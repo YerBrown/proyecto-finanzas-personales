@@ -1,60 +1,16 @@
-const users = [
-  {
-    id: 1,
-    username: "juanperez",
-    email: "juanperez@example.com",
-    password: "securepassword123",
-    create_time: "2023-11-12T12:00:00Z",
-    rol: "client",
-    active: 1,
-  },
-  {
-    id: 2,
-    username: "anamartinez",
-    email: "anamartinez@example.com",
-    password: "mypassword321",
-    create_time: "2023-11-12T13:00:00Z",
-    rol: "admin",
-    active: 0,
-  },
-  {
-    id: 3,
-    username: "robertosmith",
-    email: "robertosmith@example.com",
-    password: "123456abc",
-    create_time: "2023-11-12T14:30:00Z",
-    rol: "client",
-    active: 1,
-  },
-  {
-    id: 4,
-    username: "lauragomez",
-    email: "lauragomez@example.com",
-    password: "password789",
-    create_time: "2023-11-12T15:15:00Z",
-    rol: "admin",
-    active: 1,
-  },
-  {
-    id: 5,
-    username: "carlossanchez",
-    email: "carlossanchez@example.com",
-    password: "mypass456",
-    create_time: "2023-11-12T16:00:00Z",
-    rol: "client",
-    active: 0,
-  },
-];
+import Mysql from "../config/mysql.js";
+const mysqlInstance = new Mysql();
 
-let LAST_ID = users.length;
-
-function getAll() {
-  return users;
+async function getAll() {
+  const sql = 'SELECT * FROM user';
+  const result = await mysqlInstance.query(sql);
+  return result;
 }
 
-function getById(id) {
-  const obtainedUser = users.find((user) => user.id == id);
-  return obtainedUser;
+async function getById(id) {
+const sql = 'SELECT * FROM user WHERE id=?';
+const result = await mysqlInstance.query(sql, [id]);
+  return result[0];
 }
 
 function create(newUser) {

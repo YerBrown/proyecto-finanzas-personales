@@ -1,12 +1,13 @@
 import express from "express";
 import router from "./routes/router.js";
-
+import Mysql from "./config/mysql.js";
 const app = express();
 
-
+Mysql.getConnection();
 app.set('views', 'src/views');
 app.set('view engine', 'pug');
 
+app.use(express.static('public'));
 app.use(express.urlencoded({ extended: true }));// configurar body parser para recibir datos de formularios
 app.use(express.json());// configurar body parser para recibir datos en formato json
 
