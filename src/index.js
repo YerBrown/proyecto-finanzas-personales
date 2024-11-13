@@ -8,7 +8,7 @@ app.set('view engine', 'pug');
 
 app.use(express.urlencoded({ extended: true }));// configurar body parser para recibir datos de formularios
 app.use(express.json());// configurar body parser para recibir datos en formato json
-
+app.use(express.static('public'));
 
 app.use("/",router);
 
