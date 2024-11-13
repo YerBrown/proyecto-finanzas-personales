@@ -1,5 +1,4 @@
 import mysql from "mysql2/promise";
-impirt
 class Mysql {
   async connect() {
     try {

@@ -1,9 +1,7 @@
 import express from "express";
 import router from "./routes/router.js";
-import Mysql from "./config/mysql.js";
 const app = express();
 
-Mysql.getConnection();
 app.set('views', 'src/views');
 app.set('view engine', 'pug');
 

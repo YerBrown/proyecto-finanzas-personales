@@ -24,7 +24,9 @@ document.addEventListener("DOMContentLoaded", function () {
       datasets: [{
         data: [60, 40],
         backgroundColor: ['#d67272', '#36a2eb'],
-        hoverOffset: 4
+        hoverOffset: 40,
+        borderColor: 'rgba(0, 0, 0, 0)',
+      borderWidth: 0
       }]
     },
     options: {
@@ -37,7 +39,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
-              return tooltipItem.label + ': ' + tooltipItem.raw + '%';  // Formato del tooltip
+              return tooltipItem.label + ': ' + tooltipItem.raw + '%';
             }
           }
         },
