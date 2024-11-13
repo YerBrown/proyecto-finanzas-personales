@@ -10,22 +10,19 @@ block content
         h2 Login
         form.login-form(action="/login" method="POST")
 
-            
+          
             label(for="username") User login
             input#username(type="email" placeholder="example@mail.com" required)
 
-            
+           
             label(for="password") Password
             input#password(type="password" placeholder="Password" required)
 
 
 
-           
+            
             button.login-button(type="submit") Entrar
 
-          
-            a(href='src/views/user/login.pug')    
-                button.azure-button(type="button") Registro
-                
-
-
+            
+            button.azure-button(type="button") 
+                | Registro
