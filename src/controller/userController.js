@@ -1,13 +1,14 @@
 import userModel from '../model/userModel.js'
 
-function getAll(req, res) {
-    const users = userModel.getAll();
+async function getAll(req, res) {
+    const users = await userModel.getAll();
   res.render('user/list',{users});
 }
 
-function getById(req, res) {
+async function getById(req, res) {
   const id = parseInt(req.params.id);
-  res.render('user/show',"Get user by id " + id);
+  const user = await userModel.getById(id);
+  res.render('user/show',user);
 }
 
 
@@ -25,6 +26,7 @@ function sendLogin(req,res){
 
 export const functions = {
     getAll,
+    getById,
     renderLogin,
     renderRegister
 }
