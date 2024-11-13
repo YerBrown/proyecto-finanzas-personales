@@ -18,4 +18,6 @@ router.get("/", userController.getAll);
 
 router.get("/login", userController.renderLogin);
 
+router.get("/register", userController.renderRegister);
+
 export default router;

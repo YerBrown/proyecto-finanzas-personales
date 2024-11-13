@@ -1,0 +1,32 @@
+extends ../layout 
+
+block content
+    link(rel="stylesheet" href="/css/loginStyles.css")
+
+
+
+    
+    div.login-box
+        h2 Datos de registro
+        form.login-form(action="/login" method="POST")
+
+          
+            label(for="username") Introduzca correo
+            input#username(type="email" required)
+
+            label(for="username") Introduzca nombre de usuario
+            input#username(type="text" required)
+           
+            label(for="password") Contraseña
+            input#password(type="password" required minlength ="5")
+            
+            label(for="password") Repita contraseña
+            input#password(type="password" required minlength ="5")
+
+
+
+            
+            button.login-button(type="submit") Enviar
+
+            
+            button.azure-button(type="button") Registro
