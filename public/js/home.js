@@ -8,7 +8,6 @@ document.addEventListener("DOMContentLoaded", function () {
   let expensePercent = Math.floor((totalExpenseValue/totalIncomeExpense)*100);
   let totalBalance = totalExpenseValue + totalIncomeValue;
 
-console.log("totalIngresos grafico " + totalIncomeValue)
   Chart.register({
     id: 'centerText',
     beforeDraw: function (chart) {

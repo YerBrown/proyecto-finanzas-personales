@@ -1,7 +1,8 @@
 import incomeModel from '../model/incomeModel.js'
 import incomeTypeModel from '../model/incomeTypeModel.js'
+import expenseController from './expenseController.js'
 
-async function getAllIncomes(req, res) {
+async function getAllIncomes() {
     const incomes = await incomeModel.findAll({
       include: {
         model: incomeTypeModel,
@@ -11,9 +12,9 @@ async function getAllIncomes(req, res) {
     return incomes;
 };
 
-async function getIncomesAndExpenses(req, res){
-  const incomes = await getAllIncomes(req, res);
-  const expenses = [];
+async function getIncomesAndExpenses(){
+  const incomes = await getAllIncomes();
+  const expenses = await expenseController.getAll();
   const transactions = [];
   incomes.forEach(income => {
     const transaction = {
@@ -25,13 +26,28 @@ async function getIncomesAndExpenses(req, res){
       type: income.income_type.name,
       user: income.user_id
     }
-    transactions.push(transaction)
+    transactions.push(transaction);
+  });
+
+  expenses.forEach(expense => {
+    const transaction = {
+      id: expense.id,
+      title: expense.title,
+      amount: expense.amount/100,
+      dateTime: expense.datetime,
+      comment: expense.comment,
+      type: expense.expense_type.name,
+      user: expense.user_id
+    }
+    transactions.push(transaction);
     console.log("transaction", transaction)
   });
+
   let totalIncome = 0;
     incomes.forEach(income => {
       totalIncome += income.amount/100;
     });
+    transactions.sort((a,b)=>new Date(b.dateTime) - new Date(a.dateTime));
   return {transactions, totalIncome};
 }
 

@@ -2,7 +2,7 @@ import {Router} from "express";
 import transactionViewController from "../controller/transactionViewController.js";
 const router = Router();
 
-router.get("/home", transactionViewController.getIncomesAndExpenses);
+router.get("/", transactionViewController.getIncomesAndExpenses);
 
 //router.get("/:id",transactionController.getIncomeById);
 
