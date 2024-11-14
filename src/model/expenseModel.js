@@ -1,23 +1,24 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
+import expenseTypeModel from "./expenseTypeModel.js";
 
-const ExpenseModel = sequelize.define('expense',{
+const ExpenseModel = sequelize.define("expense", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
-    autoIncrement: true
+    autoIncrement: true,
   },
   amount: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   title: {
     type: DataTypes.STRING,
-    allowNull: false
+    allowNull: false,
   },
   comment: {
     type: DataTypes.STRING,
-    allowNull: true
+    allowNull: true,
   },
   datetime: {
     type: DataTypes.DATE,
@@ -25,27 +26,14 @@ const ExpenseModel = sequelize.define('expense',{
   },
   type_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
+    allowNull: false,
   },
   user_id: {
     type: DataTypes.INTEGER,
-    allowNull: false
-  }
-})
-
-const ExpenseTypeModel = sequelize.define('expenseTypeModel',{
-  id: {
-    type: DataTypes.INTEGER,
-    primaryKey: true,
-    autoIncrement: true
-  },
-  name: {
-    type: DataTypes.STRING,
     allowNull: false,
-    unique: true
-  }
-})
+  },
+});
 
+ExpenseModel.belongsTo(expenseTypeModel, { foreignKey: "type_id" });
 
 export default ExpenseModel;
-
