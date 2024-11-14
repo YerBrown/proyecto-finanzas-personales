@@ -7,8 +7,8 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                h4 Total gastos: 0€
-                h4 Total ingresos: #{totalIncome/100}€
+                h4#totalGastos Total gastos: 0€
+                h4#totalIngresos Total ingresos: #{totalIncome}€
 
             .columna-derecha
                 form.formulario-filtros
@@ -45,8 +45,8 @@ block content
                         each transaction in transactions
                             tr
                                 td <i class="fa-solid fa-car"></i>
-                                td Gasolina
-                                td #{transaction.amount/100} € 
+                                td #{transaction.title}
+                                td #{transaction.amount} € 
                                 td #{transaction.comment}
                                 td #{transaction.dateTime}   
                                 td #{transaction.type} 

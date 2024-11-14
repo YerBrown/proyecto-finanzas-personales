@@ -1,43 +1,42 @@
 import incomeModel from '../model/incomeModel.js'
+import incomeTypeModel from '../model/incomeTypeModel.js'
 
 async function getAllIncomes(req, res) {
-    const incomes = await incomeModel.getAll();
+    const incomes = await incomeModel.findAll({
+      include: {
+        model: incomeTypeModel,
+        attributes: ['name']}
+    });
+    
     return incomes;
-}
-
-async function getIncomeById(req, res) {
-  const id = parseInt(req.params.id);
-  const income = await incomeModel.getById(id);
-  res.render('transaction/show',income);
-}
+};
 
 async function getIncomesAndExpenses(req, res){
   const incomes = await getAllIncomes(req, res);
-  console.log("incomes ", incomes)
   const expenses = [];
   const transactions = [];
   incomes.forEach(income => {
     const transaction = {
       id: income.id,
-      amount: income.amount,
-      dateTime: income.dateTime,
-      comment: income.coment,
-      type: income.type_id
+      title: income.title,
+      amount: income.amount/100,
+      dateTime: income.datetime,
+      comment: income.comment,
+      type: income.income_type.name,
+      user: income.user_id
     }
     transactions.push(transaction)
-    
+    console.log("transaction", transaction)
   });
-console.log("transactions ", transactions)
   let totalIncome = 0;
     incomes.forEach(income => {
-      totalIncome += income.amount;
+      totalIncome += income.amount/100;
     });
-  res.render('transaction/home',{transactions, totalIncome});
+  return {transactions, totalIncome};
 }
 
 export const functions = {
   getAllIncomes,
-  getIncomeById,
   getIncomesAndExpenses
 }
 

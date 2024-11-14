@@ -1,11 +1,19 @@
 document.addEventListener("DOMContentLoaded", function () {
-  var ctx = document.getElementById('myPieChart').getContext('2d');
 
+  var ctx = document.getElementById('myPieChart').getContext('2d');
+  let totalIncomeValue = parseFloat(document.getElementById("totalIngresos").innerText.replace("Total ingresos: ", "").replace("€", ""));
+  let totalExpenseValue = parseFloat(document.getElementById("totalGastos").innerText.replace("Total gastos: ", "").replace("€", ""));
+  let totalIncomeExpense = totalIncomeValue + totalExpenseValue;
+  let incomePercent = Math.floor((totalIncomeValue/totalIncomeExpense)*100);
+  let expensePercent = Math.floor((totalExpenseValue/totalIncomeExpense)*100);
+  let totalBalance = totalExpenseValue + totalIncomeValue;
+
+console.log("totalIngresos grafico " + totalIncomeValue)
   Chart.register({
     id: 'centerText',
     beforeDraw: function (chart) {
       const ctx = chart.ctx;
-      const text = "TEXTO PRUEBA";
+      const text = "Total: " + totalBalance+"€";
       ctx.restore();
       ctx.font = `bold 15px Arial`;
       ctx.fillStyle = "#fff";
@@ -22,7 +30,7 @@ document.addEventListener("DOMContentLoaded", function () {
     type: 'doughnut',
     data: {
       datasets: [{
-        data: [60, 40],
+        data: [expensePercent, incomePercent],
         backgroundColor: ['#d67272', '#36a2eb'],
         hoverOffset: 40,
         borderColor: 'rgba(0, 0, 0, 0)',
@@ -39,7 +47,7 @@ document.addEventListener("DOMContentLoaded", function () {
         tooltip: {
           callbacks: {
             label: function (tooltipItem) {
-              return tooltipItem.label + ': ' + tooltipItem.raw + '%';
+              return tooltipItem.label + 'Ingresos: ' + tooltipItem.raw + '%';
             }
           }
         },

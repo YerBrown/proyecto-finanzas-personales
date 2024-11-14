@@ -1,62 +1,42 @@
-import Mysql from "../config/mysql.js";
-const mysqlInstance = new Mysql();
+import { DataTypes } from "sequelize";
+import sequelize from "../config/sequelize.js";
+import incomeTypeModel from "./incomeTypeModel.js";
 
-async function getAll() {
-  const sql = 'SELECT * FROM income';
-  const result = await mysqlInstance.query(sql);
-  
-  return result;
-}
+const Income = sequelize.define('income',{
+    id:{
+        type: DataTypes.INTEGER.UNSIGNED,
+        allowNull:false,
+        primaryKey:true,
+        autoIncrement:true,
+        unique:true
+    },
+    amount:{
+        type: DataTypes.INTEGER,
+        allowNull:false
+    },
+    datetime:{
+      type: DataTypes.DATE,
+      allowNull:false
+  },
+    title:{
+        type: DataTypes.STRING(45),
+        allowNull:true
+    },
+    comment:{
+        type:DataTypes.STRING(200),
+        allowNull:false
+    },
+    type_id:{
+        type:DataTypes.INTEGER,
+        allowNull:false
+    },
+    user_id:{
+      type:DataTypes.INTEGER,
+      allowNull:false
+  }
+})
 
-async function getById(id) {
-const sql = 'SELECT * FROM income WHERE id=?';
-const result = await mysqlInstance.query(sql, [id]);
-  return result[0];
-}
 
-  async function create(newUser) {
+Income.belongsTo(incomeTypeModel, { foreignKey: "type_id" });
 
-    const sql = ` INSERT INTO income (amount, income_date, comment, income_type_id, user_id)
-      VALUES (?, ?, ?, ?, ?)`;
-  
-    const values = [
-      newUser.amount,
-      newUser.income_date,
-      newUser.comment,
-      newUser.income_type_id,
-      newUser.user_id
-    ];
-   await mysqlInstance.query(sql, values);
-}
-
-async function update(id, data) {
-    const sql = `UPDATE income
-    SET amount = ?, income_date = ?, comment = ?, income_type_id = ?, user_id = ?
-    WHERE id = ?`;
-
-  const values = [
-    data.amount,
-    data.income_date,
-    data.comment,
-    data.income_type_id,
-    data.user_id,
-    id
-  ];
-
-  await mysqlInstance.query(sql, values);
-}
-
-async function remove(id) {
-  const sql = `DELETE FROM income WHERE id = ?`;
-  await mysqlInstance.query(sql, [id]);
-}
-
-export const functions = {
-  getAll,
-  getById,
-  create,
-  update,
-  remove,
-};
-
-export default functions;
+export default Income;

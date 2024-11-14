@@ -1,10 +1,10 @@
 import {Router} from "express";
-import transactionController from "../controller/transactionController.js"
+import transactionViewController from "../controller/transactionViewController.js";
 const router = Router();
 
-router.get("/",transactionController.getIncomesAndExpenses);
+router.get("/home", transactionViewController.getIncomesAndExpenses);
 
-router.get("/:id",transactionController.getIncomeById);
+//router.get("/:id",transactionController.getIncomeById);
 
 // router.get("/new",transactionController.createForm)
 
