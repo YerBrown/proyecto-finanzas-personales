@@ -1,62 +1,39 @@
-import Mysql from "../config/mysql.js";
-const mysqlInstance = new Mysql();
+import { DataTypes } from "sequelize";
+import sequelize from "../config/sequelize.js";
+import ExpenseType from "./expenseTypeModel.js";
 
-async function getAll() {
-  const sql = 'SELECT * FROM expense';
-  const result = await mysqlInstance.query(sql);
-  
-  return result;
-}
+const Expense = sequelize.define("expense", {
+  id: {
+    type: DataTypes.INTEGER,
+    primaryKey: true,
+    autoIncrement: true,
+  },
+  amount: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  title: {
+    type: DataTypes.STRING,
+    allowNull: false,
+  },
+  comment: {
+    type: DataTypes.STRING,
+    allowNull: true,
+  },
+  datetime: {
+    type: DataTypes.DATE,
+    allowNull: false,
+  },
+  type_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+  user_id: {
+    type: DataTypes.INTEGER,
+    allowNull: false,
+  },
+});
 
-async function getById(id) {
-const sql = 'SELECT * FROM expense WHERE id=?';
-const result = await mysqlInstance.query(sql, [id]);
-  return result[0];
-}
+Expense.belongsTo(ExpenseType, { foreignKey: "type_id" });
 
-  async function create(newUser) {
-
-    const sql = ` INSERT INTO expense (amount, expense_date, comment, expense_type_id, user_id)
-      VALUES (?, ?, ?, ?, ?)`;
-  
-    const values = [
-      newUser.amount,
-      newUser.expense_date,
-      newUser.comment,
-      newUser.expense_type_id,
-      newUser.user_id
-    ];
-   await mysqlInstance.query(sql, values);
-}
-
-async function update(id, data) {
-    const sql = `UPDATE expense
-    SET amount = ?, expense_date = ?, comment = ?, expense_type_id = ?, user_id = ?
-    WHERE id = ?`;
-
-  const values = [
-    data.amount,
-    data.expense_date,
-    data.comment,
-    data.expense_type_id,
-    data.user_id,
-    id
-  ];
-
-  await mysqlInstance.query(sql, values);
-}
-
-async function remove(id) {
-  const sql = `DELETE FROM expense WHERE id = ?`;
-  await mysqlInstance.query(sql, [id]);
-}
-
-export const functions = {
-  getAll,
-  getById,
-  create,
-  update,
-  remove,
-};
-
-export default functions;
+export default Expense;
