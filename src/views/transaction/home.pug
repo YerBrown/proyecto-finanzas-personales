@@ -8,7 +8,7 @@ block content
 
             .columna-centro
                 h4 Total gastos: 0€
-                h4 Total ingresos: 0€
+                h4 Total ingresos: #{totalIncome/100}€
 
             .columna-derecha
                 form.formulario-filtros
@@ -36,70 +36,27 @@ block content
                         th Cantidad
                         th Comentario
                         th Fecha
+                        th Tipo
                         th
                 tbody
-                    tr
-                        td <i class="fa-solid fa-car"></i>
-                        td Gasolina  
-                        td -100€ 
-                        td comentario de la gasolina  
-                        td 12-11-2024
-                        td
-                            button.boton-editar(onclick="location.href='/editar/1'")
-                                i(class="fas fa-edit")
-
-                    tr
-                        td <i class="fa-solid fa-utensils"></i>
-                        td Comida  
-                        td 20€
-                        td comentario de la gasolina  
-                        td 12-11-2024
-                        td
-                            button.boton-editar(onclick="location.href='/editar/1'")
-                                i(class="fas fa-edit")
-
-                    tr
-                        td <i class="fa-solid fa-basket-shopping"></i>
-                        td Gasolina  
-                        td -100€
-                        td comentario de la gasolina  
-                        td 12-11-2024
-                        td
-                            button.boton-editar(onclick="location.href='/editar/1'")
-                                i(class="fas fa-edit")
-
-                    tr
-                        td <i class="fa-solid fa-car"></i>
-                        td Gasolina  
-                        td -100€ 
-                        td comentario de la gasolina  
-                        td 12-11-2024
-                        td
-                            button.boton-editar(onclick="location.href='/editar/1'")
-                                i(class="fas fa-edit")
-
-                    tr
-                        td <i class="fa-solid fa-utensils"></i>
-                        td Comida  
-                        td 20€
-                        td comentario de la gasolina  
-                        td 12-11-2024
-                        td
-                            button.boton-editar(onclick="location.href='/editar/1'")
-                                i(class="fas fa-edit")
-
-                    tr
-                        td <i class="fa-solid fa-basket-shopping"></i>
-                        td Gasolina  
-                        td -100€
-                        td comentario de la gasolina  
-                        td 12-11-2024
-                        td
-                            button.boton-editar(onclick="location.href='/editar/1'")
-                                i(class="fas fa-edit")
+                    if transactions.length <= 0
+                        td(colspan="5") No hay registros
+                    else
+                        each transaction in transactions
+                            tr
+                                td <i class="fa-solid fa-car"></i>
+                                td Gasolina
+                                td #{transaction.amount/100} € 
+                                td #{transaction.comment}
+                                td #{transaction.dateTime}   
+                                td #{transaction.type} 
+                                td
+                                    button.boton-editar(onclick="location.href='/editar/1'")
+                                        i(class="fas fa-edit")
 
                    
                    
-                        //- td(colspan="5") No hay registros
+                        
+                            
 
 

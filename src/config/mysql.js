@@ -26,6 +26,7 @@ class Mysql {
       const [rows, fields] = await connection.query(sql,params);
       console.log(rows);
       this.disconnect();
+      return rows;
     } catch (error) {
       console.error(error);
       this.disconnect();
