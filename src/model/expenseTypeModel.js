@@ -1,7 +1,7 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
 
-const ExpenseTypeModel = sequelize.define('expense_type',{
+const ExpenseType = sequelize.define('expense_type',{
     id: {
       type: DataTypes.INTEGER,
       primaryKey: true,
@@ -14,4 +14,4 @@ const ExpenseTypeModel = sequelize.define('expense_type',{
     }
   })
 
-  export default ExpenseTypeModel;
+  export default ExpenseType;

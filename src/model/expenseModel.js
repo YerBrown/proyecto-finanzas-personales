@@ -1,8 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
-import expenseTypeModel from "./expenseTypeModel.js";
+import ExpenseType from "./expenseTypeModel.js";
 
-const ExpenseModel = sequelize.define("expense", {
+const Expense = sequelize.define("expense", {
   id: {
     type: DataTypes.INTEGER,
     primaryKey: true,
@@ -34,6 +34,6 @@ const ExpenseModel = sequelize.define("expense", {
   },
 });
 
-ExpenseModel.belongsTo(expenseTypeModel, { foreignKey: "type_id" });
+Expense.belongsTo(ExpenseType, { foreignKey: "type_id" });
 
-export default ExpenseModel;
+export default Expense;
