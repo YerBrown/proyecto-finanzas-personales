@@ -2,7 +2,6 @@ import expenseController from "./expenseController.js";
 
 async function getAll(req, res) {
   const expenses = await expenseController.getAll();
-  console.log("expenses " + expenses);
   res.json(expenses);
 }
 

@@ -1,34 +1,11 @@
 document.addEventListener("DOMContentLoaded", function () {
-
   var ctx = document.getElementById('myPieChart').getContext('2d');
-  let totalIncomeValue = parseFloat(document.getElementById("totalIngresos").innerText.replace("Total ingresos: ", "").replace("€", ""));
-  //let totalExpenseValue = -1000000;
-  let totalExpenseValue = parseFloat(document.getElementById("totalGastos").innerText.replace("Total gastos: ", "").replace("€", ""));
+  let totalExpenseValue = -1000000;
+  let totalIncomeValue = 500000;
   let totalIncomeExpense = totalIncomeValue + totalExpenseValue;
-  let incomePercent = Math.floor((totalIncomeValue/totalIncomeExpense)*100);
-  let expensePercent = Math.floor((totalExpenseValue/totalIncomeExpense)*100);
+  let incomePercent = Math.floor((totalIncomeValue / totalIncomeExpense) * 100);
+  let expensePercent = Math.floor((totalExpenseValue / totalIncomeExpense) * 100);
   let totalBalance = totalExpenseValue + totalIncomeValue;
-
-  Chart.register({
-    id: 'centerText',
-    beforeDraw: function (chart) {
-      const ctx = chart.ctx;
-      const text = "Total: " + totalBalance+"€";
-      ctx.restore();
-      ctx.font = 'italic bold 20px Arial';
-      ctx.textBaseline = 'middle';
-      ctx.textAlign = 'center';
-      if(totalBalance>0){
-        ctx.fillStyle = "#8FFFBE";
-      }else{
-        ctx.fillStyle = "#FF9B9B";
-      }
-      const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
-      const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
-      ctx.fillText(text, centerX, centerY);
-      ctx.save();
-    }
-  });
 
   var myPieChart = new Chart(ctx, {
     type: 'doughnut',
@@ -38,12 +15,14 @@ document.addEventListener("DOMContentLoaded", function () {
         backgroundColor: ['#d67272', '#36a2eb'],
         hoverOffset: 40,
         borderColor: 'rgba(0, 0, 0, 0)',
-      borderWidth: 0
+        borderWidth: 0
       }]
     },
     options: {
-      responsive: true,
+      maintainAspectRatio: false,
+      responsive: false,
       cutout: '65%',
+      radius: '80%',
       plugins: {
         legend: {
           position: 'top',
@@ -59,61 +38,144 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     }
   });
+
+  Chart.register({
+    id: 'centerText',
+    beforeDraw: function (chart) {
+      const ctx = chart.ctx;
+      const text = "Total: " + totalBalance + "€";
+      ctx.restore();
+      ctx.font = 'italic bold 15px Arial';
+      ctx.textBaseline = 'middle';
+      ctx.textAlign = 'center';
+      ctx.fillStyle = totalBalance > 0 ? "#8FFFBE" : "#FF9B9B";
+      const centerX = (chart.chartArea.left + chart.chartArea.right) / 2;
+      const centerY = (chart.chartArea.top + chart.chartArea.bottom) / 2;
+      ctx.fillText(text, centerX, centerY);
+      ctx.save();
+    }
+  });
 });
 
-document.addEventListener("DOMContentLoaded", function() {
-  console.log("entra2");
-
-  // Crear el botón
-  var boton = document.createElement('button');
-  boton.id = 'nuevo-boton';
-  boton.innerText = 'Nuevo Botón';
-
-  // Insertar el botón antes de la tabla
+document.addEventListener("DOMContentLoaded", function () {
   var table = document.getElementById('tabla-registros');
-  if (table) {
-    table.parentNode.insertBefore(boton, table);
 
-    // Activamos DataTables
-    var dataTable = new DataTable(table, {
-      paging: true,
-      ordering: true,
-      info: true,
-      searching: true,
-      language: {
-        url: "//cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"
-      },
-      drawCallback: function(settings) {
-        var rows = table.querySelectorAll('tbody tr');
-        rows.forEach(function(row) {
-          row.style.backgroundColor = '#1E1E1E';
-        });
-      }
-    });
-
-    var headers = document.querySelectorAll('#tabla-registros th');
-
-    // Crear un array para almacenar los contadores de clics de cada columna
-    var clickCounters = Array(headers.length).fill(0);  // Inicializamos un array con 0
-
-    // Iterar sobre cada <th> para añadir el evento click
-    headers.forEach(function(header, index) {
-      header.addEventListener('click', function() {
-        // Incrementar el contador de clics para esa columna
-        clickCounters[index]++;
-
-        // Verificar si se ha hecho 3 clics en esta columna
-        if (clickCounters[index] === 3) {
-          console.log('Se hizo clic 3 veces en la columna:', index);
-        }
+  var dataTable = new DataTable(table, {
+    paging: true,
+    ordering: true,
+    info: false,
+    searching: true,
+    lengthChange: false,
+    language: {
+      url: "https://cdn.datatables.net/plug-ins/2.1.8/i18n/es-ES.json"
+    },
+    drawCallback: function (settings) {
+      var rows = table.querySelectorAll('tbody tr');
+      rows.forEach(function (row) {
+        row.style.backgroundColor = '#1E1E1E';
       });
-    });
-  }
+
+      var info = document.querySelector('.dataTables_info');
+      if (info) {
+        info.style.color = '#ff6347';
+      }
+    }
+  });
 });
 
+// Función para abrir el modal y llenar la tabla de tipos de ingresos
+async function openModal(modalId) {
+  const modal = document.getElementById(modalId);
+
+  if (modalId === 'modalIngresos') {
+    const tbody = modal.querySelector('tbody');
+    tbody.innerHTML = '';
+
+    try {
+      
+      const ruta = "/transaction/detalleIngresos";
+      const response = await fetch(ruta);
+      if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
+      
+      const incomes = await response.json();
+
+      incomes.forEach(income => {
+        const tr = document.createElement('tr');
+
+        const tdIncomeTypeIcon = document.createElement('td');
+        const icon = document.createElement('i');
+        tdIncomeTypeIcon.id = "tdIncomeTypeIcon";
+        icon.className = "fa-solid fa-car";
+        tdIncomeTypeIcon.appendChild(icon);
+        
+
+        const tdIncomeTypeValue = document.createElement('td');
+        tdIncomeTypeValue.id = "tdIncomeTypeValue" 
+        tdIncomeTypeValue.textContent = income.income_type.name;
+
+        const tdIncomeTypeGrafico = document.createElement('td');
+        tdIncomeTypeGrafico.id = "tdIncomeTypeGrafico" 
+        const canvas = document.createElement('canvas');
+        canvas.id = `grafico-${income.id}`;
+        canvas.classList.add('common-chart');
+        tdIncomeTypeGrafico.appendChild(canvas);
+
+        tr.appendChild(tdIncomeTypeIcon);
+        tr.appendChild(tdIncomeTypeValue);
+        tr.appendChild(tdIncomeTypeGrafico);
+        tbody.appendChild(tr);
+
+        // Inicializar el gráfico en el canvas
+        new Chart(canvas.getContext('2d'), {
+          type: 'doughnut',
+          data: {
+            datasets: [{
+              data: [200, 100],
+              backgroundColor: ['#d67272', '#36a2eb'],
+              hoverOffset: 40,
+              borderColor: 'rgba(0, 0, 0, 0)',
+              borderWidth: 0
+            }]
+          },
+          options: {
+            maintainAspectRatio: false,
+            responsive: false,
+            cutout: '65%',
+            radius: '100%',
+            plugins: {
+              legend: {
+                position: 'top',
+              },
+              tooltip: {
+                callbacks: {
+                  label: function (tooltipItem) {
+                    return 'Ingresos: ' + 50 + '%';
+                  }
+                }
+              }
+            }
+          }
+        });
+      });
+    } catch (error) {
+      console.error('There has been a problem with your fetch operation:', error);
+    }
+  }
+
+  modal.style.display = 'block';
+}
 
 
-//FALTA ANULAR ORDENACION Y CAMBIAR COLOR "MOSTRANDO..."
+function closeModal(modalId) {
+  const modal = document.getElementById(modalId);
+  modal.style.display = 'none';
+}
 
-
-
+window.onclick = function (event) {
+  const modals = document.querySelectorAll('.modal');
+  modals.forEach((modal) => {
+    if (event.target === modal) {
+      modal.style.display = 'none';
+    }
+  });
+};

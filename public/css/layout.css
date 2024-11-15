@@ -1,0 +1,58 @@
+header.navbar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background-color: #0C0C0C;
+  padding: 0px 20px;
+  color: #fff;
+  border-bottom: 2px solid #007bff;
+}
+
+.navbar-container {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.navbar-left {
+  display: flex;
+  align-items: center;
+}
+
+.navbar-left .logo {
+  margin-right: 10px; /* Asegura mayor espacio entre el logo y el texto */
+  font-size: 1.5rem;
+  font-weight: bold;
+  display: flex;
+  align-items: center;
+}
+
+#logo {
+  width: 35px; /* Reduce el tamaño del logo */
+  height: auto; /* Mantiene la proporción original de la imagen */
+  margin-right: 8px; /* Agrega espacio entre el logo y el texto */
+}
+
+.navbar-right nav {
+  display: flex;
+}
+
+.nav-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  gap: 20px;
+}
+
+.nav-links li a {
+  color: #fff;
+  text-decoration: none;
+  font-size: 1rem;
+  transition: color 0.3s;
+}
+
+.nav-links li a:hover {
+  color: #36a2eb;
+}

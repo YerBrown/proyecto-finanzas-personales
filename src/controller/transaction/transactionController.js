@@ -5,6 +5,9 @@ async function getIncomesAndExpenses(){
   const incomes = await incomeController.getAll();
   const expenses = await expenseController.getAll();
   const transactions = [];
+  let totalIncome = 0;
+  let totalExpense = 0;
+  
   incomes.forEach(income => {
     const transaction = {
       id: income.id,
@@ -29,15 +32,18 @@ async function getIncomesAndExpenses(){
       user: expense.user_id
     }
     transactions.push(transaction);
-    console.log("transaction", transaction)
   });
 
-  let totalIncome = 0;
+
     incomes.forEach(income => {
       totalIncome += income.amount/100;
     });
+
+    expenses.forEach(expense => {
+      totalExpense += expense.amount/100;
+    });
     transactions.sort((a,b)=>new Date(b.dateTime) - new Date(a.dateTime));
-  return {transactions, totalIncome};
+  return {transactions, totalIncome, totalExpense};
 }
 
 export const functions = {

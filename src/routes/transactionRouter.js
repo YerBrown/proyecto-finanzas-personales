@@ -4,6 +4,9 @@ const router = Router();
 
 router.get("/", transactionViewController.getIncomesAndExpenses);
 
+router.get("/detalleIngresos", transactionViewController.getIncomesType);
+
+
 //router.get("/:id",transactionController.getIncomeById);
 
 // router.get("/new",transactionController.createForm)
