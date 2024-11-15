@@ -6,7 +6,6 @@ dotenv.config();
 
 const app = express();
 
-Mysql.getConnection();
 app.set('views', 'src/views');
 app.set('view engine', 'pug');
 
