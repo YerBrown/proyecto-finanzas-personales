@@ -16,4 +16,8 @@ router.get("/transactions/expense/add", (req, res) => {
     res.render("transaction/addExpense");
   });
 
+  router.get("/admin/users", (req, res) => {
+    res.render("user/userAdministrator");
+  });
+
 export default router;

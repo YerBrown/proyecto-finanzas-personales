@@ -1,0 +1,52 @@
+doctype html
+html(lang="es")
+  head
+    meta(charset="UTF-8")
+    meta(name="viewport" content="width=device-width, initial-scale=1.0")
+    title Administrador de Usuarios
+    style.
+      /* Añadir estilos específicos aquí */
+      body {
+          font-family: Arial, sans-serif;
+          background-color: #f9f9f9;
+          margin: 0;
+          padding: 20px;
+      }
+  body
+    .header
+      h1 User Administration
+      .tabs
+        .tab.active(onclick="filterUsers('all')") All Users
+        .tab(onclick="filterUsers('active')") Active
+        .tab(onclick="filterUsers('inactive')") Inactive
+    table.user-table
+      thead
+        tr
+          th(onclick="sortTable(0)") ID
+          th(onclick="sortTable(1)") Name
+          th(onclick="sortTable(2)") Role
+          th(onclick="sortTable(3)") Status
+          th Actions
+      tbody
+        //- Aquí irían las filas de usuarios
+        tr(data-status="active")
+          td #1234
+          td John Doe
+          td Admin
+          td Active
+          td
+            .action-btn(onclick="toggleDropdown(this)") ...
+              .dropdown
+                a(href="#") Edit
+                a(href="#") Delete
+    script.
+      // Añadir scripts específicos aquí
+      function filterUsers(status) {
+          // Lógica para filtrar usuarios
+      }
+      function sortTable(columnIndex) {
+          // Lógica para ordenar la tabla
+      }
+      function toggleDropdown(element) {
+          // Lógica para mostrar/ocultar dropdowns
+      }
