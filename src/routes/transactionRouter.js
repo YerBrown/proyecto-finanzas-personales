@@ -1,5 +1,5 @@
 import {Router} from "express";
-import transactionViewController from "../controller/transactionViewController.js";
+import transactionViewController from "../controller/transaction/transactionViewController.js";
 const router = Router();
 
 router.get("/", transactionViewController.getIncomesAndExpenses);

@@ -1,5 +1,5 @@
-import expenseModel from "../model/expenseModel.js";
-import expenseTypeModel from "../model/expenseTypeModel.js";
+import expenseModel from "../../model/expenseModel.js";
+import expenseTypeModel from "../../model/expenseTypeModel.js";
 
 async function getAll() {
   const expenses = await expenseModel.findAll({
@@ -38,7 +38,7 @@ async function getAllByUserId() {
 
 async function create(amount, title, comment, datetime, type_id, user_id) {
   const newExpense = await expenseModel.create({
-    amount: amount * 100,
+    amount: - Math.abs(amount * 100),
     title,
     comment,
     datetime,
