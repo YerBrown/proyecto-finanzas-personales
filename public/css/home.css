@@ -87,11 +87,10 @@ select {
 }
 
 /* Estilos de la tabla */
-.tabla-registros {
+.tabla-registros{
   width: 100%;
   border-collapse: collapse;
   margin-top: 10px;
-  background-color: #1E1E1E;
   font-style: italic;
 }
 

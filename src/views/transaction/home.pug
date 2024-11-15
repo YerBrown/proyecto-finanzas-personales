@@ -7,9 +7,9 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                h4#totalGastos Total gastos: 0€
                 h4#totalIngresos Total ingresos: #{totalIncome}€
-
+                h4#totalGastos Total gastos: #{totalExpense}€
+                
             .columna-derecha
                 form.formulario-filtros
                     div.campo
@@ -27,12 +27,12 @@ block content
                     button.boton-filtrar(type="submit") Filtrar
 
         .fila.inferior
-            button.boton-nuevo(onclick="") +
-            table.tabla-registros
+            button.boton-nuevo(onclick="location.href='/nuevo'") Nuevo
+            table#tabla-registros.tabla-registros
                 thead
                     tr
                         th
-                        th Titulo
+                        th Título
                         th Cantidad
                         th Comentario
                         th Fecha
@@ -40,23 +40,21 @@ block content
                         th
                 tbody
                     if transactions.length <= 0
-                        td(colspan="5") No hay registros
+                        tr
+                            td(colspan="7") No hay registros
                     else
                         each transaction in transactions
                             tr
-                                td <i class="fa-solid fa-car"></i>
-                                td #{transaction.title}
-                                td #{transaction.amount} € 
-                                td #{transaction.comment}
-                                td #{transaction.dateTime}   
-                                td #{transaction.type} 
                                 td
-                                    button.boton-editar(onclick="location.href='/editar/1'")
+                                    i(class="fa-solid fa-car")
+                                td #{transaction.title}
+                                if transaction.amount < 0
+                                    td(style="color: #FF9B9B;") #{transaction.amount} €
+                                else
+                                    td(style="color: #8FFFBE;")  #{transaction.amount} €
+                                td #{transaction.comment}
+                                td #{transaction.dateTime.toLocaleDateString('es-ES')}
+                                td #{transaction.type}
+                                td
+                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
                                         i(class="fas fa-edit")
-
-                   
-                   
-                        
-                            
-
-
