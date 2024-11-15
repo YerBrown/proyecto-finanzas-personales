@@ -1,44 +1,41 @@
 import Mysql from "../config/mysql.js";
 const mysqlInstance = new Mysql();
 
-async function getAll() {
-  const sql = 'SELECT * FROM user';
-  const result = await mysqlInstance.query(sql);
-  return result;
-}
+const User = sequelize.define('user', {
+  id: {
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
+    primaryKey: true,
+    autoIncrement: true
+  },
+  username: {
+    type: DataTypes.String(40),
+    allowNull: false,
+  },
+  email: {
+    type: DataTypes.String(255),
+    allowNull: false,
+  },
+  password: {
+    type: DataTypes.String(50),
+    allowNull: false,
+  },
+  create_time: {
+    type: DataTypes.DATE,
+    allowNull: true,
 
-async function getById(id) {
-const sql = 'SELECT * FROM user WHERE id=?';
-const result = await mysqlInstance.query(sql, [id]);
-  return result[0];
-}
+  },
+  rol: {
+    type: DataTypes.ENUM("client", "admin"),
+    allowNull: false,
+    defaultValue: "client",
+  },
+  active: {
+    type: DataTypes.TINYINT(1),
+    allowNull: false,
+    defaultValue: 1
+  }
 
-function create(newUser) {
-  newUser.id = ++LAST_ID;
-  users.push(newUser);
-  return newUser;
-}
+})
 
-function update(id, data) {
-  const user = getById(id);
-  const updatedUser = { ...user, ...data };
-  const index = users.findIndex((element) => element.id == id);
-  users.splice(index, 1, updatedUser);
-  return updatedUser;
-}
-
-function remove(id) {
-  const userRemoved = getById(id);
-  userRemoved.active = 0;
-  return userRemoved;
-}
-
-export const functions = {
-  getAll,
-  getById,
-  create,
-  update,
-  remove,
-};
-
-export default functions;
+export default User;

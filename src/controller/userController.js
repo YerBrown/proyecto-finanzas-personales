@@ -1,34 +1,52 @@
 import userModel from '../model/userModel.js'
 
-async function getAll(req, res) {
-    const users = await userModel.getAll();
-  res.render('user/list',{users});
+async function getAll() {
+    const users = await userModel.findAll
+    return users;
+}
+async function getById(id) {
+    const user = await userModel.findByPk(id);
+    return user;
 }
 
-async function getById(req, res) {
-  const id = parseInt(req.params.id);
-  const user = await userModel.getById(id);
-  res.render('user/show',user);
+async function create(username, email, tel, rol,password,create_time) {
+    const newUser = await userModel.create({
+        username,
+        email,
+        tel,
+        rol,
+        password,
+        create_time,
+    });
+
+    return newUser;
 }
 
 
-function renderLogin(req,res){
-    res.render('user/login')
+async function update(username, email, tel, rol,password) {
+    const user = await userModel.findByPk(id);
+    user.username = username;
+    user.email = email;
+    user.tel = tel;
+    user.rol = rol;
+    user.password = password;
+
+    return user;
 }
 
-function renderRegister(req,res){
-    res.render('user/register');
+async function remove(id) {
+    const userToRemove = await userModel.findByPk(id);
+    await userToRemove.destroy();
+    return userToRemove;
 }
-function sendLogin(req,res){
-    res.send('Login Complete!');
-    // Todo: redirect
-}
+
 
 export const functions = {
     getAll,
     getById,
-    renderLogin,
-    renderRegister
+    create,
+    update,
+    remove
 }
-
 export default functions;
+
