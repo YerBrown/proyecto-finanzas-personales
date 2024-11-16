@@ -11,10 +11,20 @@ const sequelize = new Sequelize(
     dialect: process.env.DB_DIALECT,
     port: process.env.DB_PORT,
     define: {
-      timestamps: false,
-      freezeTableName: true,
+        freezeTableName: true,
+        timestamps: false
     },
-  }
-);
+})
+
+async function testConnection() {
+    try {
+        await sequelize.authenticate();
+        console.log('Connection has been established successfully.');
+    } catch (error) {
+        console.error('Unable to connect to the database:', error);
+    }
+}
+
+//testConnection();
 
 export default sequelize;
