@@ -73,6 +73,9 @@ async function updateForm(req, res) {
     const id = parseInt(req.params.id);
     const types = await expenseTypeController.getAll();
     const currentExpense = await expenseController.getById(id);
+    if (!currentExpense) {
+      return res.status(404).json("Gasto no encontrado");
+    }
     currentExpense.amount = Math.abs(currentExpense.amount / 100);
     res.render("expense/editExpenseForm", { types, currentExpense });
   } catch (error) {

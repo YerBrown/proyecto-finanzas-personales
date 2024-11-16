@@ -9,17 +9,7 @@ block content
                 label(for="amount") Cantidad:
                 div(id='amount-input')
                     p -
-                    input(<input type="number" name='amount' id='amount' min='0' step="0.01" oninput="limitDecimalPlaces(event, 2)" placeholder="0.00" required)
-                    script.
-                        function limitDecimalPlaces(event, decimalPlaces) {
-                            const value = event.target.value;
-                            if (value.includes('.')) {
-                                const [integerPart, decimalPart] = value.split('.');
-                                if (decimalPart.length > decimalPlaces) {
-                                    event.target.value = `${integerPart}.${decimalPart.slice(0, decimalPlaces)}`;
-                                }
-                            }
-                        }
+                    input(<input type="number" name='amount' id='amount' min='0' step="0.01" oninput="limitDecimalPlaces()" placeholder="0.00" required)
                     p &euro;
             div(id='date-time-field' class='transaction-field')
                 label(for="date-time") Fecha:
@@ -38,3 +28,22 @@ block content
             div(id='submits_field' class='transaction-field')
                 button(type="button" onclick="window.location.href='/expense'") Cancelar
                 button(type="submit") Crear Gasto
+
+    script.
+        function limitDecimalPlaces() {
+            document.getElementById('amount').addEventListener('change', function () {
+                const input = this;
+                let valor = input.value;
+                valor = valor.replace('-', '');
+                let [integerPart, decimalPart] = valor.split('.');
+                if (integerPart.length > 9) {
+                    console.log('int', integerPart);
+                    integerPart = integerPart.slice(0, 9);
+                }
+                if (decimalPart && decimalPart.length > 2) {
+                    console.log('decimal', integerPart);
+                    decimalPart = decimalPart.slice(0, 2);
+                }
+                input.value = decimalPart ? `${integerPart}.${decimalPart}` : integerPart;
+            });
+        }

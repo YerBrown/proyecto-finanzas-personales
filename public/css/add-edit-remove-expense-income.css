@@ -1,8 +1,10 @@
 .transaction-menu {
-    background-color: rgb(31, 31, 31);
+    background-color: lightgray;
     max-width: 80vw;
     min-height: 70vh;
     box-sizing: border-box;
+    justify-self: center;
+    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -18,6 +20,8 @@
     display: flex;
     justify-content: center;
     font-size: 1rem;
+    color: rgb(31, 31, 31);
+    font-style: normal;
 }
 
 .window-container {
@@ -28,6 +32,7 @@
     flex-direction: column;
     box-sizing: border-box;
     gap: 20px;
+    background-color: rgb(31, 31, 31);
 }
 
 .transaction-field {
@@ -45,6 +50,7 @@
 .transaction-field label {
     font-size: .9rem;
     font-weight: bold;
+    color: rgb(176, 176, 176);
 }
 
 .transaction-field p {
@@ -81,7 +87,6 @@ textarea.transaction-field {
     font-size: 1.1rem;
     color: white;
     font-family: Arial, Helvetica, sans-serif;
-    width: 100%;
     border: none;
     padding: 0;
     border-radius: 0;
@@ -90,20 +95,32 @@ textarea.transaction-field:focus {
     outline: none;
 }
 
+.transaction-field:focus {
+    outline: 2px solid lightgray;
+}
 
 #submits_field {
     display: flex;
     flex-direction: row;
     justify-content: center;
+    align-items: center;
 }
 
 #submits_field button {
     padding: 5px;
     font-size: 1.1rem;
+    border-radius: 2px;
+    border: 2px solid lightgray;
 }
 
 input {
     font-size: 1.1rem;
+    width: 100%;
+}
+
+.remove-button {
+    background-color: red;
+    color: white;
 }
 
 /* Quitar las flechas del input number*/
