@@ -14,6 +14,6 @@ router.post("/new",expenseViewController.create);
 
 router.post("/update/:id",expenseViewController.update);
 
-router.delete("/:id",expenseViewController.remove);
+router.post("/remove/:id",expenseViewController.remove);
 
 export default router;

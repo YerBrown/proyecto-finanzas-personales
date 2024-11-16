@@ -50,8 +50,11 @@ const createForm = async (req, res) => {
 };
 
 const create = async (req, res) => {
+  console.log(req.body);
   try {
-    const { amount, title, comment, datetime, type_id, user_id } = req.body;
+    // const { amount, title, comment, datetime, type_id, user_id } = req.body;
+    const { amount, title, comment, datetime, type_id } = req.body;
+    const user_id = 1;
     const newExpense = await expenseController.create(
       amount,
       title,
