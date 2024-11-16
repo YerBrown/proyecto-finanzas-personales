@@ -4,13 +4,13 @@ PocketLog es una aplicación web de gestión financiera personal que permite a l
 
 ## 📋 Tabla de Contenidos
 
-1. [Características](#características)
-2. [Tecnologías Utilizadas](#tecnologías)
-3. [Instalación](#instalación)
-4. [Uso](#uso)
-5. [Endpoints](#endpoints)
-6. [Pruebas](#pruebas)
-7. [Colaboradores](#colaboradores)
+1. [Características](#-características)
+2. [Tecnologías Utilizadas](#-tecnologías)
+3. [Instalación](#-instalación)
+4. [Uso](#-uso)
+5. [Endpoints](#-endpoints)
+6. [Pruebas](#-pruebas)
+7. [Colaboradores](#-colaboradores)
 
 ## 🌟 Características
 - Registro y autenticación de usuarios.
