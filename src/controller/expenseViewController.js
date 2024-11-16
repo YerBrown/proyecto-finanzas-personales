@@ -1,55 +1,55 @@
 import expenseController from "./expenseController.js";
 import expenseTypeController from "./expenseTypeController.js";
-
- const getAll = async (req, res) => {
+async function getAll(req, res) {
   try {
     const expenses = await expenseController.getAll();
     res.status(200).json(expenses);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener los gastos" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
-const getById = async (req, res) => {
+async function getById(req, res) {
+  console.log(req.params);
   try {
-    const id  = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     const expense = await expenseController.getById(id);
 
     if (!expense) {
-      return res.status(404).json({ error: "Gasto no encontrado" });
+      return res.status(404).json("Gasto no encontrado");
     }
 
     res.status(200).json(expense);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener el gasto" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
-const getAllByUserId = async (req, res) => {
+async function getAllByUserId(req, res) {
   try {
-    const  user_id  = parseInt(req.params.user_id);
+    const user_id = parseInt(req.params.user_id);
     const expense = await expenseController.getAllByUserId(user_id);
 
     if (!expense) {
-      return res.status(404).json({ error: "Gastos no encontrado" });
+      return res.status(404).json({ error: error.message });
     }
 
     res.status(200).json(expense);
   } catch (error) {
-    res.status(500).json({ error: "Error al obtener el gasto" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
-const createForm = async (req, res) => {
+async function createForm(req, res) {
   try {
     const types = await expenseTypeController.getAll();
-    res.render("expense/createExpenseForm", {types});
+    res.render("expense/createExpenseForm", { types });
   } catch (error) {
-    res.status(500).json({ error: "Error al mostrar el formulario" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
-const create = async (req, res) => {
+async function create(req, res) {
   console.log(req.body);
   try {
     // const { amount, title, comment, datetime, type_id, user_id } = req.body;
@@ -66,11 +66,22 @@ const create = async (req, res) => {
 
     res.status(201).json(newExpense);
   } catch (error) {
-    res.status(500).json({ error: "Error al crear el gasto" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
+async function updateForm(req, res) {
+  try {
+    const id = parseInt(req.params.id);
+    const types = await expenseTypeController.getAll();
+    const currentExpense = await expenseController.getById(id);
+    currentExpense.amount = Math.abs(currentExpense.amount);
+    res.render("expense/editExpenseForm", { types, currentExpense });
+  } catch (error) {
+    res.status(500).json({ error: error.message });
+  }
+}
 
-const update = async (req, res) => {
+async function update(req, res) {
   try {
     const { id } = req.params;
     const { amount, title, comment, datetime, type_id, user_id } = req.body;
@@ -86,27 +97,28 @@ const update = async (req, res) => {
     );
     res.status(200).json(expense);
   } catch (error) {
-    res.status(500).json({ error: "Error al actualizar el gasto" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
-const remove = async (req, res) => {
+async function remove(req, res) {
   try {
     const { id } = req.params;
     const expense = await expenseController.remove(id);
     res.status(200).json({ message: "Gasto eliminado correctamente" });
   } catch (error) {
-    res.status(500).json({ error: "Error al eliminar el gasto" });
+    res.status(500).json({ error: error.message });
   }
-};
+}
 
 export const functions = {
   getAll,
   getById,
-  createForm,
   getAllByUserId,
-  update,
+  createForm,
   create,
+  updateForm,
+  update,
   remove,
 };
 

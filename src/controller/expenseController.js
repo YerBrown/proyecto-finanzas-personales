@@ -11,8 +11,7 @@ async function getAll() {
   return expenses;
 }
 
-async function getById() {
-  const { id } = req.params;
+async function getById(id) {
   const expense = await expenseModel.findByPk(id, {
     include: {
       model: expenseTypeModel,
@@ -22,8 +21,7 @@ async function getById() {
   return expense;
 }
 
-async function getAllByUserId() {
-  const { user_id } = req.params;
+async function getAllByUserId(user_id) {
   const expenses = await expenseModel.findAll({
     include: {
       model: expenseTypeModel,

@@ -6,6 +6,8 @@ router.get("/",expenseViewController.getAll);
 
 router.get("/new",expenseViewController.createForm);
 
+router.get("/update/:id",expenseViewController.updateForm);
+
 router.get("/:id",expenseViewController.getById);
 
 router.get("/user/:user_id",expenseViewController.getAllByUserId);
