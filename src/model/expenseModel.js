@@ -23,14 +23,12 @@ const Expense = sequelize.define("expense", {
   datetime: {
     type: DataTypes.DATE,
     allowNull: false,
+    // Formatear la fecha para el input de datetime
     get() {
       const rawValue = this.getDataValue('datetime');
       if (!rawValue) return null;
 
-      // Convertir la fecha a un objeto Date
       const fecha = new Date(rawValue);
-
-      // Formatear la fecha y hora para "datetime-local"
       const year = fecha.getFullYear();
       const month = String(fecha.getMonth() + 1).padStart(2, '0'); // Mes (0-11) + 1
       const day = String(fecha.getDate()).padStart(2, '0');

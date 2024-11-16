@@ -50,7 +50,6 @@ async function createForm(req, res) {
 }
 
 async function create(req, res) {
-  console.log(req.body);
   try {
     // const { amount, title, comment, datetime, type_id, user_id } = req.body;
     const { amount, title, comment, datetime, type_id } = req.body;
@@ -74,7 +73,7 @@ async function updateForm(req, res) {
     const id = parseInt(req.params.id);
     const types = await expenseTypeController.getAll();
     const currentExpense = await expenseController.getById(id);
-    currentExpense.amount = Math.abs(currentExpense.amount);
+    currentExpense.amount = Math.abs(currentExpense.amount / 100);
     res.render("expense/editExpenseForm", { types, currentExpense });
   } catch (error) {
     res.status(500).json({ error: error.message });
@@ -83,7 +82,7 @@ async function updateForm(req, res) {
 
 async function update(req, res) {
   try {
-    const { id } = req.params;
+    const id = parseInt(req.params.id);
     const { amount, title, comment, datetime, type_id, user_id } = req.body;
 
     const expense = await expenseController.update(
@@ -103,7 +102,7 @@ async function update(req, res) {
 
 async function remove(req, res) {
   try {
-    const { id } = req.params;
+    const id = parseInt(req.params.id);
     const expense = await expenseController.remove(id);
     res.status(200).json({ message: "Gasto eliminado correctamente" });
   } catch (error) {

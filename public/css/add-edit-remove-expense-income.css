@@ -70,7 +70,6 @@
 #amount,
 #title {
     width: 100%;
-    padding: 10px 0;
     background-color: transparent;
     border:none;
     color: white;
@@ -98,8 +97,9 @@ textarea.transaction-field:focus {
     justify-content: center;
 }
 
-#submits_field input {
+#submits_field button {
     padding: 5px;
+    font-size: 1.1rem;
 }
 
 input {

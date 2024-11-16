@@ -51,9 +51,8 @@ async function update(id, amount, title, comment, datetime, type_id, user_id) {
   if (!expense) {
     return console.error("Gasto no encontrado");
   }
-
   await expense.update({
-    amount,
+    amount:-Math.abs(amount*100),
     title,
     comment,
     datetime,
