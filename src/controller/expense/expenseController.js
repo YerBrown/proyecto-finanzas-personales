@@ -1,5 +1,5 @@
-import expenseModel from "../model/expenseModel.js";
-import expenseTypeModel from "../model/expenseTypeModel.js";
+import expenseModel from "../../model/expenseModel.js";
+import expenseTypeModel from "../../model/expenseTypeModel.js";
 
 // Obtiene todos los gastos, incluyendo el nombre del tipo de gasto
 async function getAll() {
@@ -40,7 +40,7 @@ async function getAllByUserId(user_id) {
 // Crea un nuevo gasto con los detalles proporcionados
 async function create(amount, title, comment, datetime, type_id, user_id) {
   const newExpense = await expenseModel.create({
-    amount: amount * 100,
+    amount: - Math.abs(amount * 100),
     title,
     comment,
     datetime,

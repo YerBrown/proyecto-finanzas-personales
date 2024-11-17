@@ -1,4 +1,4 @@
-import expenseController from "./expenseController.js";
+import expenseController from "./expenseApiController.js";
 import expenseTypeController from "./expenseTypeController.js";
 
 // Maneja los errores y responde con un estado 500 y el mensaje del error

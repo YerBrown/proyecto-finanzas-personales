@@ -41,15 +41,19 @@ async function getIncomesAndExpenses() {
       user: expense.user_id,
     };
     transactions.push(transaction);
-    console.log("transaction", transaction);
   });
 
   let totalIncome = 0;
   incomes.forEach((income) => {
     totalIncome += income.amount / 100;
   });
+
+  let totalExpense = 0;
+  expenses.forEach((expense) => {
+    totalExpense += expense.amount / 100;
+  });
   transactions.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
-  return { transactions, totalIncome };
+  return { transactions, totalIncome, totalExpense };
 }
 
 export const functions = {
