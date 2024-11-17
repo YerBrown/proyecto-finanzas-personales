@@ -128,8 +128,8 @@ td{
   cursor: pointer;
 }
 
-#totalIngresos,
-#totalGastos {
+#totalIncomes,
+#totalExpenses {
   display: block;
   padding: 10px 0;
   background: none;
@@ -143,11 +143,11 @@ td{
   margin-bottom: 10px; /* Espaciado vertical */
 }
 
-#totalIngresos:hover {
+#totalIncomes:hover {
   color: #8FFFBE;
 }
 
-#totalGastos:hover {
+#totalExpenses:hover {
   color: #FF9B9B;
 }
 

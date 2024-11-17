@@ -1,11 +1,14 @@
 document.addEventListener("DOMContentLoaded", function () {
   var ctx = document.getElementById('myPieChart').getContext('2d');
-  let totalExpenseValue = -1000000;
-  let totalIncomeValue = 500000;
-  let totalIncomeExpense = totalIncomeValue + totalExpenseValue;
-  let incomePercent = Math.floor((totalIncomeValue / totalIncomeExpense) * 100);
-  let expensePercent = Math.floor((totalExpenseValue / totalIncomeExpense) * 100);
-  let totalBalance = totalExpenseValue + totalIncomeValue;
+  let totalIncomesText = document.getElementById('totalIncomes').innerText;
+  let totalExpensesText = document.getElementById('totalExpenses').innerText;
+  let totalIncomesValue = Math.abs(Number(totalIncomesText.replace(/[^0-9.-]/g, '')));
+  let totalExpensesValue = Math.abs(Number(totalExpensesText.replace(/[^0-9.-]/g, '')));
+  let totalIncomesExpenses = totalIncomesValue + totalExpensesValue;
+  console.log("totalIncomeValue: " + totalIncomesValue + " totalExpenseValue: " + totalExpensesValue);
+  let incomePercent = Math.floor((totalIncomesValue / totalIncomesExpenses) * 100);
+  let expensePercent = Math.floor((totalExpensesValue / totalIncomesExpenses) * 100);
+  let totalBalance = totalIncomesValue - totalExpensesValue;
 
   var myPieChart = new Chart(ctx, {
     type: 'doughnut',

@@ -7,8 +7,8 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                button#totalIngresos(onclick="openModal('modalIngresos')") Total ingresos: #{totalIncome}€
-                button#totalGastos(onclick="openModal('modalGastos')") Total gastos: #{totalExpense}€
+                button#totalIncomes(onclick="openModal('modalIngresos')") Total ingresos: #{totalIncome}€
+                button#totalExpenses(onclick="openModal('modalGastos')") Total gastos: #{totalExpense}€
 
             .columna-derecha
                 form.formulario-filtros
@@ -39,19 +39,26 @@ block content
                         th Tipo
                         th
                 tbody
-                    each transaction in transactions
+                    if transactions.length <= 0
+                        td(colspan="5") No hay registros
                         tr
-                            td
-                                i(class="fa-solid fa-car")
-                            td #{transaction.title}
-                            if transaction.amount < 0
-                                td(style="color: #FF9B9B;") #{transaction.amount} €
-                            else
-                                td(style="color: #8FFFBE;")  #{transaction.amount} €
-                            td #{transaction.comment}
-                            td #{transaction.dateTime.toLocaleDateString('es-ES')}
-                            td #{transaction.type}
-                            td
+                            td(colspan="7") No hay registros
+                    else
+                        each transaction in transactions
+                            tr
+                                td
+                                    i(class="fa-solid fa-car")
+                                td #{transaction.title}
+                                if transaction.amount < 0
+                                    td(style="color: #FF9B9B;") #{transaction.amount} €
+                                else
+                                    td(style="color: #8FFFBE;")  #{transaction.amount} €
+                                td #{transaction.comment}
+                                td #{transaction.dateTime.toLocaleDateString('es-ES')}
+                                td #{transaction.type}
+                                td 
+                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
+                                        i(class="fas fa-edit")
 
         .modal#modalIngresos
             .modal-content

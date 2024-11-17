@@ -21,7 +21,7 @@ header.navbar {
 }
 
 .navbar-left .logo {
-  margin-right: 10px; /* Asegura mayor espacio entre el logo y el texto */
+  margin-right: 10px;
   font-size: 1.5rem;
   font-weight: bold;
   display: flex;
@@ -29,9 +29,9 @@ header.navbar {
 }
 
 #logo {
-  width: 35px; /* Reduce el tamaño del logo */
-  height: auto; /* Mantiene la proporción original de la imagen */
-  margin-right: 8px; /* Agrega espacio entre el logo y el texto */
+  width: 35px;
+  height: auto;
+  margin-right: 8px;
 }
 
 .navbar-right nav {
