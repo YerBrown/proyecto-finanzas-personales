@@ -2,6 +2,7 @@ import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
 import incomeTypeModel from "./incomeTypeModel.js";
 
+// Definición del modelo Income
 const Income = sequelize.define("income", {
   id: {
     type: DataTypes.INTEGER.UNSIGNED,
@@ -14,25 +15,6 @@ const Income = sequelize.define("income", {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
-  datetime: {
-    type: DataTypes.DATE,
-    allowNull: false,
-    // Formatear la fecha para el input de datetime
-    get() {
-      const rawValue = this.getDataValue("datetime");
-      if (!rawValue) return null;
-
-      const fecha = new Date(rawValue);
-      const year = fecha.getFullYear();
-      const month = String(fecha.getMonth() + 1).padStart(2, "0"); // Mes (0-11) + 1
-      const day = String(fecha.getDate()).padStart(2, "0");
-      const hours = String(fecha.getHours()).padStart(2, "0");
-      const minutes = String(fecha.getMinutes()).padStart(2, "0");
-
-      // Devolver la fecha en el formato "YYYY-MM-DDTHH:MM"
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
-    },
-  },
   title: {
     type: DataTypes.STRING(45),
     allowNull: true,
@@ -40,6 +22,19 @@ const Income = sequelize.define("income", {
   comment: {
     type: DataTypes.STRING(200),
     allowNull: false,
+  },
+  datetime: {
+    type: DataTypes.DATE,
+    allowNull: false,
+    // Formatea la fecha para el input de tipo datetime-local
+    get() {
+      const rawValue = this.getDataValue("datetime");
+      if (!rawValue) return null;
+
+      // Formatea la fecha en "YYYY-MM-DDTHH:MM"
+      const fecha = new Date(rawValue);
+      return fecha.toISOString().slice(0, 16);
+    },
   },
   type_id: {
     type: DataTypes.INTEGER,
@@ -51,6 +46,7 @@ const Income = sequelize.define("income", {
   },
 });
 
+// Establece la relación con el modelo IncomeType
 Income.belongsTo(incomeTypeModel, { foreignKey: "type_id" });
 
 export default Income;

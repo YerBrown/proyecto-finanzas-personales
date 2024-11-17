@@ -4,40 +4,35 @@ import ExpenseType from "./expenseTypeModel.js";
 
 const Expense = sequelize.define("expense", {
   id: {
-    type: DataTypes.INTEGER,
+    type: DataTypes.INTEGER.UNSIGNED,
+    allowNull: false,
     primaryKey: true,
     autoIncrement: true,
+    unique: true,
   },
   amount: {
     type: DataTypes.INTEGER,
     allowNull: false,
   },
   title: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(45),
     allowNull: false,
   },
   comment: {
-    type: DataTypes.STRING,
+    type: DataTypes.STRING(200),
     allowNull: true,
   },
   datetime: {
     type: DataTypes.DATE,
     allowNull: false,
-    // Formatear la fecha para el input de datetime
+    // Formatea la fecha para el input de tipo datetime-local
     get() {
-      const rawValue = this.getDataValue('datetime');
+      const rawValue = this.getDataValue("datetime");
       if (!rawValue) return null;
 
-      const fecha = new Date(rawValue);
-      const year = fecha.getFullYear();
-      const month = String(fecha.getMonth() + 1).padStart(2, '0'); // Mes (0-11) + 1
-      const day = String(fecha.getDate()).padStart(2, '0');
-      const hours = String(fecha.getHours()).padStart(2, '0');
-      const minutes = String(fecha.getMinutes()).padStart(2, '0');
-
-      // Devolver la fecha en el formato "YYYY-MM-DDTHH:MM"
-      return `${year}-${month}-${day}T${hours}:${minutes}`;
-    }
+      // Formatear la fecha para "YYYY-MM-DDTHH:MM"
+      return new Date(rawValue).toISOString().slice(0, 16);
+    },
   },
   type_id: {
     type: DataTypes.INTEGER,
@@ -49,6 +44,7 @@ const Expense = sequelize.define("expense", {
   },
 });
 
+// Establece la relación con el modelo ExpenseType
 Expense.belongsTo(ExpenseType, { foreignKey: "type_id" });
 
 export default Expense;

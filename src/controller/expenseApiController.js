@@ -1,5 +1,6 @@
 import expenseController from "./expenseController.js";
 
+// Obtiene todos los gastos
 async function getAll(req, res) {
   try {
     const expenses = await expenseController.getAll();
@@ -9,9 +10,10 @@ async function getAll(req, res) {
   }
 }
 
+// Obtiene un gasto específico por su ID
 async function getById(req, res) {
   try {
-    const id  = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     const expense = await expenseController.getById(id);
 
     if (!expense) {
@@ -24,9 +26,10 @@ async function getById(req, res) {
   }
 }
 
+// Obtiene todos los gastos de un usuario específico
 async function getAllByUserId(req, res) {
   try {
-    const  user_id  = parseInt(req.params.user_id);
+    const user_id = parseInt(req.params.user_id);
     const expense = await expenseController.getAllByUserId(user_id);
 
     if (!expense) {
@@ -39,6 +42,7 @@ async function getAllByUserId(req, res) {
   }
 }
 
+// Crea un nuevo gasto
 async function create(req, res) {
   try {
     const { amount, title, comment, datetime, type_id, user_id } = req.body;
@@ -57,6 +61,7 @@ async function create(req, res) {
   }
 }
 
+// Actualiza un gasto existente
 async function update(req, res) {
   try {
     const { id } = req.params;
@@ -77,6 +82,7 @@ async function update(req, res) {
   }
 }
 
+// Elimina un gasto por su ID
 async function remove(req, res) {
   try {
     const { id } = req.params;
@@ -86,7 +92,6 @@ async function remove(req, res) {
     res.status(500).json({ error: "Error al eliminar el gasto" });
   }
 }
-
 export const functions = {
   getAll,
   getById,

@@ -1,56 +1,60 @@
+/* Transaction Menu */
 .transaction-menu {
-    background-color: lightgray;
-    max-width: 80vw;
-    min-height: 70vh;
-    box-sizing: border-box;
-    justify-self: center;
-    align-self: center;
     display: flex;
     flex-direction: column;
     align-items: center;
-    border-radius: 10px;
+    justify-self: center;
+    align-self: center;
+    background-color: lightgray;
     color: white;
     border: 3px solid lightgray;
+    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 80vw;
+    min-height: 70vh;
     overflow: hidden;
 }
 
+/* Window Header */
 .window-header {
-    background-color: lightgray;
-    width: 100%;
     display: flex;
     justify-content: center;
-    font-size: 1rem;
+    background-color: lightgray;
     color: rgb(31, 31, 31);
+    font-size: 1rem;
     font-style: normal;
+    width: 100%;
 }
 
+/* Window Container */
 .window-container {
-    width: 100%;
-    height: 100%;
-    padding: 20px;
     display: flex;
     flex-direction: column;
-    box-sizing: border-box;
-    gap: 20px;
     background-color: rgb(31, 31, 31);
+    box-sizing: border-box;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
 }
 
+/* Transaction Field */
 .transaction-field {
-    background-color: rgb(65, 65, 65);
     display: flex;
     flex-direction: column;
     align-items: start;
+    background-color: rgb(65, 65, 65);
     border-radius: 10px;
-    gap: 5px;
-    padding: 15px;
     box-sizing: border-box;
+    padding: 15px;
+    gap: 5px;
     width: 100%;
 }
 
 .transaction-field label {
-    font-size: .9rem;
-    font-weight: bold;
     color: rgb(176, 176, 176);
+    font-size: 0.9rem;
+    font-weight: bold;
 }
 
 .transaction-field p {
@@ -58,14 +62,15 @@
     display: inline;
 }
 
-.transaction-field input:focus {
-    outline: none;
+.transaction-field:focus {
+    outline: 2px solid lightgray;
 }
 
 .transaction-field select {
     font-size: 1.1rem;
-
 }
+
+/* Amount Input */
 #amount-input {
     display: flex;
     align-items: center;
@@ -73,32 +78,33 @@
     font-size: 1.1rem;
     width: 100%;
 }
+
+/* Input and Textarea Styles */
+input,
 #amount,
-#title {
-    width: 100%;
+#title,
+textarea.transaction-field {
     background-color: transparent;
-    border:none;
+    border: none;
     color: white;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+input:focus,
+textarea.transaction-field:focus {
+    outline: none;
 }
 
 textarea.transaction-field {
     max-height: 300px;
     resize: none;
-    font-size: 1.1rem;
-    color: white;
-    font-family: Arial, Helvetica, sans-serif;
     border: none;
     padding: 0;
     border-radius: 0;
 }
-textarea.transaction-field:focus {
-    outline: none;
-}
 
-.transaction-field:focus {
-    outline: 2px solid lightgray;
-}
-
+/* Submits Field */
 #submits_field {
     display: flex;
     flex-direction: row;
@@ -109,23 +115,23 @@ textarea.transaction-field:focus {
 #submits_field button {
     padding: 5px;
     font-size: 1.1rem;
-    border-radius: 2px;
     border: 2px solid lightgray;
+    border-radius: 2px;
 }
 
-input {
-    font-size: 1.1rem;
-    width: 100%;
+#submits_field button:active {
+    border: 2px solid black;
 }
 
+/* Remove Button */
 .remove-button {
     background-color: red;
     color: white;
 }
 
-/* Quitar las flechas del input number*/
+/* Remove Number Input Spin Buttons */
 input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
+    -webkit-appearance: none;
+    margin: 0;
 }
