@@ -1,5 +1,5 @@
-import expenseModel from "../model/expenseModel.js";
-import expenseTypeModel from "../model/expenseTypeModel.js";
+import expenseModel from "../../model/expenseModel.js";
+import expenseTypeModel from "../../model/expenseTypeModel.js";
 
 async function getAll() {
   const expenseTypes = await expenseTypeModel.findAll();

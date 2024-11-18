@@ -1,21 +1,13 @@
-import incomeModel from '../model/incomeModel.js'
-import incomeTypeModel from '../model/incomeTypeModel.js'
-import expenseController from './expenseController.js'
-
-async function getAllIncomes() {
-    const incomes = await incomeModel.findAll({
-      include: {
-        model: incomeTypeModel,
-        attributes: ['name']}
-    });
-    
-    return incomes;
-};
+import expenseController from '../expense/expenseController.js';
+import incomeController from '../income/incomeController.js';
 
 async function getIncomesAndExpenses(){
-  const incomes = await getAllIncomes();
+  const incomes = await incomeController.getAll();
   const expenses = await expenseController.getAll();
   const transactions = [];
+  let totalIncome = 0;
+  let totalExpense = 0;
+  
   incomes.forEach(income => {
     const transaction = {
       id: income.id,
@@ -42,12 +34,11 @@ async function getIncomesAndExpenses(){
     transactions.push(transaction);
   });
 
-  let totalIncome = 0;
+
     incomes.forEach(income => {
       totalIncome += income.amount/100;
     });
 
-  let totalExpense = 0;
     expenses.forEach(expense => {
       totalExpense += expense.amount/100;
     });
@@ -56,7 +47,6 @@ async function getIncomesAndExpenses(){
 }
 
 export const functions = {
-  getAllIncomes,
   getIncomesAndExpenses
 }
 
