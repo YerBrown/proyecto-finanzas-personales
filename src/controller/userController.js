@@ -1,7 +1,7 @@
 import userModel from '../model/userModel.js'
 
 async function getAll() {
-    const users = await userModel.findAll
+    const users = await userModel.findAll()
     return users;
 }
 async function getById(id) {
@@ -30,7 +30,7 @@ async function update(username, email, tel, rol,password) {
     user.tel = tel;
     user.rol = rol;
     user.password = password;
-
+    await user.save();
     return user;
 }
 

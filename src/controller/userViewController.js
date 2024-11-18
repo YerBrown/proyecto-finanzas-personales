@@ -10,16 +10,12 @@ async function getById(req, res) {
     const user = await userController.getById(id);
     res.render("user/list", { user })
 }
-
-async function createForm(req, res) {
+//Cambiar por createForm por register
+/*async function createForm(req, res) {
     res.render("user/list")
-}
+}*/
 
-async function updateForm(req, res) {
-    const id = parseInt(req.params.id);
-    const user = await userController.getById(id);
-    res.render("user/list", { user })
-}
+
 
 async function create(req, res) {
     const { name, last_name, email, tel, rol } = req.body;
@@ -33,21 +29,28 @@ async function update(req, res) {
     await userController.update(id,user_name, email, tel, rol );
     res.redirect("/user/" + id);
 }
-
-async function remove(req, res) {
+//Cambiar por desactivar
+/*async function remove(req, res) {
     const id = parseInt(req.params.id);
     await userController.remove(id);
     res.redirect("/user");
-}
+}*/
 
+async function registerForm (req, res) {
+    res.render("user/register");
+    
+}
+async function loginForm (req, res) {
+    res.render("user/login");
+    
+}
 
 export const functions = {
     getAll,
     getById,
     create,
-    createForm,
-    updateForm,
     update,
-    remove
+    registerForm,
+    loginForm
 }
 export default functions;
