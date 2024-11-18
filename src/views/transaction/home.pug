@@ -1,0 +1,62 @@
+extends ../layout
+
+block content
+    body.container
+        .fila
+            .columna-izquierda
+                canvas#myPieChart
+
+            .columna-centro
+                h4#totalGastos Total gastos: 0€
+                h4#totalIngresos Total ingresos: #{totalIncome}€
+
+            .columna-derecha
+                form.formulario-filtros
+                    div.campo
+                        label Fecha desde:
+                        input(type="date" name="fechaDesde")
+                    div.campo
+                        label Fecha hasta:
+                        input(type="date" name="fechaHasta")
+                    div.campo
+                        label Tipo de gasto:
+                        select(name="tipoGasto")
+                            option(value="todos") Todos
+                            option(value="gasto") Gasto
+                            option(value="ingreso") Ingreso
+                    button.boton-filtrar(type="submit") Filtrar
+
+        .fila.inferior
+            button.boton-nuevo(onclick="") +
+            table.tabla-registros
+                thead
+                    tr
+                        th
+                        th Titulo
+                        th Cantidad
+                        th Comentario
+                        th Fecha
+                        th Tipo
+                        th
+                tbody
+                    if transactions.length <= 0
+                        td(colspan="5") No hay registros
+                    else
+                        each transaction in transactions
+                            tr
+                                td <i class="fa-solid fa-car"></i>
+                                td #{transaction.title}
+                                td #{transaction.amount} € 
+                                td #{transaction.comment}
+                                td #{transaction.dateTime}   
+                                td #{transaction.type} 
+                                td
+                                    button.boton-editar(onclick="location.href='/editar/1'")
+                                        i(class="fas fa-edit")
+
+                   
+                   
+                        
+                            
+
+
