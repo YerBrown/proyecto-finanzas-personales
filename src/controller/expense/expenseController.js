@@ -50,7 +50,7 @@ async function getExpenseCountByType(user_id, startDate, endDate) {
     const expenseCounts = await expenseModel.findAll({
         attributes: [
             "type_id",
-            [sequelize.fn("COUNT", sequelize.col("type_id")), "count"],
+            [sequelize.fn("SUM", sequelize.col("amount")), "totalAmount"],
         ],
         group: ["type_id"],
         include: {
