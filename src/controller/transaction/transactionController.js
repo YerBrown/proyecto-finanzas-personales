@@ -7,6 +7,21 @@ async function getIncomesAndExpenses(){
   const transactions = [];
   let totalIncome = 0;
   let totalExpense = 0;
+  const iconMap = {
+    Salario: 'fa-building-columns',
+    Transporte: 'fa-bus',
+    Compra: 'fa-basket-shopping',
+    Alquiler: 'fa-house',
+    Educación: 'fa-graduation-cap',
+    Comida: 'fa-utensils',
+    Entretenimiento: 'fa-music',
+    Salud: 'fa-heartbeat',
+    Viajes: 'fa-plane',
+    Ahorro: 'fa-piggy-bank',
+    Impuestos: 'fa-file-invoice-dollar',
+    Donaciones: 'fa-hand-holding-heart',
+    Renta: 'fa-solid fa-house-chimney-user'
+  };
   
   incomes.forEach(income => {
     const transaction = {
@@ -43,7 +58,7 @@ async function getIncomesAndExpenses(){
       totalExpense += expense.amount/100;
     });
     transactions.sort((a,b)=>new Date(b.dateTime) - new Date(a.dateTime));
-  return {transactions, totalIncome, totalExpense};
+  return {transactions, totalIncome, totalExpense, iconMap};
 }
 
 export const functions = {

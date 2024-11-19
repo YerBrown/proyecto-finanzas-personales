@@ -14,20 +14,14 @@ block content
                 form.formulario-filtros
                     div.campo
                         label Fecha desde:
-                        input(type="date" name="fechaDesde")
+                        //- input(type="date" name="fechaDesde")
+                        input(type="month" id="mesAnio" name="fechaDesde")
                     div.campo
                         label Fecha hasta:
                         input(type="date" name="fechaHasta")
-                    div.campo
-                        label Tipo de gasto:
-                        select(name="tipoGasto")
-                            option(value="todos") Todos
-                            option(value="gasto") Gasto
-                            option(value="ingreso") Ingreso
                     button.boton-filtrar(type="submit") Filtrar
 
         .fila.inferior
-            button.boton-nuevo(onclick="location.href='/nuevo'") +
             table#tabla-registros.tabla-registros
                 thead
                     tr
@@ -44,21 +38,30 @@ block content
                         tr
                             td(colspan="7") No hay registros
                     else
-                        each transaction in transactions
-                            tr
-                                td
-                                    i(class="fa-solid fa-car")
-                                td #{transaction.title}
-                                if transaction.amount < 0
-                                    td(style="color: #FF9B9B;") #{transaction.amount} €
-                                else
-                                    td(style="color: #8FFFBE;")  #{transaction.amount} €
-                                td #{transaction.comment}
+                       each transaction in transactions
+                        tr
+                            td 
+                                - const iconClass = iconMap[transaction.type] || 'fa-question';
+                                i(class=`fa-solid ${iconClass}`)
+
+                            td #{transaction.title}             
+                            
+                            if transaction.amount < 0
+                                td(style="color: #FF9B9B;") #{transaction.amount} €
+                            else
+                                td(style="color: #8FFFBE;") #{transaction.amount} €
+                            
+                            td #{transaction.comment}
+
+                            if transaction.dateTime
                                 td #{transaction.dateTime.toLocaleDateString('es-ES')}
-                                td #{transaction.type}
-                                td 
-                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
-                                        i(class="fas fa-edit")
+                            else
+                                td No disponible
+
+                            td #{transaction.type}
+                            td 
+                                button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
+                                    i(class="fas fa-edit")
 
         .modal#modalIngresos
             .modal-content
@@ -68,7 +71,7 @@ block content
                     thead
                         tr
                             th
-                            th Tipo
+                            th
                             th
                     tbody
                         
