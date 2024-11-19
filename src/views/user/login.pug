@@ -11,12 +11,12 @@ block content
         form.login-form(action="/login" method="POST")
 
             
-            label(for="username") User login
-            input#username(type="email" placeholder="example@mail.com" required)
+            label(for="email") User login
+            input#username(type="email" placeholder="example@mail.com" name="email", required)
 
             
             label(for="password") Password
-            input#password(type="password" placeholder="Password" required)
+            input#password(type="password" placeholder="Password" name="password",required)
 
 
 
@@ -24,7 +24,7 @@ block content
             button.login-button(type="submit") Entrar
 
           
-            a(href='/user/register')    
+            a(href='/register')    
                 button.azure-button(type="button") Registro
                 
 

@@ -1,5 +1,5 @@
 import userModel from '../model/userModel.js'
-import error from '../helpers/error.js';
+import error from '../helpers/errors.js';
 async function getAll() {
     const users = await userModel.findAll()
     return users;
@@ -9,17 +9,15 @@ async function getById(id) {
     return user;
 }
 
-async function create(username, email, rol,password) {
+async function create(username, email, password) {
     const oldUser = await getByEmail(id);
     if(oldUser){
-        throw new error.EMAIL_ALREADY_EXIST();
+        throw new error.EMAIL_ALREADY_EXISTS;
     }
     const newUser = await userModel.create({
         username,
         email,
-        rol,
-        password,
-          
+        password         
     });
 
     return newUser;

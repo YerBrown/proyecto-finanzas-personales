@@ -1,30 +1,30 @@
 import userController from "../user/userController.js";
 import { verifyPassword } from "../../config/bcrypt.js";
-import jwt from "jsonwebtoken";
+import error from "../../helpers/errors.js";
 
-async function register(username, email, password, passwordConfirm, rol) {
+async function register(username, email, password, passwordConfirm) {
+    console.log(username, email, password, passwordConfirm)
     if (password != passwordConfirm) {
-        return { error: "Passwords don't match", status: 400 };
+        throw new error.PASSWORD_NOT_MATCH;
     }
     const oldUser = await userController.getByEmail(email);
     if (oldUser) {
-        return { error: "User with that email already exists", status: 400 };
+        throw new error.EMAIL_ALREADY_EXISTS();
     }
-    const newUser = await userController.create(username, email, password, rol);
+    const newUser = await userController.create(username, email, password);
     return newUser;
 }
 
 async function login(email, password) {
     const user = await userController.getByEmail(email);
     if (!user) {
-        return { error: "user doesn't exist", status: 404 };
+        throw new error.USER_NOT_FOUND();
     }
     const verified = await verifyPassword(password, user.password);
     if (!verified) {
-        return { error: "Incorrect credentials", status: 401 };
+        throw new error.INVALID_CREDENTIALS();
     }
-    const token = jwt.sign({ user_id: user.user_id, role: user.rol });
-    return token;
+    return user;
 }
 
 export default {
