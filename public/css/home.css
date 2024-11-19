@@ -33,6 +33,15 @@ body {
   padding: 10px;
 }
 
+.columna-derecha {
+  display:flex;
+  flex-direction: column;
+  justify-content: center;
+  color:#fff;
+  height: 100%;
+  width: 100%;
+}
+
 .columna-centro {
   display: flex;
   flex-direction: column;
@@ -166,14 +175,14 @@ td{
 
 .modal-content {
   background-color: #1E1E1E;
-  margin: 15% auto;
+  margin: 2% auto;
   padding: 20px;
   border-radius: 8px;
-  width: 50%;
+  width: 40%;
   max-width: 500px;
 }
 
-.modal-close {
+[id^="modal-close-"] {
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -181,11 +190,19 @@ td{
   cursor: pointer;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+[id^="modal-close-"]:hover,
+[id^="modal-close-"]:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
+}
+
+.modal h2 {
+  color: #fff;
+  font-size: 28px;
+  margin-bottom: 10px;
+  text-align: center;
+  font-style: normal;
 }
 
 /*Estilos tabla modal*/
@@ -194,19 +211,19 @@ td{
   border-collapse: collapse;
   margin-top: 10px;
   font-style: italic;
-  border: 1px solid white; /* Asegúrate de que haya un borde sólido */
+  border: none;
+  font-size: 15px;
 }
 
-.tabla-detalleTipoIngresos th,
 .tabla-detalleTipoIngresos td {
   padding: 10px;
-  border: 1px solid white; /* Asegúrate de que los bordes sean consistentes */
-  text-align: left; /* Asegúrate de que el texto esté alineado de la misma manera */
+  border-bottom: 2px solid #404040;
+  text-align: left;
 }
 
 .tabla-detalleTipoIngresos th {
-  background-color: white;
-  color: #000; /* Asegúrate de que el texto de los th sea visible */
+  background-color: none;
+  color: #000;
 }
 
 .tabla-detalleTipoIngresos td[colspan="4"] {
@@ -216,4 +233,19 @@ td{
 .common-chart{
   width:100px;
   height: 100px;
+}
+
+.tabla-detalleTipoGastos td {
+  padding: 10px;
+  border-bottom: 2px solid #404040;
+  text-align: left;
+}
+
+.tabla-detalleTipoGastos th {
+  background-color: none;
+  color: #000;
+}
+
+.tabla-detalleTipoGastos td[colspan="4"] {
+  text-align: center;
 }

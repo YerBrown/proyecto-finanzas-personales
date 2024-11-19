@@ -7,27 +7,21 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                button#totalIncomes(onclick="openModal('modalIngresos')") Total ingresos: #{totalIncome}€
-                button#totalExpenses(onclick="openModal('modalGastos')") Total gastos: #{totalExpense}€
+                button#totalIncomes() Total ingresos: #{totalIncome}€
+                button#totalExpenses() Total gastos: #{totalExpense}€
 
             .columna-derecha
                 form.formulario-filtros
                     div.campo
                         label Fecha desde:
                         input(type="date" name="fechaDesde")
+                        //-input(type="month" id="mesAnio" name="fechaDesde")
                     div.campo
                         label Fecha hasta:
                         input(type="date" name="fechaHasta")
-                    div.campo
-                        label Tipo de gasto:
-                        select(name="tipoGasto")
-                            option(value="todos") Todos
-                            option(value="gasto") Gasto
-                            option(value="ingreso") Ingreso
                     button.boton-filtrar(type="submit") Filtrar
 
         .fila.inferior
-            button.boton-nuevo(onclick="location.href='/nuevo'") +
             table#tabla-registros.tabla-registros
                 thead
                     tr
@@ -44,37 +38,51 @@ block content
                         tr
                             td(colspan="7") No hay registros
                     else
-                        each transaction in transactions
-                            tr
-                                td
-                                    i(class="fa-solid fa-car")
-                                td #{transaction.title}
-                                if transaction.amount < 0
-                                    td(style="color: #FF9B9B;") #{transaction.amount} €
-                                else
-                                    td(style="color: #8FFFBE;")  #{transaction.amount} €
-                                td #{transaction.comment}
-                                td #{transaction.dateTime.toLocaleDateString('es-ES')}
-                                td #{transaction.type}
-                                td 
-                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
-                                        i(class="fas fa-edit")
+                       each transaction in transactions
+                        tr
+                            td 
+                                i(class=`fa-solid transactionIcon`,data-type=transaction.type)
 
-        .modal#modalIngresos
+                            td #{transaction.title}             
+                            
+                            if transaction.amount < 0
+                                td(style="color: #FF9B9B;") #{transaction.amount} €
+                            else
+                                td(style="color: #8FFFBE;") #{transaction.amount} €
+                            
+                            td #{transaction.comment}
+
+                            if transaction.dateTime
+                               td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
+                            else
+                                td No disponible
+
+                            td #{transaction.type}
+                            td 
+                                button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
+                                    i(class="fas fa-edit")
+
+        .modal#modalIncomes
             .modal-content
-                span.modal-close(onclick="closeModal('modalIngresos')") &times;
+                span#modal-close-income() &times;
                 h2 Detalle de Ingresos
                 table#tabla-detalleTipoIngresos.tabla-detalleTipoIngresos
                     thead
                         tr
                             th
-                            th Tipo
+                            th
                             th
                     tbody
                         
 
-        .modal#modalGastos
+        .modal#modalExpenses
             .modal-content
-                span.modal-close(onclick="closeModal('modalGastos')") &times;
+                span#modal-close-expense() &times;
                 h2 Detalle de Gastos
-                p Aquí puedes añadir más detalles sobre los gastos.
+                table#tabla-detalleTipoGastos.tabla-detalleTipoGastos
+                    thead
+                        tr
+                            th
+                            th
+                            th
+                    tbody
