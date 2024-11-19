@@ -1,5 +1,5 @@
 import userModel from '../model/userModel.js'
-
+import error from '../helpers/error.js';
 async function getAll() {
     const users = await userModel.findAll()
     return users;
@@ -9,27 +9,31 @@ async function getById(id) {
     return user;
 }
 
-async function create(username, email, tel, rol,password,create_time) {
+async function create(username, email, rol,password) {
+    const oldUser = await getByEmail(id);
+    if(oldUser){
+        throw new error.EMAIL_ALREADY_EXIST();
+    }
     const newUser = await userModel.create({
         username,
         email,
-        tel,
         rol,
         password,
-        create_time,
+          
     });
 
     return newUser;
 }
 
 
-async function update(username, email, tel, rol,password) {
+async function update(id, username, email, rol,password=null) {
     const user = await userModel.findByPk(id);
+
     user.username = username;
     user.email = email;
-    user.tel = tel;
     user.rol = rol;
-    user.password = password;
+    if (password) {user.password=password}
+   
     await user.save();
     return user;
 }

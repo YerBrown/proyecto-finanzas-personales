@@ -1,5 +1,5 @@
-import Mysql from "../config/mysql.js";
-const mysqlInstance = new Mysql();
+import { DataTypes } from "sequelize";
+import sequelize from "../config/sequelize.js";
 
 const User = sequelize.define('user', {
   id: {
@@ -9,15 +9,15 @@ const User = sequelize.define('user', {
     autoIncrement: true
   },
   username: {
-    type: DataTypes.String(40),
+    type: DataTypes.STRING(40),
     allowNull: false,
   },
   email: {
-    type: DataTypes.String(255),
+    type: DataTypes.STRING(255),
     allowNull: false,
   },
   password: {
-    type: DataTypes.String(50),
+    type: DataTypes.STRING(50),
     allowNull: false,
   },
   create_time: {

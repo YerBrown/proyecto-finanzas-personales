@@ -1,8 +1,8 @@
 import userController from "./userController.js";
 
 async function getAll(req, res) {
-    const users = userController.getAll();
-    res.render("/user/list", { users })
+    const users = await userController.getAll();
+    res.json(users)
 }
 
 async function getById(req, res) {
@@ -10,7 +10,7 @@ async function getById(req, res) {
     const user = await userController.getById(id);
     res.render("user/list", { user })
 }
-//Cambiar por createForm por register
+//Cambiar createForm por register
 /*async function createForm(req, res) {
     res.render("user/list")
 }*/
@@ -18,15 +18,15 @@ async function getById(req, res) {
 
 
 async function create(req, res) {
-    const { name, last_name, email, tel, rol } = req.body;
-    await userController.create(name, last_name, email, tel, rol)
-    res.redirect("user/list");
+    const { username, email, rol, password } = req.body;
+    await userController.create(username, email, rol, password)
+    res.redirect("/user");
 }
 
 async function update(req, res) {
-    const { name, last_name, email, tel, rol } = req.body;
+    const {username, email, rol, password } = req.body;
     const id = parseInt(req.params.id);
-    await userController.update(id,user_name, email, tel, rol );
+    await userController.update(id, username, email, rol, password);
     res.redirect("/user/" + id);
 }
 //Cambiar por desactivar
