@@ -1,10 +1,5 @@
 USE Proyecto_Finanzas;
 
-TRUNCATE TABLE user;
-TRUNCATE TABLE income;
-TRUNCATE TABLE expense;
-TRUNCATE TABLE income_type;
-TRUNCATE TABLE expense_type;
 
 INSERT INTO user (username,email,password, rol) VALUES
 ('john_doe', 'john@example.com', 'password123', 'client'),
