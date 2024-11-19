@@ -1,0 +1,31 @@
+extends ../layout
+
+block content
+  .header
+    h1 Menu
+    .tabs
+      .tab.active(onclick="filterOrders('all')") All Order
+  table.order-history
+    thead
+      tr
+        th(onclick="sortTable(0)") Id
+        th(onclick="sortTable(1)") Nombre
+        th(onclick="sortTable(2)") Pago
+        th(onclick="sortTable(3)") Tiempo restante
+        th(onclick="sortTable(4)") Tipo
+        th(onclick="sortTable(5)") Estado
+        th(onclick="sortTable(6)") Total
+        th Acción
+      tbody
+        tr(data-status="completed" data-date="2021-01-15")
+          td #001
+          td Usuario01
+          td Efectivo
+          td 13 min
+          td.type-delivery Entrega
+          td.status-delivered Entregado
+          td £12.00
+          td
+            .action-btn(onclick="toggleDropdown(this)") ...
+              .dropdown
+                a(href="#") Eliminar
