@@ -14,8 +14,8 @@ block content
                 form.formulario-filtros
                     div.campo
                         label Fecha desde:
-                        //- input(type="date" name="fechaDesde")
-                        input(type="month" id="mesAnio" name="fechaDesde")
+                        input(type="date" name="fechaDesde")
+                        //-input(type="month" id="mesAnio" name="fechaDesde")
                     div.campo
                         label Fecha hasta:
                         input(type="date" name="fechaHasta")
@@ -54,7 +54,7 @@ block content
                             td #{transaction.comment}
 
                             if transaction.dateTime
-                                td #{transaction.dateTime.toLocaleDateString('es-ES')}
+                               td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
                             else
                                 td No disponible
 

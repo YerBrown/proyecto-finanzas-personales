@@ -54,15 +54,15 @@ async function getAllByUserId(req, res) {
 async function getIncomeCountByType(req, res) {
     try {
         const user_id = parseInt(req.params.user_id);
-        const expenses = await incomeController.getIncomeCountByType(user_id);
+        const incomes = await incomeController.getIncomeCountByType(user_id);
 
-        if (!expenses || expenses.length === 0) {
+        if (!incomes || incomes.length === 0) {
             return res
                 .status(404)
                 .json("No se encontraron ingresos para este usuario");
         }
 
-        res.status(200).json(expenses);
+        res.status(200).json(incomes);
     } catch (error) {
         handleError(res, error);
     }

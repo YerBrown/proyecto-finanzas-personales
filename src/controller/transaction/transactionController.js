@@ -46,6 +46,7 @@ async function getIncomesAndExpenses(){
       type: expense.expense_type.name,
       user: expense.user_id
     }
+    console.log(transaction.dateTime)
     transactions.push(transaction);
   });
 

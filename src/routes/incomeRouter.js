@@ -20,4 +20,6 @@ router.post("/:id/update", incomeViewController.update);
 
 router.post("/:id/remove", incomeViewController.remove);
 
+//router.get("/detalleIngresos", incomeViewController.getIncomeCountByType);
+
 export default router;

@@ -125,7 +125,7 @@ async function openModal(modalId) {
     tbody.innerHTML = '';
 
     try {
-      const ruta = "/transaction/detalleIngresos";
+      const ruta = "/income/detalleIngresos";
       const response = await fetch(ruta);
       if (!response.ok) throw new Error('Network response was not ok ' + response.statusText);
 
