@@ -2,7 +2,10 @@ import express from "express";
 import dotenv from "dotenv";
 import router from "./routes/router.js";
 import session from "express-session";
-import { initializeSessionDates } from "./middlewares/sessionMiddleware.js";
+import {
+    initializeSessionDates,
+    saveUser,
+} from "./middlewares/sessionMiddleware.js";
 dotenv.config();
 
 const app = express();
@@ -14,12 +17,8 @@ app.use(
         saveUninitialized: true,
     })
 );
-app.use(function (req, res, next) {
-    res.locals.user = req.session.user || null;
-    next();
-});
-// Inicializar las fechas del filtro
-app.use(initializeSessionDates);
+app.use(saveUser); // Guardar la informacion del usuario en la session
+app.use(initializeSessionDates); // Inicializar las fechas del filtro
 
 app.set("views", "src/views");
 app.set("view engine", "pug");

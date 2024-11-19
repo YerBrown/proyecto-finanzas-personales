@@ -15,7 +15,7 @@ function handleError(res, error) {
 // Obtiene todos los ingresos
 async function getAll(req, res) {
     try {
-        const incomes = await incomeController.getAll();
+        const incomes = await incomeController.getAll(res.locals.user.id);
         res.status(200).json(incomes);
     } catch (error) {
         handleError(res, error);
@@ -58,12 +58,11 @@ async function getAllByUserId(req, res) {
 
 // Obtiene todos los gastos de un usuario específico
 async function getIncomeCountByType(req, res) {
-    
     try {
         //const user_id = parseInt(req.params.user_id);
         const user_id = 1; // Placeholder para el usuario actual
         const startDate = "2024-11-01";
-        const endDate = "2024-11-29"
+        const endDate = "2024-11-29";
 
         if (!startDate || !endDate) {
             return res
@@ -71,7 +70,12 @@ async function getIncomeCountByType(req, res) {
                 .json({ error: "Las fechas no están definidas en la sesión" });
         }
 
-        const {incomeCounts, totalAmountIncomes} = await incomeController.getIncomeCountByType(user_id,startDate, endDate);
+        const { incomeCounts, totalAmountIncomes } =
+            await incomeController.getIncomeCountByType(
+                user_id,
+                startDate,
+                endDate
+            );
 
         if (!incomeCounts || incomeCounts.length === 0) {
             return res
@@ -79,7 +83,7 @@ async function getIncomeCountByType(req, res) {
                 .json("No se encontraron ingresos para este usuario");
         }
 
-        res.status(200).json({incomeCounts,totalAmountIncomes});
+        res.status(200).json({ incomeCounts, totalAmountIncomes });
     } catch (error) {
         handleError(res, error);
     }
@@ -109,7 +113,7 @@ async function create(req, res) {
             user_id
         );
 
-        res.status(201).json(newIncome);
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }

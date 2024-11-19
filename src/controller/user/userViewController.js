@@ -1,95 +1,34 @@
-import User from "../model/userModel.js";
+import userController from "./userController.js";
 
-// Maneja los errores y responde con un estado 500 y el mensaje de error
-function handleError(res, error) {
-    res.status(500).json({ error: error.message });
-}
-
-// Obtiene todos los usuarios
 async function getAll(req, res) {
-    try {
-        const users = await User.findAll();
-        res.status(200).json(users);
-    } catch (error) {
-        handleError(res, error);
-    }
+    const users = await userController.getAll();
+
+    res.render("user/userAdministrator", { users });
 }
 
-// Obtiene un usuario por su ID
 async function getById(req, res) {
-    try {
-        const id = parseInt(req.params.id);
-        const user = await User.findByPk(id);
-
-        if (!user) {
-            return res.status(404).json({ error: "Usuario no encontrado" });
-        }
-
-        res.status(200).json(user);
-    } catch (error) {
-        handleError(res, error);
-    }
+    const id = parseInt(req.params.id);
+    const user = await userController.getById(id);
+    res.render("user/list", { user });
 }
 
-// Crea un nuevo usuario
 async function create(req, res) {
-    try {
-        const { username, email, password, rol } = req.body;
-        const newUser = await User.create({
-            username,
-            email,
-            password,
-            rol,
-        });
-
-        res.status(201).json(newUser);
-    } catch (error) {
-        handleError(res, error);
-    }
+    const { username, email, rol, password } = req.body;
+    await userController.create(username, email, rol, password);
+    res.redirect("/user");
 }
 
-// Edita un usuario por su ID
 async function update(req, res) {
-    try {
-        const id = parseInt(req.params.id);
-        const { username, email, password, rol } = req.body;
-
-        const user = await User.findByPk(id);
-        if (!user) {
-            return res.status(404).json({ error: "Usuario no encontrado" });
-        }
-
-        // Actualiza los campos del usuario
-        await user.update({
-            username,
-            email,
-            password,
-            rol,
-        });
-
-        res.status(200).json(user);
-    } catch (error) {
-        handleError(res, error);
-    }
+    const { username, email, rol, password } = req.body;
+    const id = parseInt(req.params.id);
+    await userController.update(id, username, email, rol, password);
+    res.redirect("/user/" + id);
 }
 
-// Desactiva un usuario por su ID (establece active a 0)
 async function deactivate(req, res) {
-    try {
-        const id = parseInt(req.params.id);
-        const user = await User.findByPk(id);
-
-        if (!user) {
-            return res.status(404).json({ error: "Usuario no encontrado" });
-        }
-
-        // Establece active a 0 para desactivar el usuario
-        await user.update({ active: 0 });
-
-        res.status(200).json({ message: "Usuario desactivado correctamente" });
-    } catch (error) {
-        handleError(res, error);
-    }
+    const id = parseInt(req.params.id);
+    await userController.deactivate(id);
+    res.redirect("/user");
 }
 
 export const functions = {
@@ -99,5 +38,4 @@ export const functions = {
     update,
     deactivate,
 };
-
 export default functions;

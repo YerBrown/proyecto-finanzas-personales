@@ -15,7 +15,7 @@ function handleError(res, error) {
 // Obtiene todos los gastos
 async function getAll(req, res) {
     try {
-        const expenses = await expenseController.getAll();
+        const expenses = await expenseController.getAll(res.locals.user.id);
         res.status(200).json(expenses);
     } catch (error) {
         handleError(res, error);
@@ -73,7 +73,7 @@ async function getExpenseCountByType(req, res) {
 
         const user_id = 1; // Placeholder para el usuario actual
         const startDate = "2024-11-01";
-        const endDate = "2024-11-29"
+        const endDate = "2024-11-29";
         console.log("LLEGA 1");
         if (!startDate || !endDate) {
             return res
@@ -82,7 +82,12 @@ async function getExpenseCountByType(req, res) {
         }
 
         //const user_id = parseInt(req.params.user_id);
-        const {expenseCounts, totalAmountExpenses} = await expenseController.getExpenseCountByType(user_id,startDate,endDate);
+        const { expenseCounts, totalAmountExpenses } =
+            await expenseController.getExpenseCountByType(
+                user_id,
+                startDate,
+                endDate
+            );
 
         if (!expenseCounts || expenseCounts.length === 0) {
             return res
@@ -90,7 +95,7 @@ async function getExpenseCountByType(req, res) {
                 .json("No se encontraron gastos para este usuario");
         }
 
-        res.status(200).json({expenseCounts, totalAmountExpenses});
+        res.status(200).json({ expenseCounts, totalAmountExpenses });
         console.log("llega 2");
     } catch (error) {
         handleError(res, error);
@@ -122,7 +127,7 @@ async function create(req, res) {
             user_id
         );
 
-        res.status(201).json(newExpense);
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }

@@ -3,10 +3,18 @@ import authViewController from "../controller/auth/authViewController.js";
 
 const router = Router();
 
-router.get("/login",authViewController.loginForm);
-router.get("/register",authViewController.registerForm);
-router.post("/login",authViewController.login);
-router.post("/register",authViewController.register);
-router.get("/logout",authViewController.logout);
+router.get("/", (req, res) => {
+    res.redirect("/transaction");
+});
+
+router.get("/login", authViewController.loginForm);
+
+router.get("/register", authViewController.registerForm);
+
+router.post("/login", authViewController.login);
+
+router.post("/register", authViewController.register);
+
+router.get("/logout", authViewController.logout);
 
 export default router;

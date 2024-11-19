@@ -1,7 +1,17 @@
 extends ../layout
 
+block styles
+    link(rel="stylesheet", href="/css/home.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css")
+    script(src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    script(src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js")
+
 block content
-    body.container
+    body
         .fila
             .columna-izquierda
                 canvas#myPieChart
@@ -53,7 +63,7 @@ block content
                             td #{transaction.comment}
 
                             if transaction.dateTime
-                               td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
+                                td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
                             else
                                 td No disponible
 

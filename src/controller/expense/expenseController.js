@@ -4,11 +4,14 @@ import expenseModel from "../../model/expenseModel.js";
 import expenseTypeModel from "../../model/expenseTypeModel.js";
 import errors from "../../helpers/errors.js";
 // Obtiene todos los gastos, incluyendo el nombre del tipo de gasto
-async function getAll() {
+async function getAll(user_id) {
     const expenses = await expenseModel.findAll({
         include: {
             model: expenseTypeModel,
             attributes: ["name"],
+        },
+        where: {
+            user_id: user_id, // Filtra los gastos del usuario
         },
     });
     return expenses;
@@ -47,7 +50,6 @@ async function getAllByUserId(user_id, startDate, endDate) {
 
 // Función para obtener la cantidad de gastos por cada tipo de gasto
 async function getExpenseCountByType(user_id, startDate, endDate) {
-
     const expenseCounts = await expenseModel.findAll({
         attributes: [
             "type_id",
@@ -68,15 +70,15 @@ async function getExpenseCountByType(user_id, startDate, endDate) {
 
     let totalAmountExpenses = 0;
 
-    expenseCounts.forEach(expense => {
+    expenseCounts.forEach((expense) => {
         // Accede al alias "totalAmount"
         const totalAmount = Number(expense.get("totalAmount"));
 
-        totalAmountExpenses += totalAmount/100;
+        totalAmountExpenses += totalAmount / 100;
     });
     console.log("expenseCounts " + expenseCounts);
     console.log("totalAmountExpenses " + totalAmountExpenses);
-    return {expenseCounts, totalAmountExpenses};
+    return { expenseCounts, totalAmountExpenses };
 }
 
 // Crea un nuevo gasto con los detalles proporcionados
