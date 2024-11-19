@@ -1,0 +1,137 @@
+/* Transaction Menu */
+.transaction-menu {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-self: center;
+    align-self: center;
+    background-color: lightgray;
+    color: white;
+    border: 3px solid lightgray;
+    border-radius: 10px;
+    box-sizing: border-box;
+    max-width: 80vw;
+    min-height: 70vh;
+    overflow: hidden;
+}
+
+/* Window Header */
+.window-header {
+    display: flex;
+    justify-content: center;
+    background-color: lightgray;
+    color: rgb(31, 31, 31);
+    font-size: 1rem;
+    font-style: normal;
+    width: 100%;
+}
+
+/* Window Container */
+.window-container {
+    display: flex;
+    flex-direction: column;
+    background-color: rgb(31, 31, 31);
+    box-sizing: border-box;
+    padding: 20px;
+    gap: 20px;
+    width: 100%;
+    height: 100%;
+}
+
+/* Transaction Field */
+.transaction-field {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    background-color: rgb(65, 65, 65);
+    border-radius: 10px;
+    box-sizing: border-box;
+    padding: 15px;
+    gap: 5px;
+    width: 100%;
+}
+
+.transaction-field label {
+    color: rgb(176, 176, 176);
+    font-size: 0.9rem;
+    font-weight: bold;
+}
+
+.transaction-field p {
+    margin: 0;
+    display: inline;
+}
+
+.transaction-field:focus {
+    outline: 2px solid lightgray;
+}
+
+.transaction-field select {
+    font-size: 1.1rem;
+}
+
+/* Amount Input */
+#amount-input {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+/* Input and Textarea Styles */
+input,
+#amount,
+#title,
+textarea.transaction-field {
+    background-color: transparent;
+    border: none;
+    color: white;
+    font-size: 1.1rem;
+    width: 100%;
+}
+
+input:focus,
+textarea.transaction-field:focus {
+    outline: none;
+}
+
+textarea.transaction-field {
+    max-height: 300px;
+    resize: none;
+    border: none;
+    padding: 0;
+    border-radius: 0;
+}
+
+/* Submits Field */
+#submits_field {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+
+#submits_field button {
+    padding: 5px;
+    font-size: 1.1rem;
+    border: 2px solid lightgray;
+    border-radius: 2px;
+}
+
+#submits_field button:active {
+    border: 2px solid black;
+}
+
+/* Remove Button */
+.remove-button {
+    background-color: red;
+    color: white;
+}
+
+/* Remove Number Input Spin Buttons */
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}

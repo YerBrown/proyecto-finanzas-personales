@@ -1,59 +1,64 @@
-import incomeModel from '../model/incomeModel.js'
-import incomeTypeModel from '../model/incomeTypeModel.js'
-import expenseController from './expenseController.js'
+import incomeModel from "../model/incomeModel.js";
+import incomeTypeModel from "../model/incomeTypeModel.js";
+import expenseController from "./expenseController.js";
 
 async function getAllIncomes() {
-    const incomes = await incomeModel.findAll({
-      include: {
-        model: incomeTypeModel,
-        attributes: ['name']}
-    });
-    
-    return incomes;
-};
+  const incomes = await incomeModel.findAll({
+    include: {
+      model: incomeTypeModel,
+      attributes: ["name"],
+    },
+  });
 
-async function getIncomesAndExpenses(){
+  return incomes;
+}
+
+async function getIncomesAndExpenses() {
   const incomes = await getAllIncomes();
   const expenses = await expenseController.getAll();
   const transactions = [];
-  incomes.forEach(income => {
+  incomes.forEach((income) => {
     const transaction = {
       id: income.id,
       title: income.title,
-      amount: income.amount/100,
+      amount: income.amount / 100,
       dateTime: income.datetime,
       comment: income.comment,
       type: income.income_type.name,
-      user: income.user_id
-    }
+      user: income.user_id,
+    };
     transactions.push(transaction);
   });
 
-  expenses.forEach(expense => {
+  expenses.forEach((expense) => {
     const transaction = {
       id: expense.id,
       title: expense.title,
-      amount: expense.amount/100,
+      amount: expense.amount / 100,
       dateTime: expense.datetime,
       comment: expense.comment,
       type: expense.expense_type.name,
-      user: expense.user_id
-    }
+      user: expense.user_id,
+    };
     transactions.push(transaction);
-    console.log("transaction", transaction)
   });
 
   let totalIncome = 0;
-    incomes.forEach(income => {
-      totalIncome += income.amount/100;
-    });
-    transactions.sort((a,b)=>new Date(b.dateTime) - new Date(a.dateTime));
-  return {transactions, totalIncome};
+  incomes.forEach((income) => {
+    totalIncome += income.amount / 100;
+  });
+
+  let totalExpense = 0;
+  expenses.forEach((expense) => {
+    totalExpense += expense.amount / 100;
+  });
+  transactions.sort((a, b) => new Date(b.dateTime) - new Date(a.dateTime));
+  return { transactions, totalIncome, totalExpense };
 }
 
 export const functions = {
   getAllIncomes,
-  getIncomesAndExpenses
-}
+  getIncomesAndExpenses,
+};
 
 export default functions;

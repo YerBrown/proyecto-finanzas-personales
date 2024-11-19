@@ -1,18 +1,19 @@
 import expenseController from "./expenseController.js";
-import expenseTypeController from "./expenseTypeController.js";
 
- const getAll = async (req, res) => {
+// Obtiene todos los gastos
+async function getAll(req, res) {
   try {
     const expenses = await expenseController.getAll();
     res.status(200).json(expenses);
   } catch (error) {
     res.status(500).json({ error: "Error al obtener los gastos" });
   }
-};
+}
 
-const getById = async (req, res) => {
+// Obtiene un gasto específico por su ID
+async function getById(req, res) {
   try {
-    const id  = parseInt(req.params.id);
+    const id = parseInt(req.params.id);
     const expense = await expenseController.getById(id);
 
     if (!expense) {
@@ -23,11 +24,12 @@ const getById = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error al obtener el gasto" });
   }
-};
+}
 
-const getAllByUserId = async (req, res) => {
+// Obtiene todos los gastos de un usuario específico
+async function getAllByUserId(req, res) {
   try {
-    const  user_id  = parseInt(req.params.user_id);
+    const user_id = parseInt(req.params.user_id);
     const expense = await expenseController.getAllByUserId(user_id);
 
     if (!expense) {
@@ -38,18 +40,10 @@ const getAllByUserId = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error al obtener el gasto" });
   }
-};
+}
 
-const createForm = async (req, res) => {
-  try {
-    const types = await expenseTypeController.getAll();
-    res.render("expense/createExpenseForm", {types});
-  } catch (error) {
-    res.status(500).json({ error: "Error al mostrar el formulario" });
-  }
-};
-
-const create = async (req, res) => {
+// Crea un nuevo gasto
+async function create(req, res) {
   try {
     const { amount, title, comment, datetime, type_id, user_id } = req.body;
     const newExpense = await expenseController.create(
@@ -65,9 +59,10 @@ const create = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error al crear el gasto" });
   }
-};
+}
 
-const update = async (req, res) => {
+// Actualiza un gasto existente
+async function update(req, res) {
   try {
     const { id } = req.params;
     const { amount, title, comment, datetime, type_id, user_id } = req.body;
@@ -85,9 +80,10 @@ const update = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error al actualizar el gasto" });
   }
-};
+}
 
-const remove = async (req, res) => {
+// Elimina un gasto por su ID
+async function remove(req, res) {
   try {
     const { id } = req.params;
     const expense = await expenseController.remove(id);
@@ -95,15 +91,13 @@ const remove = async (req, res) => {
   } catch (error) {
     res.status(500).json({ error: "Error al eliminar el gasto" });
   }
-};
-
+}
 export const functions = {
   getAll,
   getById,
-  createForm,
   getAllByUserId,
-  update,
   create,
+  update,
   remove,
 };
 

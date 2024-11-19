@@ -1,21 +1,17 @@
 import { Router } from "express";
-import userController from "../controller/userController.js";
+import userController from "../controller/userViewController.js"
 const router = Router();
 
 router.get("/", userController.getAll);
 
-// router.get("/new", userController.createForm);
+router.get("/:id", userController.getById);
 
-// router.get("/:id", userController.getById);
+router.post("/new", userController.create);
 
-// router.post("/new", userController.create);
+router.post("/:id/update", userController.update);
 
-// router.get("/:id/update", userController.updateForm);
+router.get("/login", userController.loginForm);
 
-// router.post("/:id/update", userController.update);
-
-// router.get("/:id/delete", userController.remove);
-
-router.get("/login", userController.renderLogin);
+router.get("/register", userController.registerForm);
 
 export default router;
