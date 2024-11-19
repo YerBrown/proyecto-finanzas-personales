@@ -7,8 +7,8 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                button#totalIncomes(onclick="openModal('modalIngresos')") Total ingresos: #{totalIncome}€
-                button#totalExpenses(onclick="openModal('modalGastos')") Total gastos: #{totalExpense}€
+                button#totalIncomes() Total ingresos: #{totalIncome}€
+                button#totalExpenses() Total gastos: #{totalExpense}€
 
             .columna-derecha
                 form.formulario-filtros
@@ -41,8 +41,7 @@ block content
                        each transaction in transactions
                         tr
                             td 
-                                - const iconClass = iconMap[transaction.type] || 'fa-question';
-                                i(class=`fa-solid ${iconClass}`)
+                                i(class=`fa-solid transactionIcon`,data-type=transaction.type)
 
                             td #{transaction.title}             
                             
@@ -63,9 +62,9 @@ block content
                                 button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
                                     i(class="fas fa-edit")
 
-        .modal#modalIngresos
+        .modal#modalIncomes
             .modal-content
-                span.modal-close(onclick="closeModal('modalIngresos')") &times;
+                span#modal-close-income() &times;
                 h2 Detalle de Ingresos
                 table#tabla-detalleTipoIngresos.tabla-detalleTipoIngresos
                     thead
@@ -76,8 +75,14 @@ block content
                     tbody
                         
 
-        .modal#modalGastos
+        .modal#modalExpenses
             .modal-content
-                span.modal-close(onclick="closeModal('modalGastos')") &times;
+                span#modal-close-expense() &times;
                 h2 Detalle de Gastos
-                p Aquí puedes añadir más detalles sobre los gastos.
+                table#tabla-detalleTipoGastos.tabla-detalleTipoGastos
+                    thead
+                        tr
+                            th
+                            th
+                            th
+                    tbody

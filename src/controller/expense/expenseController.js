@@ -47,6 +47,7 @@ async function getAllByUserId(user_id, startDate, endDate) {
 
 // Función para obtener la cantidad de gastos por cada tipo de gasto
 async function getExpenseCountByType(user_id, startDate, endDate) {
+
     const expenseCounts = await expenseModel.findAll({
         attributes: [
             "type_id",
@@ -65,7 +66,17 @@ async function getExpenseCountByType(user_id, startDate, endDate) {
         },
     });
 
-    return expenseCounts;
+    let totalAmountExpenses = 0;
+
+    expenseCounts.forEach(expense => {
+        // Accede al alias "totalAmount"
+        const totalAmount = Number(expense.get("totalAmount"));
+
+        totalAmountExpenses += totalAmount/100;
+    });
+    console.log("expenseCounts " + expenseCounts);
+    console.log("totalAmountExpenses " + totalAmountExpenses);
+    return {expenseCounts, totalAmountExpenses};
 }
 
 // Crea un nuevo gasto con los detalles proporcionados

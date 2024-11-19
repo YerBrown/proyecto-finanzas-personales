@@ -1,52 +1,54 @@
 import {iconMap,colores} from './home.js';
 
 export async function openModal(modalId) {
+    console.log("ENTRA EN OPENMODAL")
   const modal = document.getElementById(modalId);
 
-  if (modalId === 'modalIncomes') {
+  if (modalId === 'modalExpenses') {
     const tbody = modal.querySelector('tbody');
     tbody.innerHTML = '';
 
     try {
-      const ruta = "/income/incomesDetail";
+      const ruta = "/expense/expensesDetail";
       const response = await fetch(ruta);
-      
+      console.log("ENTRA EN OPENMODALEXPENSE2")
       if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
 
-      let incomes = await response.json();
-      let totalAmountIncomesType = incomes.totalAmountIncomes;
-      incomes.incomeCounts.forEach((income, index) => {  
+      let expenses = await response.json();
+      let totalAmountexpensesType = expenses.totalAmountExpenses;
+      console.log("HOLA TOTALAMOUNTE " + totalAmountexpensesType);
+      console.log("HOLA EXPENSES " + expenses);
+      
+      expenses.expenseCounts.forEach((expense, index) => {  
 
-        let incomeAmount = income.totalAmount / 100;
-        let incomePercent = Math.round((incomeAmount / totalAmountIncomesType) * 100);
+        let expenseAmount = expense.totalAmount / 100;
+        let expensePercent = Math.round((expenseAmount / totalAmountexpensesType) * 100);
       
         // Crear la fila de la tabla
         const tr = document.createElement('tr');
-      
-        
-      
-        const tdIncomeTypeValue = document.createElement('td');
-        tdIncomeTypeValue.id = "tdIncomeTypeValue";
-        tdIncomeTypeValue.textContent = income.income_type.name;
+        const tdexpenseTypeValue = document.createElement('td');
+        tdexpenseTypeValue.id = "tdexpenseTypeValue";
+        tdexpenseTypeValue.textContent = expense.expense_type.name;
 
         /* ICONOS DETALLE INGRESOS */
-        const tdIncomeTypeIcon = document.createElement('td');
+        const tdexpenseTypeIcon = document.createElement('td');
         const icon = document.createElement('i');
-        tdIncomeTypeIcon.id = "tdIncomeTypeIcon";
+        tdexpenseTypeIcon.id = "tdexpenseTypeIcon";
         //icon.innerHTML = `<i class="fas ${iconMap[type] || 'fa-question'}"></i>`;
-        icon.className = `fas ${iconMap[income.income_type.name]}`;
-        tdIncomeTypeIcon.appendChild(icon);
+        icon.className = `fas ${iconMap[expense.expense_type.name]}`;
+        console.log("NOMBRE ICONO " + expense.expense_type.name);
+        tdexpenseTypeIcon.appendChild(icon);
       
-        const tdIncomeTypeGrafico = document.createElement('td');
-        tdIncomeTypeGrafico.id = "tdIncomeTypeGrafico";
+        const tdexpenseTypeGrafico = document.createElement('td');
+        tdexpenseTypeGrafico.id = "tdexpenseTypeGrafico";
         const canvas = document.createElement('canvas');
-        canvas.id = `grafico-${income.id}`;
+        canvas.id = `grafico-${expense.id}`;
         canvas.classList.add('common-chart');
-        tdIncomeTypeGrafico.appendChild(canvas);
+        tdexpenseTypeGrafico.appendChild(canvas);
       
-        tr.appendChild(tdIncomeTypeIcon);
-        tr.appendChild(tdIncomeTypeValue);
-        tr.appendChild(tdIncomeTypeGrafico);
+        tr.appendChild(tdexpenseTypeIcon);
+        tr.appendChild(tdexpenseTypeValue);
+        tr.appendChild(tdexpenseTypeGrafico);
         tbody.appendChild(tr);
       
         // Crear el gráfico con un plugin específico
@@ -54,7 +56,7 @@ export async function openModal(modalId) {
           type: 'doughnut',
           data: {
             datasets: [{
-              data: [incomePercent, 100 - incomePercent],
+              data: [expensePercent, 100 - expensePercent],
               backgroundColor: [colores[index % colores.length].colorClaro, colores[index % colores.length].colorOscuro],
               hoverOffset: 10,
               borderColor: 'rgba(0, 0, 0, 0)',
@@ -79,10 +81,10 @@ export async function openModal(modalId) {
             }
           },
           plugins: [{
-            id: `centerTextModal-${income.id}`,
+            id: `centerTextModal-${expense.id}`,
             beforeDraw: function (chart) {
               const ctx = chart.ctx;
-              const text = incomePercent + "%";
+              const text = expensePercent + "%";
               ctx.restore();
               ctx.font = 'italic bold 12px Arial';
               ctx.textBaseline = 'middle';

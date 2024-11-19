@@ -175,14 +175,14 @@ td{
 
 .modal-content {
   background-color: #1E1E1E;
-  margin: 15% auto;
+  margin: 2% auto;
   padding: 20px;
   border-radius: 8px;
   width: 40%;
   max-width: 500px;
 }
 
-.modal-close {
+[id^="modal-close-"] {
   color: #aaa;
   float: right;
   font-size: 28px;
@@ -190,8 +190,8 @@ td{
   cursor: pointer;
 }
 
-.modal-close:hover,
-.modal-close:focus {
+[id^="modal-close-"]:hover,
+[id^="modal-close-"]:focus {
   color: #000;
   text-decoration: none;
   cursor: pointer;
@@ -213,9 +213,7 @@ td{
   font-style: italic;
   border: none;
   font-size: 15px;
-
 }
-
 
 .tabla-detalleTipoIngresos td {
   padding: 10px;
@@ -235,4 +233,19 @@ td{
 .common-chart{
   width:100px;
   height: 100px;
+}
+
+.tabla-detalleTipoGastos td {
+  padding: 10px;
+  border-bottom: 2px solid #404040;
+  text-align: left;
+}
+
+.tabla-detalleTipoGastos th {
+  background-color: none;
+  color: #000;
+}
+
+.tabla-detalleTipoGastos td[colspan="4"] {
+  text-align: center;
 }
