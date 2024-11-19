@@ -1,14 +1,13 @@
 extends ../layout
 
 block content
-    form(action="/expense/new" method='POST' id='add-transaction-parent' class='transaction-menu')
+    form(action="/income/new" method='POST' id='add-transaction-parent' class='transaction-menu')
         div(class='window-header')
-            h2 Nuevo Gasto 
+            h2 Nuevo Ingreso 
         div(class='window-container')
             div(id='amount-field' class='transaction-field')
                 label(for="amount") Cantidad:
                 div(id='amount-input')
-                    p -
                     input(<input type="number" name='amount' id='amount' min='0' step="0.01" oninput="limitDecimalPlaces()" placeholder="0.00" required)
                     p &euro;
             div(id='date-time-field' class='transaction-field')
@@ -27,7 +26,7 @@ block content
                 textarea(id='comment-field' class='transaction-field' name="comment" rows="4" cols="50" maxlength="200" placeholder='Comentario')
             div(id='submits_field' class='transaction-field')
                 button(type="button" onclick="window.location.href='/expense'") Cancelar
-                button(type="submit") Crear Gasto
+                button(type="submit") Crear Ingreso
 
     script.
         function limitDecimalPlaces() {
