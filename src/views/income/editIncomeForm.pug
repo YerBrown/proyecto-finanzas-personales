@@ -1,36 +1,36 @@
 extends ../layout
 
 block content
-    form(action="/expense/new" method='POST' id='add-transaction-parent' class='transaction-menu')
+    form(action="/income/update/"+currentIncome.id method='POST' id='add-transaction-parent' class='transaction-menu')
         div(class='window-header')
-            h2 Nuevo Gasto 
+            h2 Editar Ingreso 
         div(class='window-container')
             div(id='amount-field' class='transaction-field')
                 label(for="amount") Cantidad:
                 div(id='amount-input')
-                    p -
-                    input(<input type="number" name='amount' id='amount' min='0' step="0.01" oninput="limitDecimalPlaces()" placeholder="0.00" required)
+                    input(type="number" name='amount' id='amount' min='0' step="0.01" oninput="limitDecimalPlaces()" placeholder="0.00" value=currentIncome.amount required)
                     p &euro;
             div(id='date-time-field' class='transaction-field')
                 label(for="date-time") Fecha:
-                input(type="datetime-local" id="datetime" name="datetime" required)
+                input(type="datetime-local" id="datetime" name="datetime" value=currentIncome.datetime required)
             div(id='expense-type-field' class='transaction-field')
                 label(for="type_id") Categoria:
                 select( id="expense-type" name="type_id")
                     each type in types 
-                        option(class="type-option", value=type.id)= type.name 
+                        option(class="type-option", value=type.id selected=(currentIncome.type_id == type.id))= type.name 
             div(id='title-field' class='transaction-field')
                 label(for="title") Titulo:      
-                input(type="text" id="title" name="title" maxlength="50" placeholder='Titulo' required  )
+                input(type="text" id="title" name="title" maxlength="50" placeholder='Titulo' value=currentIncome.title required  )
             div(id='comment-field' class='transaction-field')
                 label(for="comment") Comentario:      
-                textarea(id='comment-field' class='transaction-field' name="comment" rows="4" cols="50" maxlength="200" placeholder='Comentario')
+                textarea(id='comment-field' class='transaction-field' name="comment" rows="4" cols="50" maxlength="200" placeholder='Comentario')=currentIncome.comment
             div(id='submits_field' class='transaction-field')
                 button(type="button" onclick="window.location.href='/expense'") Cancelar
-                button(type="submit") Crear Gasto
+                button(type="submit") Actualizar Ingreso
+                button(type="button" onclick=`removeIncome(${currentIncome.id})`  class='remove-button') Borrar Ingreso
 
     script.
-        function limitDecimalPlaces() {
+       function limitDecimalPlaces() {
             document.getElementById('amount').addEventListener('change', function () {
                 const input = this;
                 let valor = input.value;
@@ -46,4 +46,14 @@ block content
                 }
                 input.value = decimalPart ? `${integerPart}.${decimalPart}` : integerPart;
             });
+        }
+        function removeIncome(id) {
+            // Crear un formulario de manera dinámica
+            const form = document.createElement('form');
+            form.method = 'POST';
+            form.action = '/income/remove/' + id;
+
+            // Añadir el formulario al cuerpo y enviarlo
+            document.body.appendChild(form);
+            form.submit();
         }

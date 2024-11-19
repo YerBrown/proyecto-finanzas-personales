@@ -1,0 +1,62 @@
+// Devolver las fechas de inicio y fin para el filtro de gastos y ingresos
+function getFilterDates(req) {
+    // Verificar si las fechas ya están en la sesión
+    let startDate = req.session.startDate;
+    let endDate = req.session.endDate;
+
+    // Si las fechas no existen en la sesión, establecerlas
+    if (!startDate || !endDate) {
+        setFilterDateByMonthAndYear(
+            req,
+            new Date().getMonth(),
+            new Date().getFullYear()
+        );
+        startDate = req.session.startDate;
+        endDate = req.session.endDate;
+    }
+
+    return { startDate, endDate };
+}
+
+// Establecer las fechas en la sesión para el mes y el año especificados
+function setFilterDateByMonthAndYear(req, month, year) {
+    // Calcular el primer y último día del mes
+    const firstDayOfMonth = new Date(year, month, 1);
+    firstDayOfMonth.setHours(0, 0, 0, 0);
+    console.log("firsDay", firstDayOfMonth);
+    const lastDayOfMonth = new Date(year, month + 1, 0);
+    lastDayOfMonth.setHours(23, 59, 59, 999);
+    console.log("lastDay", lastDayOfMonth);
+    // Formatear las fechas a "YYYY-MM-DD"
+    const formattedFirstDay = firstDayOfMonth.toISOString().slice(0, 16);
+    const formattedLastDay = lastDayOfMonth.toISOString().slice(0, 16);
+
+    // Guardar las fechas en la sesión
+    req.session.startDate = formattedFirstDay;
+    req.session.endDate = formattedLastDay;
+    return { startDate: req.session.startDate, endDate: req.session.endDate };
+}
+
+// Establecer las fechas en la sesión para el año especificado
+function setFilterDateByYear(req, year) {
+    // Calcular el primer y último día del año
+    const firstDayOfYear = new Date(year, 0, 1);
+    firstDayOfYear.setHours(0, 0, 0, 0);
+    const lastDayOfYear = new Date(year, 11, 31);
+    lastDayOfYear.setHours(23, 59, 59, 999);
+
+    // Formatear las fechas a "YYYY-MM-DD"
+    const formattedFirstDay = firstDayOfYear.toISOString().slice(0, 16);
+    const formattedLastDay = lastDayOfYear.toISOString().slice(0, 16);
+
+    // Guardar las fechas en la sesión
+    req.session.startDate = formattedFirstDay;
+    req.session.endDate = formattedLastDay;
+
+    return { startDate: req.session.startDate, endDate: req.session.endDate };
+}
+export default {
+    getFilterDates,
+    setFilterDateByMonthAndYear,
+    setFilterDateByYear,
+};

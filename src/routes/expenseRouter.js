@@ -1,19 +1,23 @@
-import {Router} from "express";
-import expenseViewController from "../controller/expenseViewController.js"
+import { Router } from "express";
+import expenseViewController from "../controller/expense/expenseViewController.js";
 const router = Router();
 
-router.get("/",expenseViewController.getAll);
+router.get("/", expenseViewController.getAll);
 
-router.get("/new",expenseViewController.createForm);
+router.get("/new", expenseViewController.createForm);
 
-router.get("/:id",expenseViewController.getById);
+router.get("/:id/update", expenseViewController.updateForm);
 
-router.get("/user/:user_id",expenseViewController.getAllByUserId);
+router.get("/:id", expenseViewController.getById);
 
-router.post("/new",expenseViewController.create);
+router.get("/user/:user_id", expenseViewController.getAllByUserId);
 
-router.post("/update/:id",expenseViewController.update);
+router.get("/types/:user_id", expenseViewController.getExpenseCountByType);
 
-router.delete("/:id",expenseViewController.remove);
+router.post("/new", expenseViewController.create);
+
+router.post("/update/:id", expenseViewController.update);
+
+router.post("/remove/:id", expenseViewController.remove);
 
 export default router;

@@ -1,9 +1,8 @@
 import { DataTypes } from "sequelize";
 import sequelize from "../config/sequelize.js";
-import incomeTypeModel from "./incomeTypeModel.js";
 
-// Definición del modelo Income
-const Income = sequelize.define("income", {
+// Definición del modelo User
+const User = sequelize.define("user", {
     id: {
         type: DataTypes.INTEGER.UNSIGNED,
         allowNull: false,
@@ -11,24 +10,26 @@ const Income = sequelize.define("income", {
         autoIncrement: true,
         unique: true,
     },
-    amount: {
-        type: DataTypes.INTEGER,
+    username: {
+        type: DataTypes.STRING(40),
         allowNull: false,
+        unique: true,
     },
-    title: {
-        type: DataTypes.STRING(45),
+    email: {
+        type: DataTypes.STRING(255),
         allowNull: true,
+        unique: true,
     },
-    comment: {
-        type: DataTypes.STRING(200),
+    password: {
+        type: DataTypes.STRING(50),
         allowNull: false,
     },
-    datetime: {
+    create_time: {
         type: DataTypes.DATE,
-        allowNull: false,
+        allowNull: true,
         // Formatea la fecha para el input de tipo datetime-local
         get() {
-            const rawValue = this.getDataValue("datetime");
+            const rawValue = this.getDataValue("create_time");
             if (!rawValue) return null;
 
             // Formatea la fecha en "YYYY-MM-DDTHH:MM"
@@ -36,17 +37,15 @@ const Income = sequelize.define("income", {
             return fecha.toISOString().slice(0, 16);
         },
     },
-    type_id: {
-        type: DataTypes.INTEGER,
-        allowNull: false,
+    rol: {
+        type: DataTypes.ENUM("client", "admin"),
+        allowNull: true,
     },
-    user_id: {
-        type: DataTypes.INTEGER,
+    active: {
+        type: DataTypes.TINYINT,
         allowNull: false,
+        defaultValue: 1,
     },
 });
 
-// Establece la relación con el modelo IncomeType
-Income.belongsTo(incomeTypeModel, { foreignKey: "type_id" });
-
-export default Income;
+export default User;
