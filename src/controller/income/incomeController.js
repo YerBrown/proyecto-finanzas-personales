@@ -1,7 +1,7 @@
 import Income from "../../model/incomeModel.js";
 import incomeModel from "../../model/incomeModel.js";
 import incomeTypeModel from "../../model/incomeTypeModel.js";
-
+import errors from "../../helpers/errors.js";
 // Obtiene todos los ingresos, incluyendo el nombre del tipo de ingreso
 async function getAll() {
     const incomes = await incomeModel.findAll({
@@ -21,6 +21,9 @@ async function getById(id) {
             attributes: ["name"],
         },
     });
+    if (!income) {
+        throw new errors.INCOME_NOT_FOUND();
+    }
     return income;
 }
 
@@ -81,9 +84,9 @@ async function create(amount, title, comment, datetime, type_id, user_id) {
 async function update(id, amount, title, comment, datetime, type_id, user_id) {
     const income = await incomeModel.findByPk(id);
 
-    // Comprobar si ha encontrado el ingreso
+    // Comprobar si ha encontrado el gasto
     if (!income) {
-        return console.error("Gasto no encontrado");
+        throw new errors.INCOME_NOT_FOUND();
     }
 
     await income.update({
@@ -103,7 +106,7 @@ async function remove(id) {
 
     // Comprobar si ha encontrado el ingreso
     if (!income) {
-        return console.error("Gasto no encontrado");
+        throw new errors.INCOME_NOT_FOUND();
     }
 
     await income.destroy();

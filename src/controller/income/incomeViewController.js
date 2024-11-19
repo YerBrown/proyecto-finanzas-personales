@@ -3,7 +3,13 @@ import incomeTypeController from "./incomeTypeController.js";
 
 // Maneja los errores y responde con un estado 500 y el mensaje del error
 function handleError(res, error) {
-    res.status(500).json({ error: error.message });
+    console.error(error);
+    if (error.status) {
+        res.status(error.status);
+    } else {
+        res.status(500);
+    }
+    res.json({ error: error.message });
 }
 
 // Obtiene todos los ingresos
