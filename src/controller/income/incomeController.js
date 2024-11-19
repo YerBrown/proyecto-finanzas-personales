@@ -46,7 +46,7 @@ async function getIncomeCountByType(user_id, startDate, endDate) {
     const incomeCounts = await Income.findAll({
         attributes: [
             "type_id",
-            [sequelize.fn("COUNT", sequelize.col("type_id")), "count"],
+            [sequelize.fn("SUM", sequelize.col("amount")), "totalAmount"],
         ],
         group: ["type_id"],
         include: {
