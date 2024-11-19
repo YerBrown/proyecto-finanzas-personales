@@ -1,7 +1,7 @@
-import userModel from '../model/userModel.js'
-import error from '../helpers/errors.js';
+import userModel from "../model/userModel.js";
+import error from "../helpers/errors.js";
 async function getAll() {
-    const users = await userModel.findAll()
+    const users = await userModel.findAll();
     return users;
 }
 async function getById(id) {
@@ -11,44 +11,44 @@ async function getById(id) {
 
 async function create(username, email, password) {
     const oldUser = await getByEmail(id);
-    if(oldUser){
-        throw new error.EMAIL_ALREADY_EXISTS;
+    if (oldUser) {
+        throw new error.EMAIL_ALREADY_EXISTS();
     }
     const newUser = await userModel.create({
         username,
         email,
-        password         
+        password,
     });
 
     return newUser;
 }
 
-
-async function update(id, username, email, rol,password=null) {
+async function update(id, username, email, rol, password = null) {
     const user = await userModel.findByPk(id);
 
     user.username = username;
     user.email = email;
     user.rol = rol;
-    if (password) {user.password=password}
-   
+    if (password) {
+        user.password = password;
+    }
+
     await user.save();
     return user;
 }
 
-async function remove(id) {
+async function deactivate(id) {
     const userToRemove = await userModel.findByPk(id);
-    await userToRemove.destroy();
+    userToRemove.active = 0;
+    userToRemove.save();
     return userToRemove;
 }
-
 
 export const functions = {
     getAll,
     getById,
     create,
     update,
-    remove
-}
+    deactivate,
+};
 export default functions;
-

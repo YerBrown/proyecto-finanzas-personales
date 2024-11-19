@@ -2,47 +2,44 @@ import userController from "./userController.js";
 
 async function getAll(req, res) {
     const users = await userController.getAll();
-    res.json(users)
+
+    res.render("user/userAdministrator", { users });
 }
 
 async function getById(req, res) {
     const id = parseInt(req.params.id);
     const user = await userController.getById(id);
-    res.render("user/list", { user })
+    res.render("user/list", { user });
 }
 //Cambiar createForm por register
 /*async function createForm(req, res) {
     res.render("user/list")
 }*/
 
-
-
 async function create(req, res) {
     const { username, email, rol, password } = req.body;
-    await userController.create(username, email, rol, password)
+    await userController.create(username, email, rol, password);
     res.redirect("/user");
 }
 
 async function update(req, res) {
-    const {username, email, rol, password } = req.body;
+    const { username, email, rol, password } = req.body;
     const id = parseInt(req.params.id);
     await userController.update(id, username, email, rol, password);
     res.redirect("/user/" + id);
 }
-//Cambiar por desactivar
-/*async function remove(req, res) {
-    const id = parseInt(req.params.id);
-    await userController.remove(id);
-    res.redirect("/user");
-}*/
 
-async function registerForm (req, res) {
-    res.render("user/register");
-    
+async function deactivate(req, res) {
+    const id = parseInt(req.params.id);
+    await userController.deactivate(id);
+    res.redirect("/user");
 }
-async function loginForm (req, res) {
+
+async function registerForm(req, res) {
+    res.render("user/register");
+}
+async function loginForm(req, res) {
     res.render("user/login");
-    
 }
 
 export const functions = {
@@ -51,6 +48,7 @@ export const functions = {
     create,
     update,
     registerForm,
-    loginForm
-}
+    loginForm,
+    deactivate,
+};
 export default functions;
