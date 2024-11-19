@@ -9,11 +9,15 @@ const app = express();
 
 app.use(
     session({
-        secret: process.env.SECRET,
+        secret: process.env.SESSION_SECRET,
         resave: true,
         saveUninitialized: true,
     })
 );
+app.use(function (req, res, next) {
+    res.locals.user = req.session.user || null;
+    next();
+});
 // Inicializar las fechas del filtro
 app.use(initializeSessionDates);
 

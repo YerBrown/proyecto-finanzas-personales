@@ -1,10 +1,10 @@
 import jwt from "jsonwebtoken";
 import dotenv from "dotenv";
 
-// dotenv.config();
+dotenv.config();
 
-// const secret = dotenv.env.SECRET;
-export function sign(data, expiresIn = "1h") {
+const secret = dotenv.env.JWT_SECRET;
+function sign(data, expiresIn = "1h") {
     const token = jwt.sign(data, secret, {
         expiresIn,
     });
@@ -13,7 +13,8 @@ export function sign(data, expiresIn = "1h") {
 
 function verify(token) {
     try {
-        const response = jwt.verify(token.secret);
+        const response = jwt.verify(token,secret);
+        return response;
     } catch (error) {
         console.error(error);
         return { error: "Can't verify token", status: 500 };
