@@ -1,5 +1,6 @@
 import userModel from "../../model/userModel.js";
 import error from "../../helpers/errors.js";
+import { hashPassword } from "../../config/bcrypt.js";
 
 // Función para obtener todos los usuarios
 async function getAll() {
@@ -16,22 +17,20 @@ async function getById(id) {
 // Función para obtener un usuario por su email
 async function getByEmail(email) {
     const user = await userModel.findOne({ where: { email } });
-    if (!user) {
-        throw new error.USER_NOT_FOUND();
-    }
     return user;
 }
 
 // Función para crear un nuevo usuario
 async function create(username, email, password) {
-    const oldUser = await getByEmail(id);
+    const oldUser = await getByEmail(email);
     if (oldUser) {
         throw new error.EMAIL_ALREADY_EXISTS();
     }
+    const hash = await hashPassword(password);
     const newUser = await userModel.create({
         username,
         email,
-        password,
+        password: hash,
     });
 
     return newUser;

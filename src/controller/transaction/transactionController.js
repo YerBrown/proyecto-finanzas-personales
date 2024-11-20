@@ -1,9 +1,9 @@
 import expenseController from "../expense/expenseController.js";
 import incomeController from "../income/incomeController.js";
 
-async function getIncomesAndExpenses(id) {
-    const incomes = await incomeController.getAll(id);
-    const expenses = await expenseController.getAll(id);
+async function getIncomesAndExpenses(id, startDate, endDate) {
+    const incomes = await incomeController.getAll(id, startDate, endDate);
+    const expenses = await expenseController.getAll(id, startDate, endDate);
     const transactions = [];
     let totalIncome = 0;
     let totalExpense = 0;

@@ -1,11 +1,13 @@
 :root {
-  --color-principal: rgb(41, 41, 41);
-  --color-secundario: rgb(181, 181, 181);
-  --color-terciario: rgb(80, 80, 80);
+  --color-1: rgb(40, 40, 40);
+  --color-2: rgb(75, 75, 75);
+  --color-3: rgb(111, 111, 111);
+  --color-4: rgb(138, 138, 138);
+  --color-5: rgb(197, 197, 197);
   --color-fuente: rgb(227, 227, 227);
   --color-fuente-2: rgb(44, 44, 44);
   --color-boton: rgb(9, 103, 203);
-  --color-boton-hover: rgb(8, 77, 151);
+  --color-boton-hover: rgb(57, 127, 203);
   --color-boton-2: rgb(179, 95, 9);
   --color-boton-2-hover: rgb(164, 87, 9);
 }
@@ -14,7 +16,7 @@ body {
   font-family: Arial, sans-serif;
   font-style: italic;
   color: var(--color-fuente);
-  background-color: var(--color-principal);
+  background-color: var(--color-1);
   padding: 0;
   margin: 0;
   box-sizing: border-box;
@@ -31,10 +33,10 @@ header.navbar {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  background-color: var(--color-principal);
+  background-color: var(--color-1);
   padding: 0px 20px;
   color: var(--color-fuente);
-  border-bottom: 2px solid var(--color-terciario);
+  border-bottom: 2px solid var(--color-3);
 }
 
 .navbar-container {

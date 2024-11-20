@@ -14,7 +14,18 @@ function getFilterDates(req) {
         startDate = req.session.startDate;
         endDate = req.session.endDate;
     }
+    return { startDate, endDate };
+}
 
+// Establecer las fechas en la sesión para el mes y el año especificados
+function setFilterDateByDates(req, startDate, endDate) {
+    startDate = startDate.toISOString().slice(0, 16);
+    endDate = endDate.toISOString().slice(0, 16);
+
+    // Guardar las fechas en la sesión
+    req.session.startDate = startDate;
+    req.session.endDate = endDate;
+    req.session.filterType = "dates";
     return { startDate, endDate };
 }
 
@@ -35,6 +46,7 @@ function setFilterDateByMonthAndYear(req, month, year) {
     // Guardar las fechas en la sesión
     req.session.startDate = formattedFirstDay;
     req.session.endDate = formattedLastDay;
+    req.session.filterType = "monthly";
     console.log("LLEGA 4");
     return { startDate: req.session.startDate, endDate: req.session.endDate };
 }
@@ -54,7 +66,7 @@ function setFilterDateByYear(req, year) {
     // Guardar las fechas en la sesión
     req.session.startDate = formattedFirstDay;
     req.session.endDate = formattedLastDay;
-
+    req.session.filterType = "yearly";
     return { startDate: req.session.startDate, endDate: req.session.endDate };
 }
 export default {

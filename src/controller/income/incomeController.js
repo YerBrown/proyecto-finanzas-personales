@@ -4,7 +4,7 @@ import incomeTypeModel from "../../model/incomeTypeModel.js";
 import sequelize, { Op } from "sequelize";
 import errors from "../../helpers/errors.js";
 // Obtiene todos los ingresos, incluyendo el nombre del tipo de ingreso
-async function getAll(user_id) {
+async function getAll(user_id, startDate, endDate) {
     const incomes = await incomeModel.findAll({
         include: {
             model: incomeTypeModel,
@@ -12,6 +12,9 @@ async function getAll(user_id) {
         },
         where: {
             user_id: user_id, // Filtra los ingresos del usuario
+            datetime: {
+                [Op.between]: [startDate, endDate], // Filtra los gastos entre las fechas
+            },
         },
     });
     return incomes;

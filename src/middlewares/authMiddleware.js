@@ -3,13 +3,12 @@ function isAuthenticated(req, res, next) {
     console.log(req.session);  
  
     if (req.session.user) {
-     
+        next();
+
     } else {
       
         res.redirect("/login");
     }
-  
-    next();
 }
 
 // Verifica si el usuario tiene el rol de administrador
