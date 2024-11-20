@@ -16,4 +16,6 @@ router.get("/register", userController.registerForm);
 
 router.post("/:id/deactivate", userController.deactivate);
 
+router.post("/admin/user", userController.deactivate);
+
 export default router;
