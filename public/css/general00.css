@@ -1,0 +1,87 @@
+/* Estilos Generales */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f9;
+    color: #333;
+}
+
+h1, h2, h3 {
+    font-weight: normal;
+    color: #444;
+}
+
+.container {
+    width: 80%;
+    margin: 0 auto;
+    padding: 20px;
+}
+
+/* Estilos para Tablas */
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-bottom: 20px;
+}
+
+th, td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+th {
+    background-color: #f2f2f2;
+}
+
+tr:hover {
+    background-color: #f1f1f1;
+}
+
+.deactivated {
+    background-color: #f9d6d5;
+}
+
+/* Estilos para Botones */
+
+button {
+    padding: 8px 12px;
+    margin-right: 5px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+}
+
+button.activar {
+    background-color: #4CAF50;
+    color: white;
+}
+
+button.desactivar {
+    background-color: #f44336;
+    color: white;
+}
+
+button.options-btn {
+    background-color: #008CBA;
+    color: white;
+}
+
+button:hover {
+    opacity: 0.8;
+}
+
+/* Estilos para Roles de Usuario */
+
+.name.admin {
+    font-weight: bold;
+    color: #d9534f;
+}
+
+.role {
+    font-style: italic;
+}
