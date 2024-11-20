@@ -11,7 +11,7 @@ async function getAll() {
 async function getById(id) {
     const user = await userModel.findByPk(id);
 
-    // Comprobar si ha encontrado el usuario
+    
     if (!user) {
         console.error("Usuario no encontrado");
         return null;
@@ -26,7 +26,7 @@ async function getByEmail(email) {
         where: { email: email },
     });
 
-    // Comprobar si ha encontrado el usuario
+    
     if (!user) {
         console.error("Usuario no encontrado");
         return null;
@@ -58,7 +58,7 @@ async function update(id, username, email, password, rol) {
         throw new errors.USER_NOT_FOUND();
     }
 
-    // Comprobar si ha encontrado el usuario
+    
     if (!user) {
         console.error("Usuario no encontrado");
         return null;
