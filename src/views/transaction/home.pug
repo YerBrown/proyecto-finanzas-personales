@@ -20,16 +20,58 @@ block content
                 button#totalIncomes() Total ingresos: #{totalIncome}€
                 button#totalExpenses() Total gastos: #{totalExpense}€
 
+            //- .columna-derecha
+            //-     form.formulario-filtros
+            //-         div.campo
+            //-             label Fecha desde:
+            //-             input(type="date" name="fechaDesde")
+            //-             //-input(type="month" id="mesAnio" name="fechaDesde")
+            //-         div.campo
+            //-             label Fecha hasta:
+            //-             input(type="date" name="fechaHasta")
+            //-         button.boton-filtrar(type="submit") Filtrar
+
             .columna-derecha
                 form.formulario-filtros
                     div.campo
+                        label Filtro:
+                        select(name="tipo-filro") 
+                            option(value="fechas" selected) Por Fechas
+                            option(value="mensual") Mensual
+                            option(value="anual") Anual
+                    div.campo
                         label Fecha desde:
                         input(type="date" name="fechaDesde")
-                        //-input(type="month" id="mesAnio" name="fechaDesde")
                     div.campo
                         label Fecha hasta:
                         input(type="date" name="fechaHasta")
                     button.boton-filtrar(type="submit") Filtrar
+
+            .columna-derecha
+                form.formulario-filtros
+                    div.campo
+                        label Filtro:
+                        select(name="tipo-filro") 
+                            option(value="fechas") Por Fechas
+                            option(value="mensual" selected) Mensual
+                            option(value="anual") Anual
+                    div.campo
+                        label Mes y Año:
+                        input(type="month" name="fechaMensual")
+
+            .columna-derecha
+                form.formulario-filtros
+                    div.campo
+                        label Filtro:
+                        select(name="tipo-filro") 
+                            option(value="fechas") Por Fechas
+                            option(value="mensual") Mensual
+                            option(value="anual" selected) Anual
+                    div.campo
+                        label Mes y Año:
+                        select(name="fechaAnual") 
+                            each year in Array.from({ length: 31 }, (_, i) => 2020 + i)
+                                option(value=year, selected=(year == 2024)) #{year}
 
         .fila.inferior
             table#tabla-registros.tabla-registros
