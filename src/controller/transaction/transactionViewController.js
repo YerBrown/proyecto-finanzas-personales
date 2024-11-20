@@ -3,7 +3,11 @@ import incomeController from "../income/incomeController.js";
 
 async function getIncomesAndExpenses(req, res) {
     const { transactions, totalIncome, totalExpense } =
-        await transactionController.getIncomesAndExpenses(res.locals.user.id);
+        await transactionController.getIncomesAndExpenses(
+            res.locals.user.id,
+            req.session.startDate,
+            req.session.endDate
+        );
     res.render("transaction/home", { transactions, totalIncome, totalExpense });
 }
 

@@ -19,6 +19,17 @@ function getFilterDates(req) {
 }
 
 // Establecer las fechas en la sesión para el mes y el año especificados
+function setFilterDateByDates(req, startDate, endDate) {
+    startDate = startDate.toISOString().slice(0, 16);
+    endDate = endDate.toISOString().slice(0, 16);
+
+    // Guardar las fechas en la sesión
+    req.session.startDate = startDate;
+    req.session.endDate = endDate;
+    return { startDate, endDate };
+}
+
+// Establecer las fechas en la sesión para el mes y el año especificados
 function setFilterDateByMonthAndYear(req, month, year) {
     // Calcular el primer y último día del mes
     const firstDayOfMonth = new Date(year, month, 1);

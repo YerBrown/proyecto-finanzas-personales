@@ -90,29 +90,29 @@ block content
                         tr
                             td(colspan="7") No hay registros
                     else
-                       each transaction in transactions
-                        tr
-                            td 
-                                i(class=`fa-solid transactionIcon`,data-type=transaction.type)
+                        each transaction in transactions
+                            tr
+                                td 
+                                    i(class=`fa-solid transactionIcon`,data-type=transaction.type)
 
-                            td #{transaction.title}             
-                            
-                            if transaction.amount < 0
-                                td(style="color: #FF9B9B;") #{transaction.amount} €
-                            else
-                                td(style="color: #8FFFBE;") +#{transaction.amount} €
-                            
-                            td #{transaction.comment}
+                                td #{transaction.title}             
+                                
+                                if transaction.amount < 0
+                                    td(style="color: #FF9B9B;") #{transaction.amount} €
+                                else
+                                    td(style="color: #8FFFBE;") +#{transaction.amount} €
+                                
+                                td #{transaction.comment}
 
-                            if transaction.dateTime
-                                td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
-                            else
-                                td No disponible
+                                if transaction.dateTime
+                                    td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
+                                else
+                                    td No disponible
 
-                            td #{transaction.type}
-                            td 
-                                button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
-                                    i(class="fas fa-edit")
+                                td #{transaction.type}
+                                td 
+                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
+                                        i(class="fas fa-edit")
 
         .modal#modalIncomes
             .modal-content

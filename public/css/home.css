@@ -3,7 +3,7 @@
 .container {
   max-width: 1200px;
   margin: auto;
-  background-color: var(--color-principal);
+  background-color: var(--color-1);
   display: flex;
   flex-direction: column;
   align-items: stretch;
@@ -120,7 +120,7 @@ input[type="search"] {
 }
 
 .tabla-registros th {
-  background-color: var(--color-terciario);
+  background-color: var(--color-3);
 }
 
 .tabla-registros td[colspan="4"] {
