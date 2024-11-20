@@ -9,7 +9,7 @@ block styles
     script(src="https://cdn.jsdelivr.net/npm/chart.js")
     script(src="https://code.jquery.com/jquery-3.6.0.min.js")
     script(src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js")
-
+    script(type="module" src="/js/home.js")
 block content
     body
         .fila
@@ -17,25 +17,27 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                button#totalIncomes() Total ingresos: #{totalIncome}€
-                button#totalExpenses() Total gastos: #{totalExpense}€
+                button#totalIncomes() Total ingresos: #{transactionsValues.totalIncome}€
+                button#totalExpenses() Total gastos: #{transactionsValues.totalExpense}€
 
             .columna-derecha
                 form.formulario-filtros
                     div.campo
                         label Filtro:
+                        p= transactionsValues.filterType
                         select(id="tipo-filtro") 
-                            option(value="dates" selected) Por Fechas
-                            option(value="monthly") Mensual
-                            option(value="yearly") Anual
+                            option(value="dates" selected=(transactionsValues.filterType=='dates')) Por Fechas
+                            option(value="monthly" selected=(transactionsValues.filterType=='monthly')) Mensual
+                            option(value="yearly" selected=(transactionsValues.filterType=='yearly')) Anual
                     div#campoFechas
                         label Fecha desde:
-                        input(type="date" id="fechaDesde")
+                        input(type="date" id="fechaDesde" value=transactionsValues.startDate)
                         label Fecha hasta:
-                        input(type="date" id="fechaHasta")
+                        input(type="date" id="fechaHasta" value=transactionsValues.endDate)
+                        button(id="buttonFilterDates" type="button") Filtrar
                     div#campoMensual(style="display: none;")
                         label Mes y Año:
-                        input(type="month" id="fechaMensual")
+                        input(type="month" id="fechaMensual" value=transactionsValues.year + '-' + transactionsValues.month)
                     div#campoAnual(style="display: none;")
                         label Año:
                         select(id="fechaAnual") 
@@ -56,12 +58,17 @@ block content
                         th Tipo
                         th
                 tbody
-                    if transactions.length <= 0
-                        td(colspan="5") No hay registros
+                    if transactionsValues.transactions.length <= 0
                         tr
-                            td(colspan="7") No hay registros
+                            td
+                            td
+                            td 
+                            td No hay registros
+                            td 
+                            td 
+                            td
                     else
-                        each transaction in transactions
+                        each transaction in transactionsValues.transactions
                             tr
                                 td 
                                     i(class=`fa-solid transactionIcon`,data-type=transaction.type)

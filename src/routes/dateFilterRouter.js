@@ -9,6 +9,12 @@ router.get("/get-dates", (req, res) => {
     res.json(dates);
 });
 
+router.post("/set-dates-by-range", (req, res) => {
+    const { dateFrom, dateTo } = req.body;
+    const { startDate, endDate } = dateFilter.setFilterDateByDates(req, dateFrom, dateTo);
+    res.json({ startDate, endDate });
+});
+
 // Ruta para establecer fechas por mes y año
 router.post("/set-dates-by-month", (req, res) => {
     console.log("LLEGA 2");

@@ -9,6 +9,8 @@ let totalIncomesExpenses = totalIncomesValue + totalExpensesValue;
 let incomePercent;
 let expensePercent;
 let totalBalance;
+let dateFrom;
+let dateTo;
 
 export const iconMap = {
   Salario: 'fa-building-columns',
@@ -49,42 +51,44 @@ export const colores = [
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  // const filterType = sessionStorage.getItem('filterType');
+  // console.log('FILTERTYPE ' + filterType); // 'value'
+  // document.getElementById('tipo-filtro').setAttribute("selected", filterType);
+
+  // const filters = document.querySelectorAll('#tipo-filtro option');
+  // console.log("FILTROS",filters)
+  // filters.forEach(filter => {
+  //   if (filter.value === filterType) {
+  //     filter.selected = true;
+  //   }else {
+  //     filter.selected = false;
+  //   }
+  // });
+
+  filterType();
   const tipoFiltro = document.getElementById("tipo-filtro");
-  const campoFechas = document.getElementById("campoFechas");
-  const campoMensual = document.getElementById("campoMensual");
-  const campoAnual = document.getElementById("campoAnual");
-
   tipoFiltro.addEventListener("change", function () {
-    const valorSeleccionado = tipoFiltro.value;
-
-    // Mostrar/ocultar campos según la selección
-    if (valorSeleccionado === "dates") {
-      campoFechas.style.display = "block";
-      campoMensual.style.display = "none";
-      campoAnual.style.display = "none";
-    } else if (valorSeleccionado === "monthly") {
-      campoFechas.style.display = "none";
-      campoMensual.style.display = "block";
-      campoAnual.style.display = "none";
-    } else if (valorSeleccionado === "yearly") {
-      campoFechas.style.display = "none";
-      campoMensual.style.display = "none";
-      campoAnual.style.display = "block";
-    }
+   filterType();
   });
   
    // Controlar cambios en el input de fecha desde
    const fechaDesdeInput = document.getElementById('fechaDesde');
    fechaDesdeInput.addEventListener("change", function () {
-     console.log("Fecha desde:", fechaDesdeInput.value);
+     dateFrom = fechaDesdeInput.value;
      
    });
- 
+   
    // Controlar cambios en el input de fecha hasta
    const fechaHastaInput = document.getElementById('fechaHasta');
    fechaHastaInput.addEventListener("change", function () {
-     console.log("Fecha hasta:", fechaHastaInput.value);
+     dateTo = fechaHastaInput.value;
    });
+
+   const buttonFilterDates = document.getElementById('buttonFilterDates');
+   buttonFilterDates.addEventListener('click', () => {
+     console.log("LLAMA AL BOTON");
+    filterByDates(dateFrom, dateTo);
+  });
  
    // Controlar cambios en el input de fecha mensual
    const fechaMensualInput = document.getElementById('fechaMensual');
@@ -102,12 +106,13 @@ document.addEventListener("DOMContentLoaded", function () {
      yearlyFilter(year);
    });
 
+   
  
    // Controlar cambios en el select de año
-   const fechaAnualSelect = document.getElementById('fechaAnual');
-   fechaAnualSelect.addEventListener("change", function () {
-     console.log("Año seleccionado:", fechaAnualSelect.value);
-   });
+  //  const fechaAnualSelect = document.getElementById('fechaAnual');
+  //  fechaAnualSelect.addEventListener("change", function () {
+  //    console.log("Año seleccionado:", fechaAnualSelect.value);
+  //  });
 
   const closeModalIncomes = document.getElementById('modal-close-income');
   const closeModalExpenses = document.getElementById('modal-close-expense');
@@ -267,10 +272,55 @@ async function yearlyFilter(year) {
     });
     
     if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
-    console.log("LLEGA 5");
     location.reload();
     
   } catch (error) {
     console.error('There has been a problem with your fetch operation:', error);
+  }
+}
+
+async function filterByDates(dateFrom, dateTo) {
+  console.log("LLEGA FILTER BY DATES");
+
+  try {
+    const ruta = "/date-filter/set-dates-by-range";
+    const response = await fetch(ruta, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ dateFrom, dateTo }),
+    });
+    
+    if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
+    location.reload();
+    
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
+  }
+}
+
+function filterType(){
+
+  const tipoFiltro = document.getElementById("tipo-filtro");
+  const campoFechas = document.getElementById("campoFechas");
+  const campoMensual = document.getElementById("campoMensual");
+  const campoAnual = document.getElementById("campoAnual");
+
+  const valorSeleccionado = tipoFiltro.value;
+
+  // Mostrar/ocultar campos según la selección
+  if (valorSeleccionado === "dates") {
+    campoFechas.style.display = "block";
+    campoMensual.style.display = "none";
+    campoAnual.style.display = "none";
+  } else if (valorSeleccionado === "monthly") {
+    campoFechas.style.display = "none";
+    campoMensual.style.display = "block";
+    campoAnual.style.display = "none";
+  } else if (valorSeleccionado === "yearly") {
+    campoFechas.style.display = "none";
+    campoMensual.style.display = "none";
+    campoAnual.style.display = "block";
   }
 }

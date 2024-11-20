@@ -9,7 +9,27 @@ async function getIncomesAndExpenses(req, res) {
             req.session.startDate,
             req.session.endDate
         );
-    res.render("transaction/home", { transactions, totalIncome, totalExpense });
+        const startDate = req.session.startDate;
+        const endDate = req.session.endDate;
+        const year = endDate.split("-")[0];
+        const month = endDate.split("-")[1];
+        const filterType = req.session.filterType;
+        console.log("FILTER TYPE BUENO", filterType);
+
+        console.log("STARTDATE ", startDate);
+
+        const transactionsValues = {
+            transactions, 
+            totalIncome, 
+            totalExpense, 
+            startDate,
+            endDate,
+            month,
+            year,
+            filterType
+            
+        }
+    res.render("transaction/home", {transactionsValues});
 }
 
 async function getIncomesType(req, res) {
