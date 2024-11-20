@@ -16,6 +16,12 @@ export function initializeSessionDates(req, res, next) {
         // Formatear las fechas a "YYYY-MM-DD"
         req.session.startDate = firstDayOfMonth.toISOString().split("T")[0];
         req.session.endDate = lastDayOfMonth.toISOString().split("T")[0];
+        req.session.filterType = "monthly";
     }
+    next();
+}
+
+export function saveUser(req, res, next) {
+    res.locals.user = req.session.user || null;
     next();
 }

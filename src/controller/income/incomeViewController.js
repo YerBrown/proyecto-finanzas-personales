@@ -15,7 +15,11 @@ function handleError(res, error) {
 // Obtiene todos los ingresos
 async function getAll(req, res) {
     try {
-        const incomes = await incomeController.getAll();
+        const incomes = await incomeController.getAll(
+            res.locals.user.id,
+            req.session.startDate,
+            req.session.endDate
+        );
         res.status(200).json(incomes);
     } catch (error) {
         handleError(res, error);
@@ -41,7 +45,7 @@ async function getById(req, res) {
 // Obtiene todos los ingresos de un usuario por su ID
 async function getAllByUserId(req, res) {
     try {
-        const user_id = parseInt(req.params.user_id);
+        const user_id = req.params.user.id;
         const income = await incomeController.getAllByUserId(user_id);
 
         if (!income) {
@@ -59,16 +63,30 @@ async function getAllByUserId(req, res) {
 // Obtiene todos los gastos de un usuario específico
 async function getIncomeCountByType(req, res) {
     try {
-        const user_id = parseInt(req.params.user_id);
-        const expenses = await incomeController.getIncomeCountByType(user_id);
+        const user_id = res.locals.user.id;
+        const startDate = "2024-11-01";
+        const endDate = "2024-11-29";
 
-        if (!expenses || expenses.length === 0) {
+        if (!startDate || !endDate) {
+            return res
+                .status(400)
+                .json({ error: "Las fechas no están definidas en la sesión" });
+        }
+
+        const { incomeCounts, totalAmountIncomes } =
+            await incomeController.getIncomeCountByType(
+                user_id,
+                startDate,
+                endDate
+            );
+
+        if (!incomeCounts || incomeCounts.length === 0) {
             return res
                 .status(404)
                 .json("No se encontraron ingresos para este usuario");
         }
 
-        res.status(200).json(expenses);
+        res.status(200).json({ incomeCounts, totalAmountIncomes });
     } catch (error) {
         handleError(res, error);
     }
@@ -87,8 +105,8 @@ async function createForm(req, res) {
 // Crea un nuevo ingreso
 async function create(req, res) {
     try {
-        let { amount, title, comment, datetime, type_id, user_id } = req.body;
-        user_id = 1; // Placeholder para el usuario actual
+        let { amount, title, comment, datetime, type_id } = req.body;
+        const user_id = res.locals.user.id;
         const newIncome = await incomeController.create(
             amount,
             title,
@@ -98,7 +116,7 @@ async function create(req, res) {
             user_id
         );
 
-        res.status(201).json(newIncome);
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }

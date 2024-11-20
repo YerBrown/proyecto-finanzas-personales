@@ -1,13 +1,20 @@
 import Income from "../../model/incomeModel.js";
 import incomeModel from "../../model/incomeModel.js";
 import incomeTypeModel from "../../model/incomeTypeModel.js";
+import sequelize, { Op } from "sequelize";
 import errors from "../../helpers/errors.js";
 // Obtiene todos los ingresos, incluyendo el nombre del tipo de ingreso
-async function getAll() {
+async function getAll(user_id, startDate, endDate) {
     const incomes = await incomeModel.findAll({
         include: {
             model: incomeTypeModel,
             attributes: ["name"],
+        },
+        where: {
+            user_id: user_id, // Filtra los ingresos del usuario
+            datetime: {
+                [Op.between]: [startDate, endDate], // Filtra los gastos entre las fechas
+            },
         },
     });
     return incomes;
@@ -49,7 +56,7 @@ async function getIncomeCountByType(user_id, startDate, endDate) {
     const incomeCounts = await Income.findAll({
         attributes: [
             "type_id",
-            [sequelize.fn("SUM", sequelize.col("amount")), "totalAmount"],
+            [sequelize.fn("SUM", sequelize.col("amount")), "totalAmount"], // Alias: totalAmount
         ],
         group: ["type_id"],
         include: {
@@ -59,12 +66,21 @@ async function getIncomeCountByType(user_id, startDate, endDate) {
         where: {
             user_id,
             datetime: {
-                [Op.between]: [startDate, endDate], // Filtra los gastos entre las fechas
+                [Op.between]: [startDate, endDate], // Filtra los ingresos entre las fechas
             },
         },
     });
 
-    return incomeCounts;
+    let totalAmountIncomes = 0;
+
+    incomeCounts.forEach((income) => {
+        // Accede al alias "totalAmount"
+        const totalAmount = Number(income.get("totalAmount"));
+
+        totalAmountIncomes += totalAmount / 100;
+    });
+
+    return { incomeCounts, totalAmountIncomes };
 }
 
 // Crea un nuevo ingreso con los detalles proporcionados

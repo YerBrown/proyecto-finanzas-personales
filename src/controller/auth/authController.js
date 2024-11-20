@@ -3,9 +3,8 @@ import { verifyPassword } from "../../config/bcrypt.js";
 import error from "../../helpers/errors.js";
 
 async function register(username, email, password, passwordConfirm) {
-    console.log(username, email, password, passwordConfirm)
     if (password != passwordConfirm) {
-        throw new error.PASSWORD_NOT_MATCH;
+        throw new error.PASSWORD_NOT_MATCH();
     }
     const oldUser = await userController.getByEmail(email);
     if (oldUser) {

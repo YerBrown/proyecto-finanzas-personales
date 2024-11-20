@@ -1,33 +1,33 @@
-extends ../layout 
+html(lang="es")
+    head
+        meta(charset="UTF-8")
+        meta(name="viewport", content="width=device-width, initial-scale=1.0")
+        title PocketLog Login
+        link(rel="stylesheet" href="/css/layout.css")
+        link(rel="stylesheet" href="/css/loginStyles.css")
 
-block content
-    link(rel="stylesheet" href="/css/loginStyles.css")
+    body
+        main
+            div.title
+                h1 PocketLog 
+                img(src="/images/cartera.png")
+            div.login-box
+                h2 Registro
+                form.login-form(action="/register" method="POST")
+        
+                    label(for="username") Nombre de usuario 
+                    input#username(type="text" name="username" placeholder='ahorrador98' required)
+                    
+                    label(for="email") Correo Electrónico
+                    input#username(type="email" name="email" placeholder='ahorrador98@correo.com' required)
 
-
-
-    
-    div.login-box
-        h2 Datos de registro
-        form.login-form(action="/register" method="POST")
-
-          
-            label(for="email") Introduzca correo
-            input#username(type="email" name="email", required)
-
-            label(for="username") Introduzca nombre de usuario
-            input#username(type="text" name="username", required)
-           
-            label(for="password") Contraseña
-            input#password(type="password" name="password", required minlength ="5")
-            
-            label(for="passwordConfirm") Repita contraseña
-            input#password(type="password" name="passwordConfirm", required minlength ="5")
-
-
-
-            
-            button.login-button(type="submit") Enviar
-
-            
-            a(href='/login')    
-                button.azure-button(type="button") Login
+                    label(for="password") Contraseña
+                    input#password(type="password" name="password"  placeholder='Contraseña' required minlength ="5")
+                    
+                    label(for="passwordConfirm") Repetir contraseña
+                    input#password(type="password" name="passwordConfirm" placeholder='Contraseña' required minlength ="5")
+                    
+                    button.login-button(type="submit") Enviar  
+                    
+                    a(href='/login')    
+                        button.azure-button(type="button") Iniciar Sesion

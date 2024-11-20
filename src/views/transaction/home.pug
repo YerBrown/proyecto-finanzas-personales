@@ -1,33 +1,50 @@
 extends ../layout
 
+block styles
+    link(rel="stylesheet", href="/css/home.css")
+    link(rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css")
+    link(rel="stylesheet" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.min.css")
+    link(rel="stylesheet" href="https://cdn.jsdelivr.net/npm/simple-datatables@latest/dist/style.css")
+    script(src="https://cdn.jsdelivr.net/npm/simple-datatables@latest" type="text/javascript")
+    script(src="https://cdn.jsdelivr.net/npm/chart.js")
+    script(src="https://code.jquery.com/jquery-3.6.0.min.js")
+    script(src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.min.js")
+
 block content
-    body.container
+    body
         .fila
             .columna-izquierda
                 canvas#myPieChart
 
             .columna-centro
-                button#totalIncomes(onclick="openModal('modalIngresos')") Total ingresos: #{totalIncome}€
-                button#totalExpenses(onclick="openModal('modalGastos')") Total gastos: #{totalExpense}€
+                button#totalIncomes() Total ingresos: #{totalIncome}€
+                button#totalExpenses() Total gastos: #{totalExpense}€
 
             .columna-derecha
                 form.formulario-filtros
                     div.campo
+                        label Filtro:
+                        select(id="tipo-filtro") 
+                            option(value="fechas" selected) Por Fechas
+                            option(value="mensual") Mensual
+                            option(value="anual") Anual
+                    div#campoFechas
                         label Fecha desde:
-                        input(type="date" name="fechaDesde")
-                    div.campo
+                        input(type="date" id="fechaDesde")
                         label Fecha hasta:
-                        input(type="date" name="fechaHasta")
-                    div.campo
-                        label Tipo de gasto:
-                        select(name="tipoGasto")
-                            option(value="todos") Todos
-                            option(value="gasto") Gasto
-                            option(value="ingreso") Ingreso
-                    button.boton-filtrar(type="submit") Filtrar
+                        input(type="date" id="fechaHasta")
+                    div#campoMensual(style="display: none;")
+                        label Mes y Año:
+                        input(type="month" id="fechaMensual")
+                    div#campoAnual(style="display: none;")
+                        label Año:
+                        select(id="fechaAnual") 
+                            each year in Array.from({ length: 31 }, (_, i) => 2020 + i)
+                                option(value=year, selected=(year == 2024)) #{year}
+                    
+                    
 
         .fila.inferior
-            button.boton-nuevo(onclick="location.href='/nuevo'") +
             table#tabla-registros.tabla-registros
                 thead
                     tr
@@ -46,35 +63,53 @@ block content
                     else
                         each transaction in transactions
                             tr
-                                td
-                                    i(class="fa-solid fa-car")
-                                td #{transaction.title}
+                                td 
+                                    i(class=`fa-solid transactionIcon`,data-type=transaction.type)
+
+                                td #{transaction.title}             
+                                
                                 if transaction.amount < 0
                                     td(style="color: #FF9B9B;") #{transaction.amount} €
                                 else
-                                    td(style="color: #8FFFBE;")  #{transaction.amount} €
+                                    td(style="color: #8FFFBE;") +#{transaction.amount} €
+                                
                                 td #{transaction.comment}
-                                td #{transaction.dateTime.toLocaleDateString('es-ES')}
-                                td #{transaction.type}
-                                td 
-                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
-                                        i(class="fas fa-edit")
 
-        .modal#modalIngresos
+                                if transaction.dateTime
+                                    td #{new Date(transaction.dateTime).toLocaleDateString('es-ES')}
+                                else
+                                    td No disponible
+
+                                td #{transaction.type} 
+                                td 
+                                    if transaction.transactionType === 1
+                                        button.boton-editar(onclick=`location.href='/income/${transaction.id}/update/'`)
+                                            i(class="fas fa-edit")
+                                    else  
+                                        button.boton-editar(onclick=`location.href='/expense/${transaction.id}/update/'`)
+                                            i(class="fas fa-edit")
+
+        .modal#modalIncomes
             .modal-content
-                span.modal-close(onclick="closeModal('modalIngresos')") &times;
+                span#modal-close-income() &times;
                 h2 Detalle de Ingresos
                 table#tabla-detalleTipoIngresos.tabla-detalleTipoIngresos
                     thead
                         tr
                             th
-                            th Tipo
+                            th
                             th
                     tbody
                         
 
-        .modal#modalGastos
+        .modal#modalExpenses
             .modal-content
-                span.modal-close(onclick="closeModal('modalGastos')") &times;
+                span#modal-close-expense() &times;
                 h2 Detalle de Gastos
-                p Aquí puedes añadir más detalles sobre los gastos.
+                table#tabla-detalleTipoGastos.tabla-detalleTipoGastos
+                    thead
+                        tr
+                            th
+                            th
+                            th
+                    tbody
