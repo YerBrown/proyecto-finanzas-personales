@@ -49,6 +49,58 @@ export const colores = [
 
 document.addEventListener("DOMContentLoaded", function () {
 
+  const tipoFiltro = document.getElementById("tipo-filtro");
+  const campoFechas = document.getElementById("campoFechas");
+  const campoMensual = document.getElementById("campoMensual");
+  const campoAnual = document.getElementById("campoAnual");
+
+  tipoFiltro.addEventListener("change", function () {
+    const valorSeleccionado = tipoFiltro.value;
+
+    // Mostrar/ocultar campos según la selección
+    if (valorSeleccionado === "fechas") {
+      campoFechas.style.display = "block";
+      campoMensual.style.display = "none";
+      campoAnual.style.display = "none";
+    } else if (valorSeleccionado === "mensual") {
+      campoFechas.style.display = "none";
+      campoMensual.style.display = "block";
+      campoAnual.style.display = "none";
+    } else if (valorSeleccionado === "anual") {
+      campoFechas.style.display = "none";
+      campoMensual.style.display = "none";
+      campoAnual.style.display = "block";
+    }
+  });
+  
+   // Controlar cambios en el input de fecha desde
+   const fechaDesdeInput = document.getElementById('fechaDesde');
+   fechaDesdeInput.addEventListener("change", function () {
+     console.log("Fecha desde:", fechaDesdeInput.value);
+     
+   });
+ 
+   // Controlar cambios en el input de fecha hasta
+   const fechaHastaInput = document.getElementById('fechaHasta');
+   fechaHastaInput.addEventListener("change", function () {
+     console.log("Fecha hasta:", fechaHastaInput.value);
+   });
+ 
+   // Controlar cambios en el input de fecha mensual
+   const fechaMensualInput = document.getElementById('fechaMensual');
+   fechaMensualInput.addEventListener("change", function () {
+     console.log("Fecha mensual:", fechaMensualInput.value);
+     const year = fechaMensualInput.value.split('-')[0];
+     const month = fechaMensualInput.value.split('-')[1];
+     monthlyFilter(month,year);
+   });
+ 
+   // Controlar cambios en el select de año
+   const fechaAnualSelect = document.getElementById('fechaAnual');
+   fechaAnualSelect.addEventListener("change", function () {
+     console.log("Año seleccionado:", fechaAnualSelect.value);
+   });
+
   const closeModalIncomes = document.getElementById('modal-close-income');
   const closeModalExpenses = document.getElementById('modal-close-expense');
 
@@ -168,4 +220,26 @@ document.addEventListener("DOMContentLoaded", function () {
 function closeModal(modalId) {
   const modal = document.getElementById(modalId);
   modal.style.display = 'none';
+}
+
+async function monthlyFilter(month, year) {
+  console.log("LLEGA 0");
+
+  try {
+    const ruta = "/date-filter/set-dates-by-month";
+    const response = await fetch(ruta, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ month, year }),
+    });
+    
+    if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
+    console.log("LLEGA 5");
+    location.reload();
+    
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
+  }
 }

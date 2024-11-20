@@ -17,6 +17,7 @@ async function getIncomesAndExpenses(id, startDate, endDate) {
             comment: income.comment,
             type: income.income_type.name,
             user: income.user_id,
+            transactionType: 1
         };
         transactions.push(transaction);
     });
@@ -30,6 +31,7 @@ async function getIncomesAndExpenses(id, startDate, endDate) {
             comment: expense.comment,
             type: expense.expense_type.name,
             user: expense.user_id,
+            transactionType: 0
         };
         transactions.push(transaction);
     });

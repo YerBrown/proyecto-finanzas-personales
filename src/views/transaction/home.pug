@@ -20,58 +20,29 @@ block content
                 button#totalIncomes() Total ingresos: #{totalIncome}€
                 button#totalExpenses() Total gastos: #{totalExpense}€
 
-            //- .columna-derecha
-            //-     form.formulario-filtros
-            //-         div.campo
-            //-             label Fecha desde:
-            //-             input(type="date" name="fechaDesde")
-            //-             //-input(type="month" id="mesAnio" name="fechaDesde")
-            //-         div.campo
-            //-             label Fecha hasta:
-            //-             input(type="date" name="fechaHasta")
-            //-         button.boton-filtrar(type="submit") Filtrar
-
             .columna-derecha
                 form.formulario-filtros
                     div.campo
                         label Filtro:
-                        select(name="tipo-filro") 
+                        select(id="tipo-filtro") 
                             option(value="fechas" selected) Por Fechas
                             option(value="mensual") Mensual
                             option(value="anual") Anual
-                    div.campo
+                    div#campoFechas
                         label Fecha desde:
-                        input(type="date" name="fechaDesde")
-                    div.campo
+                        input(type="date" id="fechaDesde")
                         label Fecha hasta:
-                        input(type="date" name="fechaHasta")
-                    button.boton-filtrar(type="submit") Filtrar
-
-            .columna-derecha
-                form.formulario-filtros
-                    div.campo
-                        label Filtro:
-                        select(name="tipo-filro") 
-                            option(value="fechas") Por Fechas
-                            option(value="mensual" selected) Mensual
-                            option(value="anual") Anual
-                    div.campo
+                        input(type="date" id="fechaHasta")
+                    div#campoMensual(style="display: none;")
                         label Mes y Año:
-                        input(type="month" name="fechaMensual")
-
-            .columna-derecha
-                form.formulario-filtros
-                    div.campo
-                        label Filtro:
-                        select(name="tipo-filro") 
-                            option(value="fechas") Por Fechas
-                            option(value="mensual") Mensual
-                            option(value="anual" selected) Anual
-                    div.campo
-                        label Mes y Año:
-                        select(name="fechaAnual") 
+                        input(type="month" id="fechaMensual")
+                    div#campoAnual(style="display: none;")
+                        label Año:
+                        select(id="fechaAnual") 
                             each year in Array.from({ length: 31 }, (_, i) => 2020 + i)
                                 option(value=year, selected=(year == 2024)) #{year}
+                    
+                    
 
         .fila.inferior
             table#tabla-registros.tabla-registros
@@ -109,9 +80,13 @@ block content
                                 else
                                     td No disponible
 
-                                td #{transaction.type}
-                                td 
-                                    button.boton-editar(onclick=`location.href='/editar/${transaction.id}'`)
+                            td #{transaction.type}
+                            td 
+                                if transaction.transactionType === 1
+                                    button.boton-editar(onclick=`location.href='/income/${transaction.id}/update/'`)
+                                        i(class="fas fa-edit")
+                                else  
+                                    button.boton-editar(onclick=`location.href='/expense/${transaction.id}/update/'`)
                                         i(class="fas fa-edit")
 
         .modal#modalIncomes
