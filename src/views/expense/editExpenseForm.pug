@@ -30,7 +30,7 @@ block content
                 textarea(id='comment-field' class='transaction-field' name="comment" rows="4" cols="50" maxlength="200" placeholder='Comentario')=currentExpense.comment
             div(id='submits_field' class='transaction-field')
                 button(type="button" onclick="window.location.href='/transaction'") Cancelar
-                button(type="submit") Actualizar Gasto
+                button(type="submit" class='submit-button') Actualizar Gasto
                 button(type="button" onclick=`removeExpense(${currentExpense.id})`  class='remove-button') Borrar Gasto
 
 

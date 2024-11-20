@@ -12,10 +12,9 @@ html(lang="es")
             .navbar-container
                 .navbar-left
                     h1.logo Pocket Log 
-                    img#logo(src="/images/ahorrar-dinero.png")
-                    p #{user.email}
+                    img#logo(src="/images/cartera.png")
                 .navbar-center
-                     nav
+                    nav
                         ul.nav-links
                             li
                                 a(href='/income/new')    
@@ -25,6 +24,7 @@ html(lang="es")
                                     button(type="button") Nuevo Gasto
                 .navbar-right
                     nav
+                        p #{user.email}
                         ul.nav-links
                             li
                                 a(href="/transaction") Inicio

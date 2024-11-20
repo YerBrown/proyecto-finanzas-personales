@@ -29,7 +29,7 @@ block content
                 textarea(id='comment-field' class='transaction-field' name="comment" rows="4" cols="50" maxlength="200" placeholder='Comentario')=currentIncome.comment
             div(id='submits_field' class='transaction-field')
                 button(type="button" onclick="window.location.href='/transaction'") Cancelar
-                button(type="submit") Actualizar Ingreso
+                button(type="submit" class='submit-button') Actualizar Ingreso
                 button(type="button" onclick=`removeIncome(${currentIncome.id})`  class='remove-button') Borrar Ingreso
 
     script.
