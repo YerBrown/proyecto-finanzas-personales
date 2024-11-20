@@ -1,7 +1,9 @@
 import authController from "../auth/authController.js";
 
+// Función para manejar el registro de un usuario.
 async function register(req, res) {
     try {
+        
         const { username, email, password, passwordConfirm } = req.body;
         const result = await authController.register(
             username,
@@ -29,9 +31,13 @@ function registerForm(req, res) {
     res.render("user/register", { message, messageType });
 }
 
+// Función para manejar el inicio de sesión de un usuario.
 async function login(req, res) {
     try {
+        
         const { email, password } = req.body;
+
+        
         const user = await authController.login(email, password);
         req.session.user = {
             email: user.email,
@@ -50,6 +56,8 @@ function logout(req, res) {
     req.session.user = null;
     res.redirect("/login");
 }
+
+
 export default {
     register,
     login,
