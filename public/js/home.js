@@ -58,15 +58,15 @@ document.addEventListener("DOMContentLoaded", function () {
     const valorSeleccionado = tipoFiltro.value;
 
     // Mostrar/ocultar campos según la selección
-    if (valorSeleccionado === "fechas") {
+    if (valorSeleccionado === "dates") {
       campoFechas.style.display = "block";
       campoMensual.style.display = "none";
       campoAnual.style.display = "none";
-    } else if (valorSeleccionado === "mensual") {
+    } else if (valorSeleccionado === "monthly") {
       campoFechas.style.display = "none";
       campoMensual.style.display = "block";
       campoAnual.style.display = "none";
-    } else if (valorSeleccionado === "anual") {
+    } else if (valorSeleccionado === "yearly") {
       campoFechas.style.display = "none";
       campoMensual.style.display = "none";
       campoAnual.style.display = "block";
@@ -94,6 +94,14 @@ document.addEventListener("DOMContentLoaded", function () {
      const month = fechaMensualInput.value.split('-')[1];
      monthlyFilter(month,year);
    });
+
+   const fechaAnualInput = document.getElementById('fechaAnual');
+   fechaAnualInput.addEventListener("change", function () {
+     console.log("Fecha mensual:", fechaAnualInput.value);
+     const year = fechaAnualInput.value.split('-')[0];
+     yearlyFilter(year);
+   });
+
  
    // Controlar cambios en el select de año
    const fechaAnualSelect = document.getElementById('fechaAnual');
@@ -233,6 +241,29 @@ async function monthlyFilter(month, year) {
         "Content-Type": "application/json",
       },
       body: JSON.stringify({ month, year }),
+    });
+    
+    if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
+    console.log("LLEGA 5");
+    location.reload();
+    
+  } catch (error) {
+    console.error('There has been a problem with your fetch operation:', error);
+  }
+}
+
+
+async function yearlyFilter(year) {
+  console.log("LLEGA 0");
+
+  try {
+    const ruta = "/date-filter/set-dates-by-year";
+    const response = await fetch(ruta, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({ year }),
     });
     
     if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
