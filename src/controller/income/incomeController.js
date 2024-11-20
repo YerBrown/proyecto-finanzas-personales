@@ -1,13 +1,17 @@
 import Income from "../../model/incomeModel.js";
 import incomeModel from "../../model/incomeModel.js";
 import incomeTypeModel from "../../model/incomeTypeModel.js";
-
+import sequelize, { Op } from "sequelize";
+import errors from "../../helpers/errors.js";
 // Obtiene todos los ingresos, incluyendo el nombre del tipo de ingreso
-async function getAll() {
+async function getAll(user_id) {
     const incomes = await incomeModel.findAll({
         include: {
             model: incomeTypeModel,
             attributes: ["name"],
+        },
+        where: {
+            user_id: user_id, // Filtra los ingresos del usuario
         },
     });
     return incomes;
@@ -21,6 +25,9 @@ async function getById(id) {
             attributes: ["name"],
         },
     });
+    if (!income) {
+        throw new errors.INCOME_NOT_FOUND();
+    }
     return income;
 }
 
@@ -46,7 +53,7 @@ async function getIncomeCountByType(user_id, startDate, endDate) {
     const incomeCounts = await Income.findAll({
         attributes: [
             "type_id",
-            [sequelize.fn("SUM", sequelize.col("amount")), "totalAmount"],
+            [sequelize.fn("SUM", sequelize.col("amount")), "totalAmount"], // Alias: totalAmount
         ],
         group: ["type_id"],
         include: {
@@ -56,12 +63,21 @@ async function getIncomeCountByType(user_id, startDate, endDate) {
         where: {
             user_id,
             datetime: {
-                [Op.between]: [startDate, endDate], // Filtra los gastos entre las fechas
+                [Op.between]: [startDate, endDate], // Filtra los ingresos entre las fechas
             },
         },
     });
 
-    return incomeCounts;
+    let totalAmountIncomes = 0;
+
+    incomeCounts.forEach((income) => {
+        // Accede al alias "totalAmount"
+        const totalAmount = Number(income.get("totalAmount"));
+
+        totalAmountIncomes += totalAmount / 100;
+    });
+
+    return { incomeCounts, totalAmountIncomes };
 }
 
 // Crea un nuevo ingreso con los detalles proporcionados
@@ -81,9 +97,9 @@ async function create(amount, title, comment, datetime, type_id, user_id) {
 async function update(id, amount, title, comment, datetime, type_id, user_id) {
     const income = await incomeModel.findByPk(id);
 
-    // Comprobar si ha encontrado el ingreso
+    // Comprobar si ha encontrado el gasto
     if (!income) {
-        return console.error("Gasto no encontrado");
+        throw new errors.INCOME_NOT_FOUND();
     }
 
     await income.update({
@@ -103,7 +119,7 @@ async function remove(id) {
 
     // Comprobar si ha encontrado el ingreso
     if (!income) {
-        return console.error("Gasto no encontrado");
+        throw new errors.INCOME_NOT_FOUND();
     }
 
     await income.destroy();

@@ -1,17 +1,16 @@
 USE Proyecto_Finanzas;
 
-
 INSERT INTO user (username,email,password, rol) VALUES
-('john_doe', 'john@example.com', 'password123', 'client'),
-('jane_smith', 'jane@example.com', 'securePass456', 'client'),
-('maria_gonzalez', 'maria@example.com', 'mariaPass789', 'client'),
-('alex_taylor', 'alex@example.com', 'alex1234', 'client'),
-('chris_lee', 'chris@example.com', 'chris789', 'client'),
-('linda_williams', 'linda@example.com', 'lindaPass987', 'client'),
-('mark_jones', 'mark@example.com', 'markPass123', 'client'),
-('emily_clark', 'emily@example.com', 'emilyPassword', 'client'),
-('sarah_adams', 'sarah@example.com', 'sarahSecure', 'client'),
-('david_white', 'david@example.com', 'davidSecret', 'client');
+('john_doe', 'john@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('jane_smith', 'jane@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('maria_gonzalez', 'maria@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('alex_taylor', 'alex@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('chris_lee', 'chris@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('linda_williams', 'linda@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('mark_jones', 'mark@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('emily_clark', 'emily@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('sarah_adams', 'sarah@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('david_white', 'david@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client');
 
 INSERT INTO income_type (name) VALUES
 ('Salario'),

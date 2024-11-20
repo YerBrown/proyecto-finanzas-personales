@@ -5,22 +5,23 @@
     align-items: center;
     justify-self: center;
     align-self: center;
-    background-color: lightgray;
+    background-color: var(--color-principal);
     color: white;
-    border: 3px solid lightgray;
+    border: 3px solid var(--color-secundario);
     border-radius: 10px;
     box-sizing: border-box;
     max-width: 80vw;
     min-height: 70vh;
     overflow: hidden;
+    margin-top: 30px;
 }
 
 /* Window Header */
 .window-header {
     display: flex;
     justify-content: center;
-    background-color: lightgray;
-    color: rgb(31, 31, 31);
+    background-color: var(--color-secundario);
+    color: var(--color-fuente-2);
     font-size: 1rem;
     font-style: normal;
     width: 100%;
@@ -30,7 +31,7 @@
 .window-container {
     display: flex;
     flex-direction: column;
-    background-color: rgb(31, 31, 31);
+    background-color: var(--color-principal);
     box-sizing: border-box;
     padding: 20px;
     gap: 20px;
@@ -52,7 +53,7 @@
 }
 
 .transaction-field label {
-    color: rgb(176, 176, 176);
+    color: var(--color-secundario);
     font-size: 0.9rem;
     font-weight: bold;
 }
@@ -63,7 +64,7 @@
 }
 
 .transaction-field:focus {
-    outline: 2px solid lightgray;
+    outline: 2px solid var(--color-secundario);
 }
 
 .transaction-field select {
@@ -91,6 +92,10 @@ textarea.transaction-field {
     width: 100%;
 }
 
+select {
+    width: 100%;
+}
+
 input:focus,
 textarea.transaction-field:focus {
     outline: none;
@@ -115,7 +120,7 @@ textarea.transaction-field {
 #submits_field button {
     padding: 5px;
     font-size: 1.1rem;
-    border: 2px solid lightgray;
+    border: 2px solid var(--color-secundario);
     border-radius: 2px;
 }
 

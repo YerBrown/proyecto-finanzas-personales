@@ -4,11 +4,8 @@ import error from "../../helpers/errors.js";
 
 // Funcion para registrar un usuario nuevo.
 async function register(username, email, password, passwordConfirm) {
-
-
-
     if (password != passwordConfirm) {
-        throw new error.PASSWORD_NOT_MATCH;
+        throw new error.PASSWORD_NOT_MATCH();
     }
 
 

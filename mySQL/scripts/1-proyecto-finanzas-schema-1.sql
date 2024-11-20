@@ -42,7 +42,7 @@ CREATE TABLE IF NOT EXISTS `Proyecto_Finanzas`.`user` (
   `id` INT NOT NULL AUTO_INCREMENT,
   `username` VARCHAR(40) NOT NULL,
   `email` VARCHAR(255) NOT NULL,
-  `password` VARCHAR(50) NOT NULL,
+  `password` VARCHAR(100) NOT NULL,
   `create_time` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
   `rol` ENUM('client', 'admin') NOT NULL DEFAULT 'client',
   `active` TINYINT NOT NULL DEFAULT '1',
