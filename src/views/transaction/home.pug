@@ -80,14 +80,14 @@ block content
                                 else
                                     td No disponible
 
-                            td #{transaction.type}
-                            td 
-                                if transaction.transactionType === 1
-                                    button.boton-editar(onclick=`location.href='/income/${transaction.id}/update/'`)
-                                        i(class="fas fa-edit")
-                                else  
-                                    button.boton-editar(onclick=`location.href='/expense/${transaction.id}/update/'`)
-                                        i(class="fas fa-edit")
+                                td #{transaction.type} 
+                                td 
+                                    if transaction.transactionType === 1
+                                        button.boton-editar(onclick=`location.href='/income/${transaction.id}/update/'`)
+                                            i(class="fas fa-edit")
+                                    else  
+                                        button.boton-editar(onclick=`location.href='/expense/${transaction.id}/update/'`)
+                                            i(class="fas fa-edit")
 
         .modal#modalIncomes
             .modal-content
