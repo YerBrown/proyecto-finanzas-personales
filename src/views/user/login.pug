@@ -8,18 +8,20 @@ html(lang="es")
 
     body
         main
-            h1 PocketLog
+            div.title
+                h1 PocketLog 
+                img(src="/images/cartera.png")
             div.login-box
                 h2 Iniciar Sesión
                 form.login-form(action="/login" method="POST")
 
 
                     label(for="email") Correo Electrónico
-                    input#username(type="email" placeholder="ahorrador98@correo.com" name="email", required)
+                    input#username(type="email" placeholder="ahorrador98@correo.com" name="email" value='john@example.com' required)
 
 
                     label(for="password") Contraseña
-                    input#password(type="password" placeholder="Contraseña" name="password",required)
+                    input#password(type="password" placeholder="Contraseña" name="password" value='12345' required)
 
 
 

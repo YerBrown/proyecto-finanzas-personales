@@ -16,7 +16,7 @@ router.post("/set-dates-by-month", (req, res) => {
     console.log("LLEGA FECHA: " + month + " " + year);
     const { startDate, endDate } = dateFilter.setFilterDateByMonthAndYear(
         req,
-        parseInt(month),
+        parseInt(month) - 1,
         parseInt(year)
     );
     res.json({ startDate, endDate });

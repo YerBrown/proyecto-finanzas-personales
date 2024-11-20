@@ -8,6 +8,9 @@ block content
         div(class='window-header')
             h2 Editar Ingreso 
         div(class='window-container')
+            div(id='title-field' class='transaction-field')
+                label(for="title") Titulo:      
+                input(type="text" id="title" name="title" maxlength="50" placeholder='Titulo' value=currentIncome.title required  )
             div(id='amount-field' class='transaction-field')
                 label(for="amount") Cantidad:
                 div(id='amount-input')
@@ -21,9 +24,6 @@ block content
                 select( id="expense-type" name="type_id")
                     each type in types 
                         option(class="type-option", value=type.id selected=(currentIncome.type_id == type.id))= type.name 
-            div(id='title-field' class='transaction-field')
-                label(for="title") Titulo:      
-                input(type="text" id="title" name="title" maxlength="50" placeholder='Titulo' value=currentIncome.title required  )
             div(id='comment-field' class='transaction-field')
                 label(for="comment") Comentario:      
                 textarea(id='comment-field' class='transaction-field' name="comment" rows="4" cols="50" maxlength="200" placeholder='Comentario')=currentIncome.comment

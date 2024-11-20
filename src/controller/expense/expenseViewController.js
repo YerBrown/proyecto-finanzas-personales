@@ -15,7 +15,12 @@ function handleError(res, error) {
 // Obtiene todos los gastos
 async function getAll(req, res) {
     try {
-        const expenses = await expenseController.getAll(res.locals.user.id);
+        console.log("startDate", req.session.startDate);
+        const expenses = await expenseController.getAll(
+            res.locals.user.id,
+            req.session.startDate,
+            req.session.endDate
+        );
         res.status(200).json(expenses);
     } catch (error) {
         handleError(res, error);
@@ -71,7 +76,7 @@ async function getExpenseCountByType(req, res) {
         // const startDate = req.session.startDate;
         // const endDate = req.session.endDate;
 
-        const user_id = 1; // Placeholder para el usuario actual
+        const user_id = res.locals.user.id;
         const startDate = "2024-11-01";
         const endDate = "2024-11-29";
         console.log("LLEGA 1");
@@ -116,7 +121,7 @@ async function createForm(req, res) {
 async function create(req, res) {
     try {
         const { amount, title, comment, datetime, type_id } = req.body;
-        const user_id = 1; // Uso este user_id como prueba hasta que tengamos login.
+        const user_id = res.locals.user.id;
 
         const newExpense = await expenseController.create(
             amount,
