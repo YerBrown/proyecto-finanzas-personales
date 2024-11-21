@@ -26,7 +26,8 @@ html(lang="es")
                     
                     label(for="passwordConfirm") Repetir contraseña
                     input#repit-password(type="password" name="passwordConfirm" placeholder='Contraseña' minlength ="5" required)
-                    
+                    if(message && messageType)
+                        p(style=`color: red` class=`message ${messageType}`)= message  
                     button.login-button(type="submit") Enviar  
                     
                     a(href='/login')    

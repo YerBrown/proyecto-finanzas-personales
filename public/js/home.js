@@ -80,7 +80,6 @@ document.addEventListener("DOMContentLoaded", function () {
   dataTable();
 });
 
-
 function modalIcons(){
   const transactionIcons = document.querySelectorAll(".transactionIcon");
   transactionIcons.forEach((icon) => {
@@ -181,10 +180,8 @@ function filterType() {
   const campoFechas = document.getElementById("campoFechas");
   const campoMensual = document.getElementById("campoMensual");
   const campoAnual = document.getElementById("campoAnual");
-
   const valorSeleccionado = tipoFiltro.value;
 
-  // Mostrar/ocultar campos según la selección
   if (valorSeleccionado === "dates") {
     campoFechas.style.display = "flex";
     campoMensual.style.display = "none";
