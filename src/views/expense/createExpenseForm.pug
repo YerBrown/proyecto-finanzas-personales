@@ -40,11 +40,9 @@ block content
                 valor = valor.replace('-', '');
                 let [integerPart, decimalPart] = valor.split('.');
                 if (integerPart.length > 9) {
-                    console.log('int', integerPart);
                     integerPart = integerPart.slice(0, 9);
                 }
                 if (decimalPart && decimalPart.length > 2) {
-                    console.log('decimal', integerPart);
                     decimalPart = decimalPart.slice(0, 2);
                 }
                 input.value = decimalPart ? `${integerPart}.${decimalPart}` : integerPart;

@@ -96,7 +96,8 @@ async function getIncomeCountByType(req, res) {
 async function createForm(req, res) {
     try {
         const types = await incomeTypeController.getAll();
-        res.render("income/createIncomeForm", { types });
+        const isAdmin = req.session.user.rol == "admin";
+        res.render("income/createIncomeForm", { types, isAdmin });
     } catch (error) {
         handleError(res, error);
     }
@@ -134,9 +135,11 @@ async function updateForm(req, res) {
         }
 
         currentIncome.amount = Math.abs(currentIncome.amount / 100);
+        const isAdmin = req.session.user.rol == "admin";
         res.render("income/editIncomeForm", {
             types,
             currentIncome: currentIncome,
+            isAdmin,
         });
     } catch (error) {
         handleError(res, error);

@@ -79,8 +79,6 @@ async function getExpenseCountByType(user_id, startDate, endDate) {
 
         totalAmountExpenses += totalAmount / 100;
     });
-    console.log("expenseCounts " + expenseCounts);
-    console.log("totalAmountExpenses " + totalAmountExpenses);
     return { expenseCounts, totalAmountExpenses };
 }
 

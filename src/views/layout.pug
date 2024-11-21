@@ -28,8 +28,9 @@ html(lang="es")
                         ul.nav-links
                             li
                                 a(href="/transaction") Inicio
-                            li
-                                a(href="/transaction") Menu Admin
+                            if (isAdmin)
+                                li
+                                    a(href="/user") Menu Admin
                             li
                                 a(href="/logout") Cerrar sesión
 

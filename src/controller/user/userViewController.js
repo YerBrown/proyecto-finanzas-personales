@@ -2,8 +2,12 @@ import userController from "./userController.js";
 
 async function getAll(req, res) {
     const users = await userController.getAll();
-
-    res.render("user/userAdministrator", { users });
+    const isAdmin = req.session.user.rol == "admin";
+    if (isAdmin) {
+        res.render("user/userAdministrator", { users, isAdmin });
+    } else {
+        res.redirect("/transaction");
+    }
 }
 
 async function getById(req, res) {

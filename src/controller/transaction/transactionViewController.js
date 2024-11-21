@@ -1,7 +1,6 @@
 import transactionController from "./transactionController.js";
 import incomeController from "../income/incomeController.js";
 async function getIncomesAndExpenses(req, res) {
-    console.log("user_id", res.locals.user);
     const { transactions, totalIncome, totalExpense } =
         await transactionController.getIncomesAndExpenses(
             res.locals.user.id,
@@ -23,9 +22,8 @@ async function getIncomesAndExpenses(req, res) {
         month,
         year,
         filterType,
-        isAdmin,
     };
-    res.render("transaction/home", { transactionsValues });
+    res.render("transaction/home", { transactionsValues, isAdmin });
 }
 
 async function getIncomesType(req, res) {

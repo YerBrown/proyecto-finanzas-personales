@@ -1,7 +1,7 @@
 USE Proyecto_Finanzas;
 
 INSERT INTO user (username,email,password, rol) VALUES
-('john_doe', 'john@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
+('john_doe', 'john@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'admin'),
 ('jane_smith', 'jane@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
 ('maria_gonzalez', 'maria@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),
 ('alex_taylor', 'alex@example.com', '$2a$10$8ZSKVTZvWWa1lkIzS/s8eOvoSOeWgXEEnHfKBjpsdl8Gxt2bptM1O', 'client'),

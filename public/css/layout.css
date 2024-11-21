@@ -6,11 +6,11 @@
   --color-5: rgb(197, 197, 197);
   --color-fuente: rgb(227, 227, 227);
   --color-fuente-2: rgb(44, 44, 44);
-  --color-boton: rgb(46, 157, 227);
+  --color-boton: #2e9de3;
   --color-boton-hover: rgb(73, 167, 225);
-  --color-boton-2: rgb(46, 160, 29);
+  --color-boton-2: #2ea01d;
   --color-boton-2-hover: rgb(64, 174, 47);
-  --color-boton-3: rgb(255, 0, 0);
+  --color-boton-3: #ff0000;
   --color-boton-3-hover: rgb(254, 60, 60);
 }
 
