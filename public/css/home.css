@@ -179,7 +179,6 @@ td {
 #totalIncomes,
 #totalExpenses {
   display: block;
-  padding: 10px 0;
   background: none;
   border: none;
   color: var(--color-fuente);
@@ -189,7 +188,6 @@ td {
   font-style: italic;
   text-align: center;
   cursor: pointer;
-  margin-bottom: 10px;
   /* Espaciado vertical */
 }
 
