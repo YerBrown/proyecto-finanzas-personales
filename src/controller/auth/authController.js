@@ -23,6 +23,9 @@ async function login(email, password) {
     if (!verified) {
         throw new error.INVALID_CREDENTIALS();
     }
+    if (user.active === 0) {
+        throw new error.USER_NOT_ACTIVE();
+    }
     return user;
 }
 

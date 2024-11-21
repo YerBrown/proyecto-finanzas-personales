@@ -10,6 +10,7 @@ router.post("/new", userController.create);
 
 router.post("/:id/update", userController.update);
 
-router.post("/:id/deactivate", userController.deactivate);
+router.get("/:id/deactivate", userController.deactivate);
+router.get("/:id/activate", userController.activate);
 
 export default router;

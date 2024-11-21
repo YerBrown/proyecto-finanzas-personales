@@ -4,8 +4,8 @@ class USER_NOT_FOUND extends Error {
         this.status = 404;
     }
 }
-class PASSWORD_NOT_MATCH extends Error{
-    constructor(){
+class PASSWORD_NOT_MATCH extends Error {
+    constructor() {
         super("Contraseñas no coinciden");
         this.status = 400;
     }
@@ -39,6 +39,13 @@ class INVALID_CREDENTIALS extends Error {
     }
 }
 
+class USER_NOT_ACTIVE extends Error {
+    constructor() {
+        super("El usuario no está activo");
+        this.status = 403;
+    }
+}
+
 class EXPENSE_NOT_FOUND extends Error {
     constructor() {
         super("Gasto no encontrado");
@@ -63,11 +70,13 @@ export const errors = {
     PASSWORD_NOT_MATCH,
     USER_ALREADY_EXISTS,
     EMAIL_ALREADY_EXISTS,
+    USER_NOT_ACTIVE,
+    CATEGORY_NOT_FOUND,
     USERNAME_ALREADY_EXISTS,
     INVALID_CREDENTIALS,
     EXPENSE_NOT_FOUND,
     INCOME_NOT_FOUND,
-    CATEGORY_NOT_FOUND
+    CATEGORY_NOT_FOUND,
 };
 
 export default errors;

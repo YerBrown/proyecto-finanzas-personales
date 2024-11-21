@@ -35,11 +35,18 @@ async function deactivate(req, res) {
     res.redirect("/user");
 }
 
+async function activate(req, res) {
+    const id = parseInt(req.params.id);
+    await userController.activate(id);
+    res.redirect("/user");
+}
+
 export const functions = {
     getAll,
     getById,
     create,
     update,
     deactivate,
+    activate,
 };
 export default functions;

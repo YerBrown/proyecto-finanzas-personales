@@ -29,7 +29,7 @@ block content
               .action-btn(onclick="toggleDropdown(this)") ...
                 .dropdown
                   if user.active 
-                    a(href=`/${user.id}/deactivate`) Desactivar
+                    a(href=`/user/${user.id}/deactivate`) Desactivar
                   else
-                    a(href="#") Activar
+                    a(href=`/user/${user.id}/activate`) Activar
                   

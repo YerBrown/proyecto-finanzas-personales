@@ -48,6 +48,12 @@ async function deactivate(id) {
     userToRemove.save();
     return userToRemove;
 }
+async function activate(id) {
+    const userToRemove = await userModel.findByPk(id);
+    userToRemove.active = 1;
+    userToRemove.save();
+    return userToRemove;
+}
 
 export const functions = {
     getAll,
@@ -56,5 +62,6 @@ export const functions = {
     create,
     update,
     deactivate,
+    activate,
 };
 export default functions;

@@ -1,4 +1,14 @@
-# Changelog
+# 🪄 Changelog
+
+## [1.0.0] - 2024-11-21
+
+### Añadidos
+
+-   Dockerizacion del backend y la base de datos de mysql
+
+### Arreglos
+
+-   Arreglados los bugs restantes para la aplicacion final
 
 ## [0.1.0] - 2024-11-20
 
@@ -16,7 +26,7 @@
 
 ## [0.0.5] - 2024-11-19
 
-### Añadido
+### Añadidos
 
 -   Login y registro de usuarios
 
@@ -24,7 +34,7 @@
 
 ## [0.0.4] - 2024-11-18
 
-### Añadido
+### Añadidos
 
 -   Modelo, controlador y router de usuarios completado.
 -   Vistas de creacion y ediccion de usuarios completadas.
@@ -33,7 +43,7 @@
 
 ## [0.0.3] - 2024-11-17
 
-### Añadido
+### Añadidos
 
 -   Modelo, controlador y router de ingresos completado.
 -   Vistas de creacion y ediccion de ingresos completadas.
@@ -42,7 +52,7 @@
 
 ## [0.0.2] - 2024-11-16
 
-### Añadido
+### Añadidos
 
 -   Modelo, controlador y router de gastos completado.
 -   Vistas de creacion y ediccion de gastos completadas.
@@ -52,7 +62,7 @@
 
 ## [0.0.1] - 2024-11-14
 
-### Añadido
+### Añadidos
 
 -   Se establecio la conexion con la base de datos mediante sequelize.
 
@@ -60,6 +70,6 @@
 
 ## [0.0.1] - 2024-11-11
 
-### Añadido
+### Añadidos
 
 -   Creacion del repositorio y primera version del reedme.
