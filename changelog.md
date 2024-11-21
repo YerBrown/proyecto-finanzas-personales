@@ -18,8 +18,6 @@
 
 ### Añadido
 
--   Modelo, controlador y router de ingresos completado.
--   Vistas de creacion y ediccion de ingresos completadas.
 -   Login y registro de usuarios
 
 ---

@@ -105,11 +105,23 @@ nav button:hover {
   margin-right: 8px;
 }
 
+#username-icon {
+  background-color: var(--color-5);
+  border-radius: 50px;
+  width: 50px;
+  height: 50px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  color: var(--color-fuente-2);
+  font-size: 150%;
+}
+
 .navbar-right nav {
   display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  align-items: end;
+  flex-direction: row-reverse;
+  justify-content: right;
+  align-items: center;
   gap: 10px;
 }
 
@@ -134,7 +146,7 @@ nav p {
 }
 
 .nav-links li a:hover {
-  color: var(--color_secundario);
+  color: var(--color-4);
 }
 
 @media(orientation: portrait) {

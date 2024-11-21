@@ -23,7 +23,7 @@ html(lang="es")
                                     button(type="button") Nuevo Gasto
                 .navbar-right
                     nav
-                        p #{user.email}
+                        p#username-icon #{(user.username.slice(0,1)).toUpperCase()}
                         ul.nav-links
                             li
                                 a(href="/transaction") Inicio

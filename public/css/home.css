@@ -78,10 +78,26 @@
   gap: 10px;
 }
 
-#campoFechas {
-  display: flex;
+#campoFechas,
+#campoMensual,
+#campoAnual {
+  display: none;
   flex-direction: column;
   gap: 10px;
+}
+
+#campoFechas button {
+  width: 100%;
+  background-color: var(--color-boton);
+}
+
+#campoFechas button:hover {
+  width: 100%;
+  background-color: var(--color-boton-hover);
+}
+
+#campoMensual input {
+  padding: 8px;
 }
 
 label {
@@ -290,11 +306,8 @@ td {
   text-align: center;
 }
 
-
-.sorting_1 {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+.sorting_1 i {
+  justify-self: center;
 }
 
 .boton-editar {
