@@ -20,9 +20,9 @@ html(lang="es")
                     label(for="password") Contraseña
                     input#password(type="password" placeholder="Contraseña" name="password" value='12345' required)
 
+                    if(message && messageType)
+                        p(style=`color: red` class=`message ${messageType}`)= message  
                     button.login-button(type="submit") Entrar
 
                     a(href='/register')    
                         button.azure-button(type="button") Registro
-
-
