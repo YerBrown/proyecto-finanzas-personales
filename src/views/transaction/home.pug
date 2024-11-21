@@ -24,7 +24,6 @@ block content
                 form.formulario-filtros
                     div.campo
                         label Filtro:
-                        p= transactionsValues.filterType
                         select(id="tipo-filtro") 
                             option(value="dates" selected=(transactionsValues.filterType=='dates')) Por Fechas
                             option(value="monthly" selected=(transactionsValues.filterType=='monthly')) Mensual

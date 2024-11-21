@@ -17,13 +17,13 @@ function getFilterDates(req) {
     return { startDate, endDate };
 }
 
+
 // Establecer las fechas en la sesión para el mes y el año especificados
 function setFilterDateByDates(req, startDate, endDate) {
     // Guardar las fechas en la sesión 
     req.session.startDate = startDate;
     req.session.endDate = endDate;
     req.session.filterType = "dates";
-    console.log("filter", req.session.filterType);
     return { startDate, endDate };
 }
 
