@@ -14,23 +14,15 @@ html(lang="es")
             div.login-box
                 h2 Iniciar Sesión
                 form.login-form(action="/login" method="POST")
-
-
                     label(for="email") Correo Electrónico
-                    input#username(type="email" placeholder="ahorrador98@correo.com" name="email" value='john@example.com' required)
-
+                    input#email(type="email" placeholder="ahorrador98@correo.com" name="email" value='john@example.com' required)
 
                     label(for="password") Contraseña
                     input#password(type="password" placeholder="Contraseña" name="password" value='12345' required)
 
-
-
-
                     button.login-button(type="submit") Entrar
-
 
                     a(href='/register')    
                         button.azure-button(type="button") Registro
-                
 
 

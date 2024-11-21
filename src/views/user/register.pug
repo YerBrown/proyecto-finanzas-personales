@@ -2,7 +2,7 @@ html(lang="es")
     head
         meta(charset="UTF-8")
         meta(name="viewport", content="width=device-width, initial-scale=1.0")
-        title PocketLog Login
+        title PocketLog Register
         link(rel="stylesheet" href="/css/layout.css")
         link(rel="stylesheet" href="/css/loginStyles.css")
 
@@ -19,13 +19,13 @@ html(lang="es")
                     input#username(type="text" name="username" placeholder='ahorrador98' required)
                     
                     label(for="email") Correo Electrónico
-                    input#username(type="email" name="email" placeholder='ahorrador98@correo.com' required)
+                    input#email(type="email" name="email" placeholder='ahorrador98@correo.com' required)
 
                     label(for="password") Contraseña
-                    input#password(type="password" name="password"  placeholder='Contraseña' required minlength ="5")
+                    input#password(type="password" name="password"  placeholder='Contraseña' minlength ="5" required)
                     
                     label(for="passwordConfirm") Repetir contraseña
-                    input#password(type="password" name="passwordConfirm" placeholder='Contraseña' required minlength ="5")
+                    input#repit-password(type="password" name="passwordConfirm" placeholder='Contraseña' minlength ="5" required)
                     
                     button.login-button(type="submit") Enviar  
                     

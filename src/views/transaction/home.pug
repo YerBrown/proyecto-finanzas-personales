@@ -41,7 +41,7 @@ block content
                         label Año:
                         select(id="fechaAnual") 
                             each year in Array.from({ length: 31 }, (_, i) => 2020 + i)
-                                option(value=year, selected=(year == 2024)) #{year}
+                                option(value=year, selected=(year == transactionsValues.year)) #{year}
                     
                     
 

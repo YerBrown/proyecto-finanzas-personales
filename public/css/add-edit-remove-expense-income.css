@@ -13,7 +13,7 @@
     max-width: 80vw;
     min-height: 70vh;
     overflow: hidden;
-    margin-top: 30px;
+    margin: 20px 0;
 }
 
 /* Window Header */
@@ -117,23 +117,30 @@ textarea.transaction-field {
     flex-direction: row;
     justify-content: center;
     align-items: center;
+    background-color: transparent;
 }
 
 #submits_field button {
-    padding: 5px;
     font-size: 1.1rem;
-    border: 2px solid var(--color-2);
-    border-radius: 2px;
+    text-wrap: nowrap;
 }
 
-#submits_field button:active {
-    border: 2px solid black;
+.submit-button {
+    background-color: var(--color-boton);
+    color: var(--color-fuente);
 }
 
-/* Remove Button */
+.submit-button:hover {
+    background-color: var(--color-boton-hover);
+}
+
 .remove-button {
-    background-color: red;
-    color: white;
+    background-color: var(--color-boton-3);
+    color: var(--color-fuente);
+}
+
+.remove-button:hover {
+    background-color: var(--color-boton-3-hover);
 }
 
 /* Remove Number Input Spin Buttons */
@@ -141,4 +148,18 @@ input[type="number"]::-webkit-inner-spin-button,
 input[type="number"]::-webkit-outer-spin-button {
     -webkit-appearance: none;
     margin: 0;
+}
+
+@media(orientation: portrait) {
+    #submits_field {
+        flex-direction: column;
+        padding: 0;
+        gap: 10px;
+
+    }
+
+    #submits_field button {
+        width: 100%;
+    }
+
 }
