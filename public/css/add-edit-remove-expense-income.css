@@ -16,6 +16,14 @@
     margin: 20px 0;
 }
 
+.transaction-menu.income {
+    border: 3px solid var(--color-boton-2);
+}
+
+.transaction-menu.expense {
+    border: 3px solid var(--color-boton-3);
+}
+
 /* Window Header */
 .window-header {
     display: flex;

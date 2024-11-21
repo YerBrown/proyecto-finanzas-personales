@@ -10,23 +10,26 @@ html(lang="es")
         header.navbar
             .navbar-container
                 .navbar-left
-                    h1.logo Pocket Log 
-                    img#logo(src="/images/cartera.png")
+                    h1.logo 
+                        a(href='/transaction')  Pocket Log
+                    img#logo(src="/images/cartera (2).png")
                 .navbar-center
                     nav
                         ul.nav-links
                             li
                                 a(href='/income/new')    
-                                    button(type="button") Nuevo Ingreso
+                                    button.income(type="button") Nuevo Ingreso
                             li
                                 a(href='/expense/new')    
-                                    button(type="button") Nuevo Gasto
+                                    button.expense(type="button") Nuevo Gasto
                 .navbar-right
                     nav
                         p#username-icon #{(user.username.slice(0,1)).toUpperCase()}
                         ul.nav-links
                             li
                                 a(href="/transaction") Inicio
+                            li
+                                a(href="/transaction") Menu Admin
                             li
                                 a(href="/logout") Cerrar sesión
 

@@ -20,6 +20,9 @@ async function register(req, res) {
 }
 
 function loginForm(req, res) {
+    if (req.session.user) {
+        res.redirect("/transaction");
+    }
     const { message, messageType } = req.query;
     res.render("user/login", { message, messageType });
 }

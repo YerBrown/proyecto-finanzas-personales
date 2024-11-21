@@ -164,7 +164,7 @@ document.addEventListener("DOMContentLoaded", function () {
             datasets: [
                 {
                     data: [expensePercent, incomePercent],
-                    backgroundColor: ["#d67272", "#36a2eb"],
+                    backgroundColor: ["#ff0000", "#2ea01d"],
                     hoverOffset: 40,
                     borderColor: "rgba(0, 0, 0, 0)",
                     borderWidth: 0,
@@ -198,12 +198,12 @@ document.addEventListener("DOMContentLoaded", function () {
                 id: "centerTextPrincipal",
                 beforeDraw: function (chart) {
                     const ctx = chart.ctx;
-                    const text = "Total: " + totalBalance + "€";
+                    const text = "Total: " + totalBalance + " €";
                     ctx.restore();
                     ctx.font = "italic bold 15px Arial";
                     ctx.textBaseline = "middle";
                     ctx.textAlign = "center";
-                    ctx.fillStyle = totalBalance > 0 ? "#8FFFBE" : "#FF9B9B";
+                    ctx.fillStyle = totalBalance > 0 ? "#40dd28" : "#ff0000";
                     const centerX =
                         (chart.chartArea.left + chart.chartArea.right) / 2;
                     const centerY =

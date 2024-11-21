@@ -1,5 +1,6 @@
 import { Router } from "express";
 import authViewController from "../controller/auth/authViewController.js";
+import { isAuthenticated } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 

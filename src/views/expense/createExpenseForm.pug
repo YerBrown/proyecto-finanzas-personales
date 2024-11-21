@@ -4,10 +4,10 @@ block styles
         link(rel="stylesheet", href="/css/add-edit-remove-expense-income.css")
 
 block content
-    form(action="/expense/new" method='POST' id='add-transaction-parent' class='transaction-menu')
-        div(class='window-header')
+    form(action="/expense/new" method='POST' id='add-transaction-parent' class='transaction-menu expense')
+        div(class='window-header expense')
             h2 Nuevo Gasto 
-        div(class='window-container')
+        div(class='window-container expense')
             div(id='title-field' class='transaction-field')
                 label(for="title") Titulo:      
                 input(type="text" id="title" name="title" maxlength="50" placeholder='Titulo' required  )

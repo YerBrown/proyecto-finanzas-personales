@@ -17,8 +17,8 @@ block content
                 canvas#myPieChart
 
             .columna-centro
-                button#totalIncomes() Total ingresos: #{transactionsValues.totalIncome}€
-                button#totalExpenses() Total gastos: #{transactionsValues.totalExpense}€
+                button#totalIncomes() Ingresos: #{transactionsValues.totalIncome} €
+                button#totalExpenses() Gastos: #{transactionsValues.totalExpense} €
 
             .columna-derecha
                 form.formulario-filtros
@@ -75,9 +75,9 @@ block content
                                 td #{transaction.title}             
                                 
                                 if transaction.amount < 0
-                                    td(style="color: #FF9B9B;") #{transaction.amount} €
+                                    td(style="color: #ff0000;") #{transaction.amount} €
                                 else
-                                    td(style="color: #8FFFBE;") +#{transaction.amount} €
+                                    td(style="color: #40dd28;") +#{transaction.amount} €
                                 
                                 td #{transaction.comment}
 

@@ -13,7 +13,7 @@ async function getIncomesAndExpenses(req, res) {
     const year = endDate.split("-")[0];
     const month = endDate.split("-")[1];
     const filterType = req.session.filterType;
-
+    const isAdmin = req.session.user.rol == "admin";
     const transactionsValues = {
         transactions,
         totalIncome,
@@ -23,6 +23,7 @@ async function getIncomesAndExpenses(req, res) {
         month,
         year,
         filterType,
+        isAdmin,
     };
     res.render("transaction/home", { transactionsValues });
 }

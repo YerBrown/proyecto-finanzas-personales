@@ -4,7 +4,7 @@ block styles
         link(rel="stylesheet", href="/css/add-edit-remove-expense-income.css")
 
 block content
-    form(action="/expense/update/"+currentExpense.id method='POST' id='add-transaction-parent' class='transaction-menu')
+    form(action="/expense/update/"+currentExpense.id method='POST' id='add-transaction-parent' class='transaction-menu expense')
         div(class='window-header')
             h2 Editar Gasto 
         div(class='window-container')

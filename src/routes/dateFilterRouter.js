@@ -11,7 +11,11 @@ router.get("/get-dates", (req, res) => {
 
 router.post("/set-dates-by-range", (req, res) => {
     const { dateFrom, dateTo } = req.body;
-    const { startDate, endDate } = dateFilter.setFilterDateByDates(req, dateFrom, dateTo);
+    const { startDate, endDate } = dateFilter.setFilterDateByDates(
+        req,
+        dateFrom,
+        dateTo
+    );
     res.json({ startDate, endDate });
 });
 

@@ -55,8 +55,15 @@
   text-align: center;
   color: var(--color-fuente);
   height: 100%;
+  gap: 10px;
+  padding: 20px;
+  box-sizing: border-box;
 }
 
+
+.columna-centro button:hover {
+  background-color: var(--color-boton-hover);
+}
 
 #myPieChart {
   max-width: 100%;
@@ -89,6 +96,8 @@
 #campoFechas button {
   width: 100%;
   background-color: var(--color-boton);
+  color: var(--color-fuente);
+  font-weight: bold;
 }
 
 #campoFechas button:hover {
@@ -198,6 +207,7 @@ td {
   background: none;
   border: none;
   color: var(--color-fuente);
+  width: 100%;
   font-size: 1.25rem;
   /* Tamaño similar a h4 */
   font-weight: bold;
@@ -207,12 +217,20 @@ td {
   /* Espaciado vertical */
 }
 
+#totalIncomes {
+  background-color: var(--color-boton-2);
+}
+
+#totalExpenses {
+  background-color: var(--color-boton-3);
+}
+
 #totalIncomes:hover {
-  color: #8FFFBE;
+  background-color: var(--color-boton-2-hover);
 }
 
 #totalExpenses:hover {
-  color: #FF9B9B;
+  background-color: var(--color-boton-3-hover);
 }
 
 /* Estilos para el modal */
@@ -306,9 +324,7 @@ td {
   text-align: center;
 }
 
-.sorting_1 i {
-  justify-self: center;
-}
+
 
 .boton-editar {
   width: 100%;
