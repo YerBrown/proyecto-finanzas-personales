@@ -21,10 +21,8 @@ function getFilterDates(req) {
 function setFilterDateByDates(req, startDate, endDate) {
     startDate = new Date(startDate);
     startDate.setHours(1, 0, 0, 0);
-    console.log("startDate: ", startDate);
     endDate = new Date(endDate);
     endDate.setHours(23, 59, 59, 999);
-    console.log("endDate: ", endDate);
     // Guardar las fechas en la sesión
     req.session.startDate = startDate.toISOString().slice(0, 16);
     req.session.endDate = endDate.toISOString().slice(0, 16);
@@ -37,10 +35,8 @@ function setFilterDateByMonthAndYear(req, month, year) {
     // Calcular el primer y último día del mes
     const firstDayOfMonth = new Date(year, month, 1);
     firstDayOfMonth.setHours(0, 0, 0, 0);
-    console.log("firsDay", firstDayOfMonth);
     const lastDayOfMonth = new Date(year, month + 1, 0);
     lastDayOfMonth.setHours(23, 59, 59, 999);
-    console.log("lastDay", lastDayOfMonth);
     // Formatear las fechas a "YYYY-MM-DD"
     const formattedFirstDay = firstDayOfMonth.toISOString().slice(0, 16);
     const formattedLastDay = lastDayOfMonth.toISOString().slice(0, 16);
@@ -49,7 +45,6 @@ function setFilterDateByMonthAndYear(req, month, year) {
     req.session.startDate = formattedFirstDay;
     req.session.endDate = formattedLastDay;
     req.session.filterType = "monthly";
-    console.log("LLEGA 4");
     return { startDate: req.session.startDate, endDate: req.session.endDate };
 }
 

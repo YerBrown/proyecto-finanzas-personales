@@ -1,4 +1,4 @@
-import {iconMap,colores} from './home.js';
+import {iconMap, colores} from './mapas.js';
 
 export async function openModal(modalId) {
   const modal = document.getElementById(modalId);

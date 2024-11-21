@@ -17,16 +17,13 @@ router.post("/set-dates-by-range", (req, res) => {
 
 // Ruta para establecer fechas por mes y año
 router.post("/set-dates-by-month", (req, res) => {
-    console.log("LLEGA 2");
     const { month, year } = req.body;
-    console.log("LLEGA FECHA: " + month + " " + year);
     const { startDate, endDate } = dateFilter.setFilterDateByMonthAndYear(
         req,
         parseInt(month) - 1,
         parseInt(year)
     );
     res.json({ startDate, endDate });
-    console.log("LLEGA 1 " + startDate, endDate);
 });
 
 // Ruta para establecer fechas por año

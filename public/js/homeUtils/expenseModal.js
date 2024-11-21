@@ -1,23 +1,18 @@
-import {iconMap,colores} from './home.js';
+import {iconMap,colores} from './mapas.js';
 
 export async function openModal(modalId) {
-    console.log("ENTRA EN OPENMODAL")
   const modal = document.getElementById(modalId);
 
   if (modalId === 'modalExpenses') {
     const tbody = modal.querySelector('tbody');
     tbody.innerHTML = '';
-
     try {
       const ruta = "/expense/expensesDetail";
       const response = await fetch(ruta);
-      console.log("ENTRA EN OPENMODALEXPENSE2")
       if (!response.ok) throw new Error('Network response was not ok ' + response.statusText + "RUTA FETCH " + ruta);
 
       let expenses = await response.json();
       let totalAmountexpensesType = expenses.totalAmountExpenses;
-      console.log("HOLA TOTALAMOUNTE " + totalAmountexpensesType);
-      console.log("HOLA EXPENSES " + expenses);
       
       expenses.expenseCounts.forEach((expense, index) => {  
 
@@ -34,9 +29,7 @@ export async function openModal(modalId) {
         const tdexpenseTypeIcon = document.createElement('td');
         const icon = document.createElement('i');
         tdexpenseTypeIcon.id = "tdexpenseTypeIcon";
-        //icon.innerHTML = `<i class="fas ${iconMap[type] || 'fa-question'}"></i>`;
         icon.className = `fas ${iconMap[expense.expense_type.name]}`;
-        console.log("NOMBRE ICONO " + expense.expense_type.name);
         tdexpenseTypeIcon.appendChild(icon);
       
         const tdexpenseTypeGrafico = document.createElement('td');
@@ -103,7 +96,6 @@ export async function openModal(modalId) {
       console.error('There has been a problem with your fetch operation:', error);
     }
   }
-
   modal.style.display = 'block';
 }
 

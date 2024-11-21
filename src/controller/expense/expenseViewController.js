@@ -15,7 +15,6 @@ function handleError(res, error) {
 // Obtiene todos los gastos
 async function getAll(req, res) {
     try {
-        console.log("startDate", req.session.startDate);
         const expenses = await expenseController.getAll(
             res.locals.user.id,
             req.session.startDate,
@@ -79,7 +78,6 @@ async function getExpenseCountByType(req, res) {
         const user_id = res.locals.user.id;
         const startDate = "2024-11-01";
         const endDate = "2024-11-29";
-        console.log("LLEGA 1");
         if (!startDate || !endDate) {
             return res
                 .status(400)
@@ -101,7 +99,6 @@ async function getExpenseCountByType(req, res) {
         }
 
         res.status(200).json({ expenseCounts, totalAmountExpenses });
-        console.log("llega 2");
     } catch (error) {
         handleError(res, error);
     }
