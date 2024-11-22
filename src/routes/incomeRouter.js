@@ -4,11 +4,11 @@ import { isAuthenticated } from "../middlewares/authMiddleware.js";
 
 const router = Router();
 
-router.get("/", isAuthenticated, incomeViewController.getAll);
-
-router.get("/new", isAuthenticated, incomeViewController.createForm);
-
-router.get("/:id/update", isAuthenticated, incomeViewController.updateForm);
+router.get(
+    "/types/:user_id",
+    isAuthenticated,
+    incomeViewController.getIncomeCountByType
+);
 
 router.get(
     "/user/:user_id",
@@ -16,24 +16,19 @@ router.get(
     incomeViewController.getAllByUserId
 );
 
-router.get(
-    "/types/:user_id",
-    isAuthenticated,
-    incomeViewController.getIncomeCountByType
-);
+router.get("/:id/update", isAuthenticated, incomeViewController.updateForm);
 
+router.post("/update/:id", isAuthenticated, incomeViewController.update);
+router.post("/remove/:id", isAuthenticated, incomeViewController.remove);
+
+router.get("/new", isAuthenticated, incomeViewController.createForm);
 router.post("/new", isAuthenticated, incomeViewController.create);
-
-router.post("/:id/update", isAuthenticated, incomeViewController.update);
-
-router.post("/:id/remove", isAuthenticated, incomeViewController.remove);
 
 router.get(
     "/incomesDetail",
     isAuthenticated,
     incomeViewController.getIncomeCountByType
 );
-
-router.get("/:id", isAuthenticated, incomeViewController.getById);
+router.get("/", isAuthenticated, incomeViewController.getAll);
 
 export default router;

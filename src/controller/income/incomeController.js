@@ -22,6 +22,7 @@ async function getAll(user_id, startDate, endDate) {
 
 // Obtiene un ingreso por su ID
 async function getById(id) {
+    console.log("Getting income by ID:", id);
     const income = await incomeModel.findByPk(id, {
         include: {
             model: incomeTypeModel,

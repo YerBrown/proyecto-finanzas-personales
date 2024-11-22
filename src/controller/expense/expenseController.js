@@ -66,7 +66,7 @@ async function getExpenseCountByType(user_id, startDate, endDate) {
         where: {
             user_id,
             datetime: {
-                [Op.between]: [startDate, endDate], // Filtra los gastos entre las fechas
+                [Op.between]: [startDate, endDate], // Filtra los ingresos entre las fechas
             },
         },
     });

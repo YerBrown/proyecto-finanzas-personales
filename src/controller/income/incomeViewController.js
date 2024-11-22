@@ -64,15 +64,14 @@ async function getAllByUserId(req, res) {
 async function getIncomeCountByType(req, res) {
     try {
         const user_id = res.locals.user.id;
-        const startDate = "2024-11-01";
-        const endDate = "2024-11-29";
+        const startDate = req.session.startDate;
+        const endDate = req.session.endDate;
 
         if (!startDate || !endDate) {
             return res
                 .status(400)
                 .json({ error: "Las fechas no están definidas en la sesión" });
         }
-
         const { incomeCounts, totalAmountIncomes } =
             await incomeController.getIncomeCountByType(
                 user_id,
@@ -162,7 +161,7 @@ async function update(req, res) {
             user_id
         );
 
-        res.status(200).json(income);
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }
@@ -173,7 +172,7 @@ async function remove(req, res) {
     try {
         const { id } = req.params;
         const income = await incomeController.remove(id);
-        res.status(200).json({ message: "Ingreso eliminado correctamente" });
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }

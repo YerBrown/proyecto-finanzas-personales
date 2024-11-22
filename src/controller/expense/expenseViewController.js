@@ -72,12 +72,11 @@ async function getAllByUserId(req, res) {
 // Obtiene todos los gastos de un usuario específico
 async function getExpenseCountByType(req, res) {
     try {
-        // const startDate = req.session.startDate;
-        // const endDate = req.session.endDate;
+        const startDate = req.session.startDate;
+        const endDate = req.session.endDate;
 
         const user_id = res.locals.user.id;
-        const startDate = "2024-11-01";
-        const endDate = "2024-11-29";
+
         if (!startDate || !endDate) {
             return res
                 .status(400)
@@ -175,7 +174,7 @@ async function update(req, res) {
             user_id
         );
 
-        res.status(200).json(updatedExpense);
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }
@@ -186,7 +185,7 @@ async function remove(req, res) {
     try {
         const id = parseInt(req.params.id);
         await expenseController.remove(id);
-        res.status(200).json({ message: "Gasto eliminado correctamente" });
+        res.redirect("/transaction");
     } catch (error) {
         handleError(res, error);
     }
