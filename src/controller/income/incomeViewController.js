@@ -45,7 +45,7 @@ async function getById(req, res) {
 // Obtiene todos los ingresos de un usuario por su ID
 async function getAllByUserId(req, res) {
     try {
-        const user_id = req.params.user.id;
+        const user_id = req.params.user_id;
         const income = await incomeController.getAllByUserId(user_id);
 
         if (!income) {

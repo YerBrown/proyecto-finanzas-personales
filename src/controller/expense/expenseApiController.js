@@ -1,20 +1,9 @@
 import expenseController from "./expenseController.js";
 
-// Maneja los errores y responde con un estado 500 y el mensaje del error
-function handleError(res, error) {
-    console.error(error);
-    if (error.status) {
-        res.status(error.status);
-    } else {
-        res.status(500);
-    }
-    res.json({ error: error.message });
-}
-
 // Obtiene todos los gastos
 async function getAll(req, res) {
     try {
-        const expenses = await expenseController.getAll();
+        const expenses = await expenseController.getAllExpenses();
         res.status(200).json(expenses);
     } catch (error) {
         res.status(500).json({ error: "Error al obtener los gastos" });

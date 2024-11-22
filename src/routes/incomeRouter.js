@@ -1,5 +1,6 @@
 import { Router } from "express";
 import incomeViewController from "../controller/income/incomeViewController.js";
+import incomeApiController from "../controller/income/incomeApiController.js";
 import { isAuthenticated } from "../middlewares/authMiddleware.js";
 
 const router = Router();
@@ -10,11 +11,7 @@ router.get(
     incomeViewController.getIncomeCountByType
 );
 
-router.get(
-    "/user/:user_id",
-    isAuthenticated,
-    incomeViewController.getAllByUserId
-);
+router.get("/user/:user_id", incomeViewController.getAllByUserId);
 
 router.get("/:id/update", isAuthenticated, incomeViewController.updateForm);
 
@@ -29,6 +26,6 @@ router.get(
     isAuthenticated,
     incomeViewController.getIncomeCountByType
 );
-router.get("/", isAuthenticated, incomeViewController.getAll);
+router.get("/", incomeApiController.getAll);
 
 export default router;

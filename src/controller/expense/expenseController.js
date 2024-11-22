@@ -4,6 +4,17 @@ import expenseModel from "../../model/expenseModel.js";
 import expenseTypeModel from "../../model/expenseTypeModel.js";
 import errors from "../../helpers/errors.js";
 // Obtiene todos los gastos, incluyendo el nombre del tipo de gasto
+async function getAllExpenses() {
+    const expenses = await expenseModel.findAll({
+        include: {
+            model: expenseTypeModel,
+            attributes: ["name"],
+        },
+    });
+    return expenses;
+}
+
+// Obtiene todos los gastos, incluyendo el nombre del tipo de gasto
 async function getAll(user_id, startDate, endDate) {
     const expenses = await expenseModel.findAll({
         include: {
@@ -128,6 +139,7 @@ async function remove(id) {
     return expense;
 }
 export const functions = {
+    getAllExpenses,
     getAll,
     getById,
     getAllByUserId,

@@ -4,6 +4,17 @@ import incomeTypeModel from "../../model/incomeTypeModel.js";
 import sequelize, { Op } from "sequelize";
 import errors from "../../helpers/errors.js";
 // Obtiene todos los ingresos, incluyendo el nombre del tipo de ingreso
+async function getAllIncomes() {
+    const incomes = await incomeModel.findAll({
+        include: {
+            model: incomeTypeModel,
+            attributes: ["name"],
+        },
+    });
+    return incomes;
+}
+
+// Obtiene todos los ingresos, incluyendo el nombre del tipo de ingreso
 async function getAll(user_id, startDate, endDate) {
     const incomes = await incomeModel.findAll({
         include: {
@@ -131,6 +142,7 @@ async function remove(id) {
 }
 
 export const functions = {
+    getAllIncomes,
     getAll,
     getById,
     getAllByUserId,
