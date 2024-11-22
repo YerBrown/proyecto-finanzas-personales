@@ -36,7 +36,7 @@ PocketLog es una aplicación web de gestión financiera personal que permite a l
 
 2. **Crear archivo '.env'**
 
-    Utilizando el '.env.example' crea el arechivo '.env' y añade las variables de entorno
+    Utilizando el '.env.example' crea el archivo '.env' y añade las variables de entorno
 
     ```plaintext
      DB_HOST=proyecto-finanzas-db
@@ -55,7 +55,7 @@ PocketLog es una aplicación web de gestión financiera personal que permite a l
     Entra en la carpeta del proyecto y usa este comando para crear el contenedor
 
     ```bash
-    docker compose up
+    docker compose up --build
     ```
 
 4. **Disfruta de nuestra app :)**
@@ -97,20 +97,20 @@ PocketLog es una aplicación web de gestión financiera personal que permite a l
 
 /transaction
 
-<img src="public/images/screenshoots/Captura-home.png" alt="Login de PocketLog" width="1000">
-<img src="public/images/screenshoots/Captura resumen.png" alt="Login de PocketLog" width="1000">
+<img src="public/images/screenshoots/Captura-home.png" alt="Menu de transacciones" width="1000">
+<img src="public/images/screenshoots/Captura resumen.png" alt="Modal resumen ingresos" width="1000">
 
 /expense/new - /income/new
 
-<img src="public/images/screenshoots/Captura-crear-ingreso.png" alt="Login de PocketLog" width="1000">
+<img src="public/images/screenshoots/Captura-crear-ingreso.png" alt="Crear un ingreso" width="1000">
 
 /expense/:id/update - /income/:id/update
 
-<img src="public/images/screenshoots/Captura-editar-gasto.png" alt="Login de PocketLog" width="1000">
+<img src="public/images/screenshoots/Captura-editar-gasto.png" alt="Editar un gasto" width="1000">
 
 /user
 
-<img src="public/images/screenshoots/Captura-administrador-usuarios.png" alt="Login de PocketLog" width="1000">
+<img src="public/images/screenshoots/Captura-administrador-usuarios.png" alt="Administrador de usuarios" width="1000">
 
 ## 👥 Colaboradores
 
